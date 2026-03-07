@@ -155,15 +155,29 @@ input, select, textarea { font-family: inherit; }
 /* ===== HERO PHOTO COLLAGE ===== */
 .hero-photos {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  margin-top: 48px; max-width: 700px;
+  margin-top: 16px; max-width: 700px;
 }
 .hero-photo {
   border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
   border: 2px solid rgba(255,255,255,0.15);
-  transition: transform 0.3s;
+  transition: transform 0.3s; cursor: pointer;
 }
 .hero-photo:hover { transform: scale(1.05); }
 .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo-lightbox {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+  cursor: pointer;
+}
+.photo-lightbox.active { opacity: 1; visibility: visible; }
+.photo-lightbox img {
+  max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px;
+}
+.photo-lightbox .lb-close {
+  position: absolute; top: 20px; right: 24px; color: #fff; font-size: 2rem;
+  cursor: pointer; background: none; border: none; font-weight: 300; line-height: 1;
+}
 @media (max-width: 768px) {
   .hero-photos { grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 100%; }
   .hero-photo { border-radius: 8px; }
@@ -1237,6 +1251,19 @@ window.addEventListener('scroll', () => {
 function debounce(fn, ms) {
   let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); };
 }
+
+// ===== LIGHTBOX =====
+const lightbox = document.createElement('div');
+lightbox.className = 'photo-lightbox';
+lightbox.innerHTML = '<button class="lb-close">&times;</button><img src="" alt="">';
+document.body.appendChild(lightbox);
+const lbImg = lightbox.querySelector('img');
+const lbClose = lightbox.querySelector('.lb-close');
+document.querySelectorAll('.hero-photo img').forEach(img => {
+  img.addEventListener('click', () => { lbImg.src = img.src; lbImg.alt = img.alt; lightbox.classList.add('active'); });
+});
+lightbox.addEventListener('click', (e) => { if (e.target !== lbImg) lightbox.classList.remove('active'); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
 
 // ===== INIT =====
 renderAll(programs);
