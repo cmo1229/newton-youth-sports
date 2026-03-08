@@ -1252,6 +1252,11 @@ function debounce(fn, ms) {
   let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); };
 }
 
+// ===== MOBILE NAV CLOSE ON CLICK =====
+document.querySelectorAll('#navLinks a').forEach(a => {
+  a.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); });
+});
+
 // ===== LIGHTBOX =====
 const lightbox = document.createElement('div');
 lightbox.className = 'photo-lightbox';
