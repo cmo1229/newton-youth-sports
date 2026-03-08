@@ -1106,10 +1106,10 @@ function renderSportSection(sportKey, filteredPrograms) {
   let gridContent = '';
   if (sportKey === 'clinics-camps') {
     const breakOrder = [
-      {key:'winter-break',label:'Winter Break (December)',color:'#90caf9'},
-      {key:'february-break',label:'February Break',color:'#ce93d8'},
       {key:'april-break',label:'April Break',color:'#81c784'},
-      {key:'summer',label:'Summer Camps',color:'#ffb74d'}
+      {key:'summer',label:'Summer Camps',color:'#ffb74d'},
+      {key:'winter-break',label:'Winter Break (December)',color:'#90caf9'},
+      {key:'february-break',label:'February Break',color:'#ce93d8'}
     ];
     breakOrder.forEach(b => {
       const breakPrograms = sportPrograms.filter(p => p.breakType === b.key);
