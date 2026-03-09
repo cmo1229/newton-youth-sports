@@ -92,9 +92,15 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== HERO ===== */
 .hero {
-  position: relative; min-height: 100vh; display: flex; align-items: center;
+  position: relative; display: flex; align-items: center;
   background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
   overflow: hidden; padding-top: 70px;
+}
+@media (min-width: 769px) {
+  .hero { min-height: auto; }
+}
+@media (max-width: 768px) {
+  .hero { min-height: 100vh; }
 }
 .hero::before {
   content: ''; position: absolute; inset: 0;
@@ -103,7 +109,7 @@ input, select, textarea { font-family: inherit; }
 }
 .hero-content {
   position: relative; z-index: 2; max-width: var(--max-w);
-  margin: 0 auto; padding: 60px 32px; width: 100%;
+  margin: 0 auto; padding: 40px 32px; width: 100%;
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
