@@ -111,6 +111,12 @@ input, select, textarea { font-family: inherit; }
   position: relative; z-index: 2; max-width: var(--max-w);
   margin: 0 auto; padding: 40px 32px; width: 100%;
 }
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+}
+.hero-right {
+  display: flex; align-items: center; justify-content: center;
+}
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3);
@@ -130,11 +136,11 @@ input, select, textarea { font-family: inherit; }
   background-clip: text;
 }
 .hero-sub {
-  font-size: 1.2rem; color: rgba(255,255,255,0.75); max-width: 600px;
-  line-height: 1.7; margin-bottom: 40px; font-weight: 300;
+  font-size: 1.1rem; color: rgba(255,255,255,0.75); max-width: 600px;
+  line-height: 1.7; margin-bottom: 24px; font-weight: 300;
 }
 .hero-stats {
-  display: flex; gap: 48px; margin-bottom: 48px; flex-wrap: wrap;
+  display: flex; gap: 36px; margin-bottom: 24px; flex-wrap: wrap;
 }
 .hero-stat .num {
   font-size: 2.5rem; font-weight: 800; color: var(--gold);
@@ -161,8 +167,8 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== HERO PHOTO COLLAGE ===== */
 .hero-photos {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
-  margin-top: 16px; max-width: 700px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+  max-width: 400px;
 }
 .hero-photo {
   border-radius: 12px; overflow: hidden; aspect-ratio: 4/3;
@@ -184,10 +190,6 @@ input, select, textarea { font-family: inherit; }
 .photo-lightbox .lb-close {
   position: absolute; top: 20px; right: 24px; color: #fff; font-size: 2rem;
   cursor: pointer; background: none; border: none; font-weight: 300; line-height: 1;
-}
-@media (max-width: 768px) {
-  .hero-photos { grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 100%; }
-  .hero-photo { border-radius: 8px; }
 }
 
 /* ===== SPORTS QUICK NAV ===== */
@@ -533,6 +535,9 @@ input, select, textarea { font-family: inherit; }
   }
   .mobile-toggle { display: block; }
   .hero h1 { font-size: 2.4rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+  .hero-photos { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
+  .hero-photo { border-radius: 8px; }
   .hero-stats { gap: 12px; flex-wrap: nowrap; justify-content: center; }
   .hero-stat { text-align: center; flex: 1; }
   .hero-stat .num { font-size: 1.4rem; }
@@ -590,23 +595,29 @@ input, select, textarea { font-family: inherit; }
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
   <div class="hero-content">
-    <div class="hero-badge">Newton, Massachusetts</div>
-    <h1>Every Youth Program.<br><span class="highlight">One Place.</span></h1>
-    <p class="hero-sub">The complete, centralized guide to youth sports, camps, and enrichment programs in Newton, MA. Built by Newton parents, for Newton parents.</p>
-    <div class="hero-photos">
-      <div class="hero-photo"><img src="soccer-67.jpeg" alt="Newton youth soccer" loading="eager"></div>
-      <div class="hero-photo"><img src="basketball-photo.jpg" alt="Newton youth basketball" loading="eager"></div>
-      <div class="hero-photo"><img src="bb.jpg" alt="Newton youth baseball" loading="eager"></div>
-      <div class="hero-photo"><img src="LC.jpg" alt="Newton youth lacrosse" loading="eager"></div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">155+</div><div class="label">Programs Listed</div></div>
-      <div class="hero-stat"><div class="num">20+</div><div class="label">Sports & Activities</div></div>
-      <div class="hero-stat"><div class="num">K-12</div><div class="label">Ages Served</div></div>
-    </div>
-    <div class="hero-actions">
-      <a href="#sports" class="btn btn-primary">Browse All Programs</a>
-      <a href="#submit" class="btn btn-outline">Submit a Program</a>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <div class="hero-badge">Newton, Massachusetts</div>
+        <h1>Every Youth Program.<br><span class="highlight">One Place.</span></h1>
+        <p class="hero-sub">The complete, centralized guide to youth sports, camps, and enrichment programs in Newton, MA. Built by Newton parents, for Newton parents.</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="num">155+</div><div class="label">Programs Listed</div></div>
+          <div class="hero-stat"><div class="num">20+</div><div class="label">Sports & Activities</div></div>
+          <div class="hero-stat"><div class="num">K-12</div><div class="label">Ages Served</div></div>
+        </div>
+        <div class="hero-actions">
+          <a href="#sports" class="btn btn-primary">Browse All Programs</a>
+          <a href="#submit" class="btn btn-outline">Submit a Program</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-photos">
+          <div class="hero-photo"><img src="soccer-67.jpeg" alt="Newton youth soccer" loading="eager"></div>
+          <div class="hero-photo"><img src="basketball-photo.jpg" alt="Newton youth basketball" loading="eager"></div>
+          <div class="hero-photo"><img src="bb.jpg" alt="Newton youth baseball" loading="eager"></div>
+          <div class="hero-photo"><img src="LC.jpg" alt="Newton youth lacrosse" loading="eager"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
