@@ -1206,7 +1206,7 @@ const programs = [
 
   // ===== BASKETBALL =====
   {sport:"basketball",name:"NCE Presents: NAA Summer Basketball Program",org:"Newton Community Education / NAA",desc:"Co-ed, high-energy summer basketball clinics led by NAA alumni and current college athletes. Weekly themes: Ball Handling (Jun 29-Jul 3), Shooting (Jul 27-31), Finishing & Scoring (Aug 3-7), Championship Week (Aug 10-14). Register for individual weeks or the whole summer. Custom NAA Summer T-shirt included each week.",ages:"Co-Ed, Grades 4-9",ageCategory:["3-5","6-8"],season:["summer"],level:"camp",cost:"$525/week",costRange:"over-500",location:"Newton South HS, Field House",website:"https://newtoncommunityed.asapconnected.com/#CourseID=324646",regDate:"Rolling",commitment:"Mon-Fri 9am-3:30pm",featured:true,ourPick:true,tags:["coed"]},
-  {sport:"basketball",name:"NAA Basketball League",org:"Newton Athletic Association",desc:"Newton's primary recreational basketball league. Volunteer-run, welcomes all abilities and genders. Games on weekends at Brown Middle School.",ages:"Grades 3-9",ageCategory:["3-5","6-8","9-12"],season:["winter"],level:"recreational",cost:"$235-$270",costRange:"200-500",location:"Brown Middle School, 125 Meadowbrook Rd, Newton",website:"https://newton-athletic-association.sportngin.com/",regDate:"Fall registration",commitment:"2x/week",bestValue:true},
+  {sport:"basketball",name:"NAA Basketball League",org:"Newton Athletic Association",desc:"Newton's primary recreational basketball league. Volunteer-run, welcomes all abilities and genders. Games on weekends at Brown Middle School.",ages:"Co-Ed, Grades 3-9",ageCategory:["3-5","6-8","9-12"],season:["winter"],level:"recreational",cost:"$235-$270",costRange:"200-500",location:"Brown Middle School, 125 Meadowbrook Rd, Newton",website:"https://newton-athletic-association.sportngin.com/",regDate:"Fall registration",commitment:"2x/week",bestValue:true,tags:["coed"]},
   {sport:"basketball",name:"Newton Girls Basketball (NGBA)",org:"NGBA",desc:"Girls-only recreational league emphasizing fun, skill development, and sportsmanship. Saturday games at Newton school gyms, weeknight practices for grades 3-9.",ages:"Girls, Grades 2-9",ageCategory:["k-2","3-5","6-8","9-12"],season:["winter"],level:"recreational",cost:"~$180",costRange:"under-200",location:"Newton school gyms",website:"https://newtongirlsbball.com/",regDate:"Deadline ~Oct 27; $25 late fee after",commitment:"1-2x/week",tags:["girls"]},
   {sport:"basketball",name:"Newton Metrowest Travel Basketball",org:"Newton Metrowest Travel",desc:"Competitive travel basketball in the Metrowest League. Tryout-based teams stressing skills, sportsmanship, and fun. Partial scholarships available.",ages:"Grades 4-8",ageCategory:["3-5","6-8"],season:["winter"],level:"competitive",cost:"$650-$700",costRange:"over-500",location:"Brown Middle School, Fessenden School",website:"https://www.newtonbball.com/",regDate:"Tryouts ~Oct",commitment:"3-4x/week"},
   {sport:"basketball",name:"Boys & Girls Club Basketball",org:"Newton Boys & Girls Club",desc:"Tiered winter basketball: Development League (fundamentals, 3v3 to 5v5), Premier League (advanced concepts), and Junior League (zone defense, motion offense).",ages:"Elementary - Middle School",ageCategory:["k-2","3-5","6-8"],season:["winter"],level:"recreational",cost:"$125 membership + program fee",costRange:"under-200",location:"675 Watertown St, Newton",website:"https://www.newtonbgc.com/2025-2026-winter-basketball",regDate:"Fall",commitment:"1-2x/week"},
@@ -1623,10 +1623,10 @@ function getFiltered() {
         if (!hasBoyTag && !hasBoyText) return false;
       }
       if (gender === 'coed') {
-        const hasCoedTag = tags.includes('coed');
-        const hasGirlTag = tags.includes('girls');
-        const hasBoyTag = tags.includes('boys');
-        if (!hasCoedTag && (hasGirlTag || hasBoyTag)) return false;
+        // Co-ed = everything that isn't explicitly girls-only or boys-only
+        const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
+        const isBoysOnly = tags.includes('boys');
+        if (isGirlsOnly || isBoysOnly) return false;
       }
     }
     if (season) {
