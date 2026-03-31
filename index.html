@@ -2562,15 +2562,26 @@ function openPlanPopup(event, programName, programSport, programSeasons) {
     </div>
   `;
 
-  // Position popup
-  let top = rect.bottom + 8;
-  let left = rect.left;
-  if (top + 400 > window.innerHeight) top = rect.top - 400;
-  if (left + 300 > window.innerWidth) left = window.innerWidth - 320;
-  if (left < 10) left = 10;
-  if (top < 10) top = 10;
-  popup.style.top = top + 'px';
-  popup.style.left = left + 'px';
+  // Position popup — centered modal on mobile, near button on desktop
+  if (window.innerWidth <= 768) {
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.width = 'calc(100vw - 32px)';
+    popup.style.maxWidth = '360px';
+    popup.style.maxHeight = '80vh';
+    popup.style.overflowY = 'auto';
+  } else {
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    if (top + 400 > window.innerHeight) top = rect.top - 400;
+    if (left + 300 > window.innerWidth) left = window.innerWidth - 320;
+    if (left < 10) left = 10;
+    if (top < 10) top = 10;
+    popup.style.top = top + 'px';
+    popup.style.left = left + 'px';
+  }
 
   document.body.appendChild(popup);
 }
