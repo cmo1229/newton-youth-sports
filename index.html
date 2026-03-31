@@ -771,6 +771,7 @@ input, select, textarea { font-family: inherit; }
   }
   .planner-mobile-item .pm-name {
     font-weight: 600; font-size: 0.88rem; margin-bottom: 4px;
+    display: flex; align-items: center;
   }
   .planner-mobile-item .pm-kid {
     font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 6px;
@@ -940,6 +941,15 @@ input, select, textarea { font-family: inherit; }
   display: flex; align-items: center;
 }
 .planner-bar.conflict { border: 2px solid #ff5252; }
+.planner-del {
+  background: none; border: none; color: rgba(255,255,255,0.5); font-size: 1.1rem;
+  cursor: pointer; margin-left: 6px; padding: 0 2px; line-height: 1; font-weight: 700;
+}
+.planner-del:hover { color: white; }
+.planner-del-mobile {
+  background: none; border: none; color: #ff5252; font-size: 1.2rem;
+  cursor: pointer; margin-left: auto; padding: 0 4px; line-height: 1; font-weight: 700;
+}
 .planner-empty {
   grid-column: 1 / -1; text-align: center; padding: 24px;
   color: rgba(255,255,255,0.5); font-size: 0.88rem;
@@ -1278,11 +1288,11 @@ input, select, textarea { font-family: inherit; }
   <div class="submit-inner">
     <h2>Submit a Program</h2>
     <p class="section-sub">Know of a program we're missing? Help us keep this resource complete. Submissions are reviewed before being added.</p>
-    <form id="submitForm" action="https://formsubmit.co/contact.newtonyouthsports@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="New Program Submission - Newton Youth Sports">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="">
+    <form id="submitForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="109d4f09-35e1-4ecd-8121-48d24a58b79d">
+      <input type="hidden" name="subject" value="New Program Submission - Newton Youth Sports">
+      <input type="hidden" name="from_name" value="Newton Youth Sports">
+      <input type="hidden" name="redirect" value="">
       <div class="form-grid">
         <div class="form-group">
           <label>Your Name *</label>
@@ -2425,7 +2435,7 @@ function renderDeadlines() {
 
 function renderPlanner() {
   const allPlan = getPlan();
-  const plan = allPlan.filter(p => p.season === currentPlannerSeason);
+  const plan = allPlan.map((p, i) => ({...p, _idx: i})).filter(p => p.season === currentPlannerSeason);
   const kids = getKidProfiles();
   const container = document.getElementById('plannerContent');
   const seasonData = PLANNER_SEASONS[currentPlannerSeason];
@@ -2471,7 +2481,7 @@ function renderPlanner() {
           let spanLen = weekIdx - spanStart;
           const hasConflict = weekCounts.slice(spanStart, spanStart + spanLen).some(c => c > 1);
           html += `<div class="planner-cell" style="grid-column: span ${spanLen};">
-            <div class="planner-bar${hasConflict ? ' conflict' : ''}" style="background:${p.color || dotColor}">${p.programName}</div>
+            <div class="planner-bar${hasConflict ? ' conflict' : ''}" style="background:${p.color || dotColor}">${p.programName}<button class="planner-del" onclick="event.stopPropagation();removePlanEntry(${p._idx})" title="Remove">&times;</button></div>
           </div>`;
         } else {
           html += `<div class="planner-cell"></div>`;
@@ -2493,7 +2503,7 @@ function renderPlanner() {
     kidPlans.forEach(p => {
       const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => weeks[w] || '');
       mobileHtml += `<div class="planner-mobile-item">
-        <div class="pm-name" style="border-left: 3px solid ${p.color || dotColor}; padding-left: 10px;">${p.programName}</div>
+        <div class="pm-name" style="border-left: 3px solid ${p.color || dotColor}; padding-left: 10px;">${p.programName}<button class="planner-del-mobile" onclick="removePlanEntry(${p._idx})">&times;</button></div>
         <div class="pm-kid"><div class="pm-kid-dot" style="background:${dotColor}"></div>${label}</div>
         <div class="pm-weeks">${weekLabels.map(w => `<span class="pm-week-tag">${w}</span>`).join('')}</div>
       </div>`;
@@ -2673,6 +2683,16 @@ function savePlanEntry(programName, programSport) {
   currentPlannerSeason = season;
   renderTimeline();
   document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== REMOVE PLAN ENTRY =====
+function removePlanEntry(idx) {
+  const plan = getPlan();
+  if (idx >= 0 && idx < plan.length) {
+    plan.splice(idx, 1);
+    savePlan(plan);
+    renderTimeline();
+  }
 }
 
 // ===== SHARE PLAN =====
