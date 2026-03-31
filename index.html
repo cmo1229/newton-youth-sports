@@ -821,10 +821,12 @@ input, select, textarea { font-family: inherit; }
   .kids-panel h2 { font-size: 1.3rem; }
 }
 /* Hide mobile-only elements on desktop */
-.mobile-filter-toggle { display: none; }
-.planner-mobile-list { display: none; }
-.planner-mobile-empty { display: none; }
-.sports-quick-toggle { display: none; }
+@media (min-width: 769px) {
+  .mobile-filter-toggle { display: none !important; }
+  .planner-mobile-list { display: none !important; }
+  .planner-mobile-empty { display: none !important; }
+  .sports-quick-toggle { display: none !important; }
+}
 @media (max-width: 420px) {
   .hero h1 { font-size: 1.6rem; }
   .hero-stat .num { font-size: 1.2rem; }
