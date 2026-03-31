@@ -217,16 +217,25 @@ input, select, textarea { font-family: inherit; }
   color: var(--green-main); border-bottom-color: var(--green-main);
 }
 .sq-scroll-arrow {
-  position: absolute; right: 0; top: 0; bottom: 0; width: 60px;
-  display: flex; align-items: center; justify-content: flex-end;
-  padding-right: 10px;
-  background: linear-gradient(to right, transparent, var(--white) 60%);
+  position: absolute; top: 0; bottom: 0; width: 48px;
+  display: flex; align-items: center; justify-content: center;
   pointer-events: auto; cursor: pointer; z-index: 2;
   transition: opacity 0.3s;
 }
-.sq-scroll-arrow.hidden { opacity: 0; }
-.sq-scroll-arrow svg { color: var(--slate); opacity: 0.6; animation: scrollBounce 1.5s ease-in-out infinite; }
-@keyframes scrollBounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+.sq-scroll-arrow.sq-right {
+  right: 0; padding-right: 8px;
+  background: linear-gradient(to right, transparent, var(--white) 60%);
+}
+.sq-scroll-arrow.sq-left {
+  left: 0; padding-left: 8px;
+  background: linear-gradient(to left, transparent, var(--white) 60%);
+}
+.sq-scroll-arrow.hidden { opacity: 0; pointer-events: none; }
+.sq-scroll-arrow svg { color: var(--slate); opacity: 0.6; }
+.sq-scroll-arrow.sq-right svg { animation: scrollBounceR 1.5s ease-in-out infinite; }
+.sq-scroll-arrow.sq-left svg { animation: scrollBounceL 1.5s ease-in-out infinite; }
+@keyframes scrollBounceR { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
+@keyframes scrollBounceL { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-4px)} }
 
 /* ===== FILTER BAR ===== */
 .filter-section {
@@ -877,7 +886,10 @@ input, select, textarea { font-family: inherit; }
       <button class="sq-btn" data-sport="enrichment">Arts & STEM</button>
       <button class="sq-btn" data-sport="clinics-camps">Clinics & Camps</button>
     </div>
-    <div class="sq-scroll-arrow" id="sqScrollArrow">
+    <div class="sq-scroll-arrow sq-left hidden" id="sqScrollLeft">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 4l-6 6 6 6"/></svg>
+    </div>
+    <div class="sq-scroll-arrow sq-right" id="sqScrollRight">
       <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 4l6 6-6 6"/></svg>
     </div>
   </div>
@@ -1755,25 +1767,33 @@ document.querySelectorAll('.hero-photo img').forEach(img => {
 lightbox.addEventListener('click', (e) => { if (e.target !== lbImg) lightbox.classList.remove('active'); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
 
-// ===== SPORTS QUICK NAV SCROLL ARROW =====
+// ===== SPORTS QUICK NAV SCROLL ARROWS =====
 (function() {
   const inner = document.getElementById('sportsQuickInner');
-  const arrow = document.getElementById('sqScrollArrow');
+  const leftArrow = document.getElementById('sqScrollLeft');
+  const rightArrow = document.getElementById('sqScrollRight');
   function checkScroll() {
-    if (!inner || !arrow) return;
+    if (!inner) return;
+    const atStart = inner.scrollLeft <= 10;
     const atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 10;
-    arrow.classList.toggle('hidden', atEnd);
+    if (leftArrow) leftArrow.classList.toggle('hidden', atStart);
+    if (rightArrow) rightArrow.classList.toggle('hidden', atEnd);
   }
   if (inner) {
     inner.addEventListener('scroll', checkScroll);
     window.addEventListener('resize', checkScroll);
     setTimeout(checkScroll, 100);
   }
-  if (arrow && inner) {
-    arrow.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+  if (rightArrow && inner) {
+    rightArrow.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
       inner.scrollBy({left: 200, behavior: 'smooth'});
+    });
+  }
+  if (leftArrow && inner) {
+    leftArrow.addEventListener('click', (e) => {
+      e.preventDefault(); e.stopPropagation();
+      inner.scrollBy({left: -200, behavior: 'smooth'});
     });
   }
 })();
