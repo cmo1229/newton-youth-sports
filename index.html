@@ -669,7 +669,7 @@ input, select, textarea { font-family: inherit; }
 }
 .kid-remove-btn:hover { background: #ffebee; }
 
-/* ===== SUMMER PLANNER ===== */
+/* ===== YEAR PLANNER ===== */
 .planner-toggle {
   display: flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 24px; background: var(--green-pale); color: var(--green-deep);
@@ -681,11 +681,11 @@ input, select, textarea { font-family: inherit; }
   background: var(--green-deep); padding: 0; max-height: 0; overflow: hidden;
   transition: max-height 0.4s ease, padding 0.4s ease;
 }
-.planner-section.open { max-height: 800px; padding: 32px 0; }
+.planner-section.open { max-height: 2000px; padding: 32px 0; }
 .planner-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .planner-grid {
   display: grid;
-  grid-template-columns: 120px repeat(10, 1fr);
+  grid-template-columns: 120px repeat(12, 1fr);
   gap: 2px; max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
   min-width: 800px;
 }
@@ -724,6 +724,15 @@ input, select, textarea { font-family: inherit; }
   font-weight: 600; cursor: pointer;
 }
 .planner-clear-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+.planner-tabs { display: flex; gap: 4px; margin-bottom: 16px; justify-content: center; max-width: var(--max-w); margin-left: auto; margin-right: auto; padding: 0 32px; }
+.planner-tab {
+  padding: 8px 20px; border-radius: 8px; font-size: 0.85rem;
+  font-weight: 600; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+  cursor: pointer; border: none; transition: all 0.2s;
+}
+.planner-tab.active { background: var(--gold); color: var(--green-deep); }
+.planner-tab:hover { background: rgba(255,255,255,0.2); color: white; }
+.planner-tab.active:hover { background: var(--gold); }
 
 /* Add to Plan button on cards */
 .card-plan-btn {
@@ -1000,10 +1009,10 @@ input, select, textarea { font-family: inherit; }
   </div>
 </div>
 
-<!-- ===== SUMMER PLANNER ===== -->
+<!-- ===== YEAR PLANNER ===== -->
 <button class="planner-toggle" id="plannerToggle" onclick="togglePlanner()">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-  Plan Your Summer
+  Plan Your Year
   <span style="font-weight:400;font-size:0.8rem;opacity:0.7">(click to expand)</span>
 </button>
 <div class="planner-section" id="plannerSection">
@@ -1853,10 +1862,10 @@ function removeKid(id) {
   let kids = getKidProfiles();
   kids = kids.filter(k => k.id !== id);
   saveKidProfiles(kids);
-  // Also remove from summer plan
-  let plan = getSummerPlan();
+  // Also remove from plan
+  let plan = getPlan();
   plan = plan.filter(p => p.kidId !== id);
-  saveSummerPlan(plan);
+  savePlan(plan);
   renderKidList();
   renderKidsBar();
   renderPlanner();
@@ -1937,10 +1946,26 @@ function selectKidPill(kidId) {
   applyFilters();
 }
 
-// ===== SUMMER PLANNER =====
-const SUMMER_WEEKS = ['Jun 22','Jun 29','Jul 6','Jul 13','Jul 20','Jul 27','Aug 3','Aug 10','Aug 17','Aug 24'];
-function getSummerPlan() { return JSON.parse(localStorage.getItem('nys-plan') || '[]'); }
-function saveSummerPlan(plan) { localStorage.setItem('nys-plan', JSON.stringify(plan)); }
+// ===== YEAR PLANNER =====
+const PLANNER_SEASONS = {
+  fall: { label: 'Fall', sublabel: 'Sep-Nov', weeks: ['Sep 1','Sep 8','Sep 15','Sep 22','Sep 29','Oct 6','Oct 13','Oct 20','Oct 27','Nov 3','Nov 10','Nov 17'] },
+  winter: { label: 'Winter', sublabel: 'Dec-Feb', weeks: ['Dec 1','Dec 8','Dec 15','Dec 22','Jan 5','Jan 12','Jan 19','Jan 26','Feb 2','Feb 9','Feb 16','Feb 23'] },
+  spring: { label: 'Spring', sublabel: 'Mar-May', weeks: ['Mar 2','Mar 9','Mar 16','Mar 23','Mar 30','Apr 6','Apr 13','Apr 20','Apr 27','May 4','May 11','May 18'] },
+  summer: { label: 'Summer', sublabel: 'Jun-Aug', weeks: ['Jun 22','Jun 29','Jul 6','Jul 13','Jul 20','Jul 27','Aug 3','Aug 10','Aug 17','Aug 24'] }
+};
+
+function getCurrentSeason() {
+  const month = new Date().getMonth(); // 0-11
+  if (month >= 5 && month <= 7) return 'summer';   // Jun-Aug
+  if (month >= 8 && month <= 10) return 'fall';     // Sep-Nov
+  if (month >= 2 && month <= 4) return 'spring';    // Mar-May
+  return 'winter';                                   // Dec-Feb
+}
+
+let currentPlannerSeason = getCurrentSeason();
+
+function getPlan() { return JSON.parse(localStorage.getItem('nys-plan') || '[]'); }
+function savePlan(plan) { localStorage.setItem('nys-plan', JSON.stringify(plan)); }
 
 function togglePlanner() {
   const section = document.getElementById('plannerSection');
@@ -1950,26 +1975,44 @@ function togglePlanner() {
   toggle.querySelector('span').textContent = isOpen ? '(click to collapse)' : '(click to expand)';
 }
 
+function switchPlannerSeason(season) {
+  currentPlannerSeason = season;
+  renderPlanner();
+}
+
 function renderPlanner() {
-  const plan = getSummerPlan();
+  const allPlan = getPlan();
+  const plan = allPlan.filter(p => p.season === currentPlannerSeason);
   const kids = getKidProfiles();
   const container = document.getElementById('plannerContent');
+  const seasonData = PLANNER_SEASONS[currentPlannerSeason];
+  const weeks = seasonData.weeks;
+  const weekCount = weeks.length;
+
+  // Season tabs
+  let tabsHtml = '<div class="planner-tabs">';
+  Object.keys(PLANNER_SEASONS).forEach(key => {
+    const s = PLANNER_SEASONS[key];
+    const activeClass = key === currentPlannerSeason ? ' active' : '';
+    tabsHtml += `<button class="planner-tab${activeClass}" onclick="switchPlannerSeason('${key}')">${s.label}<br><span style="font-size:0.7rem;font-weight:400;opacity:0.8">${s.sublabel}</span></button>`;
+  });
+  tabsHtml += '</div>';
 
   if (plan.length === 0) {
-    container.innerHTML = `<div class="planner-grid-wrap"><div class="planner-grid">
+    container.innerHTML = tabsHtml + `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">
       <div class="planner-header"></div>
-      ${SUMMER_WEEKS.map(w => `<div class="planner-header">${w}</div>`).join('')}
-      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start planning your summer!</div>
+      ${weeks.map(w => `<div class="planner-header">${w}</div>`).join('')}
+      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start planning your ${seasonData.label.toLowerCase()}!</div>
     </div></div>`;
     return;
   }
 
   // Determine rows: group by kidId
   const kidIds = [...new Set(plan.map(p => p.kidId))];
-  let html = '<div class="planner-grid-wrap"><div class="planner-grid">';
+  let html = tabsHtml + `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">`;
   // Header row
   html += '<div class="planner-header"></div>';
-  SUMMER_WEEKS.forEach(w => { html += `<div class="planner-header">${w}</div>`; });
+  weeks.forEach(w => { html += `<div class="planner-header">${w}</div>`; });
 
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
@@ -1978,7 +2021,7 @@ function renderPlanner() {
     const kidPlans = plan.filter(p => p.kidId === kidId);
 
     // Count how many programs occupy each week for conflict detection
-    const weekCounts = new Array(10).fill(0);
+    const weekCounts = new Array(weekCount).fill(0);
     kidPlans.forEach(p => { (p.weeks||[]).forEach(w => { weekCounts[w]++; }); });
 
     // For each program belonging to this kid, render a row
@@ -1988,13 +2031,13 @@ function renderPlanner() {
       } else {
         html += `<div class="planner-kid-label" style="font-size:0.72rem;color:rgba(255,255,255,0.4);padding-left:28px;"></div>`;
       }
-      const weeks = (p.weeks || []).sort((a,b) => a - b);
+      const pWeeks = (p.weeks || []).sort((a,b) => a - b);
       let weekIdx = 0;
-      while (weekIdx < 10) {
-        if (weeks.includes(weekIdx)) {
+      while (weekIdx < weekCount) {
+        if (pWeeks.includes(weekIdx)) {
           // Find consecutive span
           let spanStart = weekIdx;
-          while (weekIdx < 10 && weeks.includes(weekIdx)) weekIdx++;
+          while (weekIdx < weekCount && pWeeks.includes(weekIdx)) weekIdx++;
           let spanLen = weekIdx - spanStart;
           const hasConflict = weekCounts.slice(spanStart, spanStart + spanLen).some(c => c > 1);
           html += `<div class="planner-cell" style="grid-column: span ${spanLen};">
@@ -2009,15 +2052,37 @@ function renderPlanner() {
   });
 
   html += '</div></div>';
-  html += '<div class="planner-actions"><button class="planner-clear-btn" onclick="clearPlan()">Clear Plan</button></div>';
+  html += `<div class="planner-actions">
+    <button class="planner-clear-btn" onclick="clearPlan('season')">Clear ${seasonData.label}</button>
+    <button class="planner-clear-btn" onclick="clearPlan('all')">Clear All Seasons</button>
+  </div>`;
   container.innerHTML = html;
 }
 
-function clearPlan() {
-  if (confirm('Clear your entire summer plan?')) {
-    localStorage.removeItem('nys-plan');
-    renderPlanner();
+function clearPlan(mode) {
+  if (mode === 'all') {
+    if (confirm('Clear your plan for ALL seasons?')) {
+      localStorage.removeItem('nys-plan');
+      renderPlanner();
+    }
+  } else {
+    const seasonLabel = PLANNER_SEASONS[currentPlannerSeason].label;
+    if (confirm('Clear your plan for ' + seasonLabel + '?')) {
+      const plan = getPlan().filter(p => p.season !== currentPlannerSeason);
+      savePlan(plan);
+      renderPlanner();
+    }
   }
+}
+
+// Guess best default season for a program based on its sport/season data
+function guessSeasonForProgram(programSport) {
+  const s = (programSport || '').toLowerCase();
+  if (s.includes('summer') || s.includes('camp')) return 'summer';
+  if (s.includes('fall') || s.includes('autumn')) return 'fall';
+  if (s.includes('winter')) return 'winter';
+  if (s.includes('spring')) return 'spring';
+  return getCurrentSeason();
 }
 
 // Add to Plan popup
@@ -2045,18 +2110,32 @@ function openPlanPopup(event, programName, programSport) {
   let kidOptions = '<option value="general">General</option>';
   kids.forEach(k => { kidOptions += `<option value="${k.id}">${k.name}</option>`; });
 
-  let weeksHtml = '';
-  SUMMER_WEEKS.forEach((w, i) => {
-    weeksHtml += `<label class="plan-week-cb"><input type="checkbox" name="plan-week" value="${i}"> ${w}</label>`;
+  const defaultSeason = guessSeasonForProgram(programSport);
+  let seasonOptions = '';
+  Object.keys(PLANNER_SEASONS).forEach(key => {
+    const s = PLANNER_SEASONS[key];
+    const sel = key === defaultSeason ? ' selected' : '';
+    seasonOptions += `<option value="${key}"${sel}>${s.label} (${s.sublabel})</option>`;
   });
+
+  function buildWeeksHtml(seasonKey) {
+    const sw = PLANNER_SEASONS[seasonKey].weeks;
+    let h = '';
+    sw.forEach((w, i) => {
+      h += `<label class="plan-week-cb"><input type="checkbox" name="plan-week" value="${i}"> ${w}</label>`;
+    });
+    return h;
+  }
 
   popup.innerHTML = `
     <h4>Add to Plan</h4>
     <p style="font-size:0.82rem;color:var(--slate);margin-bottom:14px;">${programName}</p>
     <label>For which child?</label>
     <select id="planKidSelect">${kidOptions}</select>
+    <label>Season</label>
+    <select id="planSeasonSelect" onchange="updatePlanWeeks()">${seasonOptions}</select>
     <label>Which weeks?</label>
-    <div class="plan-weeks">${weeksHtml}</div>
+    <div class="plan-weeks" id="planWeeksContainer">${buildWeeksHtml(defaultSeason)}</div>
     <div class="plan-popup-actions">
       <button class="plan-popup-cancel" onclick="closePlanPopup()">Cancel</button>
       <button class="plan-popup-save" onclick="savePlanEntry('${programName.replace(/'/g,"\\'")}', '${programSport}')">Save</button>
@@ -2066,7 +2145,7 @@ function openPlanPopup(event, programName, programSport) {
   // Position popup
   let top = rect.bottom + 8;
   let left = rect.left;
-  if (top + 350 > window.innerHeight) top = rect.top - 350;
+  if (top + 400 > window.innerHeight) top = rect.top - 400;
   if (left + 300 > window.innerWidth) left = window.innerWidth - 320;
   if (left < 10) left = 10;
   if (top < 10) top = 10;
@@ -2074,6 +2153,18 @@ function openPlanPopup(event, programName, programSport) {
   popup.style.left = left + 'px';
 
   document.body.appendChild(popup);
+}
+
+function updatePlanWeeks() {
+  const seasonSelect = document.getElementById('planSeasonSelect');
+  const container = document.getElementById('planWeeksContainer');
+  const seasonKey = seasonSelect.value;
+  const sw = PLANNER_SEASONS[seasonKey].weeks;
+  let h = '';
+  sw.forEach((w, i) => {
+    h += `<label class="plan-week-cb"><input type="checkbox" name="plan-week" value="${i}"> ${w}</label>`;
+  });
+  container.innerHTML = h;
 }
 
 function closePlanPopup() {
@@ -2086,6 +2177,8 @@ function closePlanPopup() {
 function savePlanEntry(programName, programSport) {
   const kidSelect = document.getElementById('planKidSelect');
   const kidVal = kidSelect.value;
+  const seasonSelect = document.getElementById('planSeasonSelect');
+  const season = seasonSelect.value;
   const weekCheckboxes = document.querySelectorAll('#planPopup input[name="plan-week"]:checked');
   const weeks = Array.from(weekCheckboxes).map(cb => parseInt(cb.value));
 
@@ -2096,10 +2189,13 @@ function savePlanEntry(programName, programSport) {
   const kid = kids.find(k => k.id === kidId);
   const color = kid ? kid.color : '#52b788';
 
-  const plan = getSummerPlan();
-  plan.push({ kidId, programName, programSport, weeks, color });
-  saveSummerPlan(plan);
+  const plan = getPlan();
+  plan.push({ kidId, programName, programSport, season, weeks, color });
+  savePlan(plan);
   closePlanPopup();
+
+  // Switch planner to the season that was just added
+  currentPlannerSeason = season;
   renderPlanner();
 
   // Open planner if not open
