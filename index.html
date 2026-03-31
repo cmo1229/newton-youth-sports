@@ -642,10 +642,42 @@ input, select, textarea { font-family: inherit; }
     text-align: center; border-radius: 10px;
   }
 
-  /* --- SPORTS NAV --- */
-  .sports-quick { top: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .sports-quick-inner { padding: 0 16px; gap: 0; }
-  .sq-btn { padding: 12px 14px; font-size: 0.78rem; }
+  /* --- SPORTS NAV (grid on mobile) --- */
+  .sports-quick {
+    top: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    position: sticky; z-index: 100;
+  }
+  .sports-quick-inner {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    padding: 10px 16px; overflow: visible;
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease;
+    padding-top: 0; padding-bottom: 0;
+  }
+  .sports-quick-inner.mobile-grid-open {
+    max-height: 500px; padding: 10px 16px;
+  }
+  .sq-btn {
+    padding: 8px 4px; font-size: 0.72rem; text-align: center;
+    border-radius: 8px; border-bottom: none;
+    background: var(--light-bg); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+  .sq-btn:hover, .sq-btn.active {
+    background: var(--green-main); color: white;
+    border-bottom-color: transparent;
+  }
+  .sq-scroll-arrow { display: none; }
+  .sports-quick-toggle {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; width: 100%; padding: 8px;
+    background: white; border: none; font-size: 0.8rem;
+    font-weight: 600; color: var(--green-main); cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .sports-quick-toggle svg {
+    width: 14px; height: 14px; transition: transform 0.2s;
+  }
+  .sports-quick-toggle.open svg { transform: rotate(180deg); }
 
   /* --- FILTERS (collapsible on mobile) --- */
   .filter-section { padding: 14px 0; }
@@ -792,6 +824,7 @@ input, select, textarea { font-family: inherit; }
 .mobile-filter-toggle { display: none; }
 .planner-mobile-list { display: none; }
 .planner-mobile-empty { display: none; }
+.sports-quick-toggle { display: none; }
 @media (max-width: 420px) {
   .hero h1 { font-size: 1.6rem; }
   .hero-stat .num { font-size: 1.2rem; }
@@ -1067,6 +1100,10 @@ input, select, textarea { font-family: inherit; }
 
 <!-- ===== SPORT QUICK NAV ===== -->
 <div class="sports-quick" id="sportsQuickNav">
+  <button class="sports-quick-toggle" id="sportsGridToggle" onclick="toggleSportsGrid()">
+    <span id="sportsToggleLabel">All Sports</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
   <div class="sports-quick-wrap">
     <div class="sports-quick-inner" id="sportsQuickInner">
       <button class="sq-btn active" data-sport="all">All Sports</button>
@@ -1866,18 +1903,37 @@ document.getElementById('clearFilters').addEventListener('click', () => {
   applyFilters();
 });
 
+// Sports grid toggle (mobile)
+function toggleSportsGrid() {
+  const inner = document.getElementById('sportsQuickInner');
+  const toggleBtn = document.getElementById('sportsGridToggle');
+  inner.classList.toggle('mobile-grid-open');
+  toggleBtn.classList.toggle('open');
+}
+function updateSportsToggleLabel(text) {
+  const label = document.getElementById('sportsToggleLabel');
+  if (label) label.textContent = text;
+}
+
 // Sport quick nav — clicking scrolls to the sport, doesn't filter
 document.querySelectorAll('.sq-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelector('.sq-btn.active')?.classList.remove('active');
     btn.classList.add('active');
+    // Close mobile grid after selection
+    const inner = document.getElementById('sportsQuickInner');
+    const toggleBtn = document.getElementById('sportsGridToggle');
+    if (inner.classList.contains('mobile-grid-open')) {
+      inner.classList.remove('mobile-grid-open');
+      toggleBtn.classList.remove('open');
+    }
+    updateSportsToggleLabel(btn.textContent.trim());
+
     if (btn.dataset.sport === 'all') {
-      // Reset filter and scroll to top of programs
       document.getElementById('sportFilter').value = '';
       applyFilters();
       document.getElementById('sports')?.scrollIntoView({behavior:'smooth',block:'start'});
     } else {
-      // Ensure all sports are showing, then scroll to the section
       if (document.getElementById('sportFilter').value) {
         document.getElementById('sportFilter').value = '';
         applyFilters();
@@ -1920,9 +1976,10 @@ function updateScrollSpy() {
       if (newActive && currentActive !== newActive) {
         currentActive?.classList.remove('active');
         newActive.classList.add('active');
-        // Scroll the sports nav horizontally without shifting the page
+        updateSportsToggleLabel(newActive.textContent.trim());
+        // Scroll the sports nav horizontally without shifting the page (desktop)
         const container = document.getElementById('sportsQuickInner');
-        if (container) {
+        if (container && !container.classList.contains('mobile-grid-open')) {
           const scrollLeft = newActive.offsetLeft - container.offsetWidth / 2 + newActive.offsetWidth / 2;
           container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
         }
