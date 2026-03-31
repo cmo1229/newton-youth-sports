@@ -1654,7 +1654,7 @@ function createProgramCard(p) {
     <div class="card-footer">
       <a href="${p.website}" target="_blank" rel="noopener" class="card-link">Visit Website <svg><use href="#icon-arrow"/></svg></a>
       <span style="display:flex;align-items:center;gap:8px;">
-        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', ${JSON.stringify(p.season)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
+        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', [${(p.season||[]).map(s=>`'${s}'`).join(',')}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
         <span class="card-cost">${p.cost}</span>
       </span>
     </div>
