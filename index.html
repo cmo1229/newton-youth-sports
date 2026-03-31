@@ -1786,15 +1786,22 @@ document.getElementById('clearFilters').addEventListener('click', () => {
   applyFilters();
 });
 
-// Sport quick nav
+// Sport quick nav — clicking scrolls to the sport, doesn't filter
 document.querySelectorAll('.sq-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelector('.sq-btn.active')?.classList.remove('active');
     btn.classList.add('active');
-    const sportVal = btn.dataset.sport === 'all' ? '' : btn.dataset.sport;
-    document.getElementById('sportFilter').value = sportVal;
-    applyFilters();
-    if (btn.dataset.sport !== 'all') {
+    if (btn.dataset.sport === 'all') {
+      // Reset filter and scroll to top of programs
+      document.getElementById('sportFilter').value = '';
+      applyFilters();
+      document.getElementById('sports')?.scrollIntoView({behavior:'smooth',block:'start'});
+    } else {
+      // Ensure all sports are showing, then scroll to the section
+      if (document.getElementById('sportFilter').value) {
+        document.getElementById('sportFilter').value = '';
+        applyFilters();
+      }
       const section = document.querySelector(`[data-sport-section="${btn.dataset.sport}"]`);
       if (section) section.scrollIntoView({behavior:'smooth',block:'start'});
     }
@@ -1808,13 +1815,12 @@ window.addEventListener('scroll', () => {
   updateScrollSpy();
 });
 
-// Sport nav scroll spy (throttled) — only active when viewing all sports
+// Sport nav scroll spy (throttled)
 let scrollSpyTicking = false;
 function updateScrollSpy() {
-  // Don't override the active button when a specific sport is filtered
+  // Don't run scroll spy if a sport filter is actively filtering results
   const sportFilter = document.getElementById('sportFilter').value;
-  const activeBtn = document.querySelector('.sq-btn.active');
-  if (sportFilter || (activeBtn && activeBtn.dataset.sport !== 'all')) return;
+  if (sportFilter) return;
 
   if (scrollSpyTicking) return;
   scrollSpyTicking = true;
