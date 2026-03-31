@@ -1782,9 +1782,14 @@ window.addEventListener('scroll', () => {
   updateScrollSpy();
 });
 
-// Sport nav scroll spy (throttled)
+// Sport nav scroll spy (throttled) — only active when viewing all sports
 let scrollSpyTicking = false;
 function updateScrollSpy() {
+  // Don't override the active button when a specific sport is filtered
+  const sportFilter = document.getElementById('sportFilter').value;
+  const activeBtn = document.querySelector('.sq-btn.active');
+  if (sportFilter || (activeBtn && activeBtn.dataset.sport !== 'all')) return;
+
   if (scrollSpyTicking) return;
   scrollSpyTicking = true;
   requestAnimationFrame(() => {
