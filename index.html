@@ -221,7 +221,7 @@ input, select, textarea { font-family: inherit; }
   display: flex; align-items: center; justify-content: flex-end;
   padding-right: 10px;
   background: linear-gradient(to right, transparent, var(--white) 60%);
-  pointer-events: none; z-index: 2;
+  pointer-events: auto; cursor: pointer; z-index: 2;
   transition: opacity 0.3s;
 }
 .sq-scroll-arrow.hidden { opacity: 0; }
@@ -254,6 +254,16 @@ input, select, textarea { font-family: inherit; }
   outline: none; border-color: var(--green-main);
 }
 .filter-input { min-width: 280px; }
+.filter-search-row {
+  margin-bottom: 12px;
+}
+.filter-search-row .filter-input {
+  width: 100%;
+  min-width: 100%;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-radius: 10px;
+}
 .filter-clear {
   padding: 10px 20px; background: none; color: var(--green-main);
   font-size: 0.85rem; font-weight: 600; margin-top: 18px;
@@ -578,6 +588,178 @@ input, select, textarea { font-family: inherit; }
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== KID PROFILES ===== */
+.kids-bar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.kid-pill {
+  padding: 6px 14px; border-radius: 100px; font-size: 0.82rem;
+  font-weight: 600; color: white; cursor: pointer; transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.kid-pill:hover { opacity: 0.85; }
+.kid-pill.active { border-color: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.add-kid-btn {
+  padding: 6px 14px; border-radius: 100px; font-size: 0.82rem;
+  font-weight: 600; color: var(--green-main); background: var(--green-pale);
+  cursor: pointer; border: 1px dashed var(--green-mid);
+}
+.add-kid-btn:hover { background: var(--green-light); color: white; }
+.nav-kids-btn {
+  padding: 8px 16px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 500; color: var(--slate); transition: all 0.2s;
+  background: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav-kids-btn:hover { background: var(--green-pale); color: var(--green-deep); }
+
+/* ===== KIDS PANEL ===== */
+.kids-panel {
+  position: fixed; top: 0; right: -400px; width: 380px; max-width: 90vw;
+  height: 100vh; background: white; z-index: 2000;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+  transition: right 0.3s ease; padding: 32px 24px;
+  overflow-y: auto;
+}
+.kids-panel.open { right: 0; }
+.kids-panel-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.3s;
+}
+.kids-panel-overlay.open { opacity: 1; visibility: visible; }
+.kids-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--green-deep); margin-bottom: 24px; }
+.kids-panel-close {
+  position: absolute; top: 16px; right: 16px; background: none; font-size: 1.5rem;
+  color: var(--slate); cursor: pointer; line-height: 1; border: none;
+}
+.kids-panel-close:hover { color: var(--navy); }
+.kid-form { background: var(--light-bg); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.kid-form h3 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.kid-form-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.kid-form-row input, .kid-form-row select {
+  flex: 1; min-width: 100px; padding: 10px 14px; border: 1.5px solid #dde2e5;
+  border-radius: 8px; font-size: 0.88rem; background: white; color: var(--navy);
+}
+.kid-form-row input:focus, .kid-form-row select:focus { outline: none; border-color: var(--green-main); }
+.kid-add-btn {
+  width: 100%; padding: 12px; background: var(--green-main); color: white;
+  font-weight: 700; font-size: 0.9rem; border-radius: 8px; border: none;
+  cursor: pointer; transition: background 0.2s;
+}
+.kid-add-btn:hover { background: var(--green-deep); }
+.kid-list { display: flex; flex-direction: column; gap: 10px; }
+.kid-list-item {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  border-radius: 10px; background: var(--light-bg); border: 1px solid rgba(0,0,0,0.06);
+}
+.kid-list-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+.kid-list-info { flex: 1; }
+.kid-list-name { font-weight: 700; font-size: 0.92rem; color: var(--navy); }
+.kid-list-meta { font-size: 0.78rem; color: var(--slate); }
+.kid-remove-btn {
+  background: none; border: none; color: #e53935; font-size: 0.78rem;
+  font-weight: 600; cursor: pointer; padding: 4px 10px; border-radius: 6px;
+}
+.kid-remove-btn:hover { background: #ffebee; }
+
+/* ===== SUMMER PLANNER ===== */
+.planner-toggle {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 24px; background: var(--green-pale); color: var(--green-deep);
+  font-weight: 700; font-size: 0.9rem; cursor: pointer; border: none;
+  width: 100%; border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.planner-toggle:hover { background: #c8edce; }
+.planner-section {
+  background: var(--green-deep); padding: 0; max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.planner-section.open { max-height: 800px; padding: 32px 0; }
+.planner-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.planner-grid {
+  display: grid;
+  grid-template-columns: 120px repeat(10, 1fr);
+  gap: 2px; max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+  min-width: 800px;
+}
+.planner-header {
+  font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.6);
+  text-align: center; padding: 8px 4px;
+}
+.planner-kid-label {
+  font-size: 0.82rem; font-weight: 600; color: white;
+  display: flex; align-items: center; gap: 6px; padding: 8px;
+}
+.planner-kid-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.planner-cell {
+  background: rgba(255,255,255,0.05); border-radius: 4px;
+  min-height: 40px; position: relative;
+}
+.planner-bar {
+  position: absolute; top: 4px; bottom: 4px; left: 2px; right: 2px;
+  border-radius: 4px; font-size: 0.65rem; font-weight: 600;
+  color: white; padding: 2px 6px; overflow: hidden;
+  white-space: nowrap; text-overflow: ellipsis;
+  display: flex; align-items: center;
+}
+.planner-bar.conflict { border: 2px solid #ff5252; }
+.planner-empty {
+  grid-column: 1 / -1; text-align: center; padding: 24px;
+  color: rgba(255,255,255,0.5); font-size: 0.88rem;
+}
+.planner-actions {
+  display: flex; justify-content: center; gap: 12px; margin-top: 16px;
+  max-width: var(--max-w); margin-left: auto; margin-right: auto; padding: 0 32px;
+}
+.planner-clear-btn {
+  padding: 8px 20px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; font-size: 0.82rem;
+  font-weight: 600; cursor: pointer;
+}
+.planner-clear-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+
+/* Add to Plan button on cards */
+.card-plan-btn {
+  background: none; border: 1px solid var(--green-mid); color: var(--green-main);
+  border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 0.78rem;
+  font-weight: 600; display: inline-flex; align-items: center; gap: 4px;
+  transition: all 0.2s;
+}
+.card-plan-btn:hover { background: var(--green-pale); }
+.card-plan-btn svg { width: 14px; height: 14px; }
+
+/* Add to Plan popup */
+.plan-popup {
+  position: fixed; z-index: 2100; background: white; border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 20px; width: 300px;
+  max-width: 90vw;
+}
+.plan-popup-overlay {
+  position: fixed; inset: 0; z-index: 2050; background: rgba(0,0,0,0.3);
+}
+.plan-popup h4 { font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.plan-popup label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.plan-popup select {
+  width: 100%; padding: 8px 12px; border: 1.5px solid #dde2e5; border-radius: 8px;
+  font-size: 0.88rem; margin-bottom: 12px; background: white;
+}
+.plan-popup select:focus { outline: none; border-color: var(--green-main); }
+.plan-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+.plan-week-cb { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--navy); }
+.plan-week-cb input { accent-color: var(--green-main); }
+.plan-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.plan-popup-save {
+  padding: 8px 20px; background: var(--green-main); color: white; border: none;
+  border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
+}
+.plan-popup-save:hover { background: var(--green-deep); }
+.plan-popup-cancel {
+  padding: 8px 16px; background: none; color: var(--slate); border: 1px solid #dde2e5;
+  border-radius: 8px; font-weight: 500; font-size: 0.85rem; cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .planner-grid { min-width: 700px; }
+  .planner-grid-wrap { margin: 0 -16px; padding: 0 16px; }
+}
 </style>
 </head>
 <body>
@@ -590,16 +772,14 @@ input, select, textarea { font-family: inherit; }
       Newton Youth Sports
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#sports">Sports</a>
-      <a href="#" data-nav-sport="soccer">Soccer</a>
-      <a href="#" data-nav-sport="basketball">Basketball</a>
-      <a href="#" data-nav-sport="baseball">Baseball</a>
-      <a href="#" data-nav-sport="hockey">Hockey</a>
+      <a href="#sports">Browse Programs</a>
       <a href="#timeline">Timeline</a>
-      <a href="#enrichment">Enrichment</a>
-      <a href="#clinics-camps">Clinics & Camps</a>
       <a href="newton-facts.html">Newton Facts</a>
       <a href="program-types-guide.html">Parent Guide</a>
+      <button class="nav-kids-btn" id="navKidsBtn" onclick="openKidsPanel()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>
+        My Kids
+      </button>
       <a href="#submit" class="nav-cta">Submit a Program</a>
     </div>
     <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
@@ -607,6 +787,45 @@ input, select, textarea { font-family: inherit; }
     </button>
   </div>
 </nav>
+
+<!-- ===== KIDS PANEL ===== -->
+<div class="kids-panel-overlay" id="kidsPanelOverlay" onclick="closeKidsPanel()"></div>
+<div class="kids-panel" id="kidsPanel">
+  <button class="kids-panel-close" onclick="closeKidsPanel()">&times;</button>
+  <h2>My Kids</h2>
+  <div class="kid-form">
+    <h3>Add a Child</h3>
+    <div class="kid-form-row">
+      <input type="text" id="kidNameInput" placeholder="Name">
+    </div>
+    <div class="kid-form-row">
+      <select id="kidGradeInput">
+        <option value="">Grade...</option>
+        <option value="Pre-K">Pre-K</option>
+        <option value="Kindergarten">Kindergarten</option>
+        <option value="Grade 1">Grade 1</option>
+        <option value="Grade 2">Grade 2</option>
+        <option value="Grade 3">Grade 3</option>
+        <option value="Grade 4">Grade 4</option>
+        <option value="Grade 5">Grade 5</option>
+        <option value="Grade 6">Grade 6</option>
+        <option value="Grade 7">Grade 7</option>
+        <option value="Grade 8">Grade 8</option>
+        <option value="Grade 9">Grade 9</option>
+        <option value="Grade 10">Grade 10</option>
+        <option value="Grade 11">Grade 11</option>
+        <option value="Grade 12">Grade 12</option>
+      </select>
+      <select id="kidGenderInput">
+        <option value="">Gender...</option>
+        <option value="Boy">Boy</option>
+        <option value="Girl">Girl</option>
+      </select>
+    </div>
+    <button class="kid-add-btn" onclick="addKid()">Add Child</button>
+  </div>
+  <div class="kid-list" id="kidList"></div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
@@ -667,10 +886,30 @@ input, select, textarea { font-family: inherit; }
 <!-- ===== FILTERS ===== -->
 <div class="filter-section" id="sports">
   <div class="filter-inner">
+    <div class="kids-bar" id="kidsBar" style="display:none;"></div>
+    <div class="filter-search-row">
+      <input type="text" class="filter-input" id="searchInput" placeholder="Search programs, organizations, sports...">
+    </div>
     <div class="filter-row">
       <div class="filter-group">
-        <label>Search</label>
-        <input type="text" class="filter-input" id="searchInput" placeholder="Search programs, organizations...">
+        <label>Sport</label>
+        <select class="filter-select" id="sportFilter">
+          <option value="">All Sports</option>
+          <option value="soccer">Soccer</option>
+          <option value="basketball">Basketball</option>
+          <option value="baseball">Baseball & Softball</option>
+          <option value="hockey">Hockey</option>
+          <option value="lacrosse">Lacrosse</option>
+          <option value="swimming">Swimming</option>
+          <option value="tennis">Tennis</option>
+          <option value="track">Track & Field</option>
+          <option value="football">Football</option>
+          <option value="gymnastics">Gymnastics</option>
+          <option value="martial-arts">Martial Arts</option>
+          <option value="other-sports">More Sports</option>
+          <option value="enrichment">Arts & STEM</option>
+          <option value="clinics-camps">Clinics & Camps</option>
+        </select>
       </div>
       <div class="filter-group">
         <label>Grade</label>
@@ -747,6 +986,16 @@ input, select, textarea { font-family: inherit; }
     <div class="active-filters" id="activeFilters"></div>
     <div class="results-count" id="resultsCount"></div>
   </div>
+</div>
+
+<!-- ===== SUMMER PLANNER ===== -->
+<button class="planner-toggle" id="plannerToggle" onclick="togglePlanner()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+  Plan Your Summer
+  <span style="font-weight:400;font-size:0.8rem;opacity:0.7">(click to expand)</span>
+</button>
+<div class="planner-section" id="plannerSection">
+  <div class="section-inner" id="plannerContent"></div>
 </div>
 
 <!-- ===== MAIN CONTENT (Generated by JS) ===== -->
@@ -944,7 +1193,7 @@ const programs = [
   {sport:"soccer",name:"Newton Girls Soccer Academy",org:"Newton Girls Soccer",desc:"Competitive academy program for girls committed to high-level soccer development. Tryout-based teams competing in top regional leagues.",ages:"Girls, Grades 3-8",ageCategory:["3-5","6-8"],season:["fall","spring"],level:"competitive",cost:"Contact for pricing",costRange:"over-500",location:"Newton fields",website:"https://newtongirlssoccer.org/academy/",regDate:"Spring tryouts",commitment:"3-4x/week",tags:["girls"]},
 
   // ===== BASKETBALL =====
-  {sport:"basketball",name:"NCE Presents: NAA Summer Basketball Program",org:"Newton Community Education / NAA",desc:"Co-ed, high-energy summer basketball clinics led by NAA alumni and current college athletes. Weekly themes: Ball Handling (Jun 29-Jul 3), Shooting (Jul 27-31), Finishing & Scoring (Aug 3-7), Championship Week (Aug 10-14). Register for individual weeks or the whole summer. Custom NAA Summer T-shirt included each week. $499 early bird per week until March 22!",ages:"Co-Ed, Grades 4-9",ageCategory:["3-5","6-8"],season:["summer"],level:"camp",cost:"$525/week ($499 early bird before Mar 22)",costRange:"over-500",location:"Newton South HS, Field House",website:"https://newtoncommunityed.asapconnected.com/#CourseID=324646",regDate:"Early bird until Mar 22",commitment:"Mon-Fri 9am-3:30pm",featured:true,ourPick:true,tags:["coed"]},
+  {sport:"basketball",name:"NCE Presents: NAA Summer Basketball Program",org:"Newton Community Education / NAA",desc:"Co-ed, high-energy summer basketball clinics led by NAA alumni and current college athletes. Weekly themes: Ball Handling (Jun 29-Jul 3), Shooting (Jul 27-31), Finishing & Scoring (Aug 3-7), Championship Week (Aug 10-14). Register for individual weeks or the whole summer. Custom NAA Summer T-shirt included each week.",ages:"Co-Ed, Grades 4-9",ageCategory:["3-5","6-8"],season:["summer"],level:"camp",cost:"$525/week",costRange:"over-500",location:"Newton South HS, Field House",website:"https://newtoncommunityed.asapconnected.com/#CourseID=324646",regDate:"Rolling",commitment:"Mon-Fri 9am-3:30pm",featured:true,ourPick:true,tags:["coed"]},
   {sport:"basketball",name:"NAA Basketball League",org:"Newton Athletic Association",desc:"Newton's primary recreational basketball league. Volunteer-run, welcomes all abilities and genders. Games on weekends at Brown Middle School.",ages:"Grades 3-9",ageCategory:["3-5","6-8","9-12"],season:["winter"],level:"recreational",cost:"$235-$270",costRange:"200-500",location:"Brown Middle School, 125 Meadowbrook Rd, Newton",website:"https://newton-athletic-association.sportngin.com/",regDate:"Fall registration",commitment:"2x/week",bestValue:true},
   {sport:"basketball",name:"Newton Girls Basketball (NGBA)",org:"NGBA",desc:"Girls-only recreational league emphasizing fun, skill development, and sportsmanship. Saturday games at Newton school gyms, weeknight practices for grades 3-9.",ages:"Girls, Grades 2-9",ageCategory:["k-2","3-5","6-8","9-12"],season:["winter"],level:"recreational",cost:"~$180",costRange:"under-200",location:"Newton school gyms",website:"https://newtongirlsbball.com/",regDate:"Deadline ~Oct 27; $25 late fee after",commitment:"1-2x/week",tags:["girls"]},
   {sport:"basketball",name:"Newton Metrowest Travel Basketball",org:"Newton Metrowest Travel",desc:"Competitive travel basketball in the Metrowest League. Tryout-based teams stressing skills, sportsmanship, and fun. Partial scholarships available.",ages:"Grades 4-8",ageCategory:["3-5","6-8"],season:["winter"],level:"competitive",cost:"$650-$700",costRange:"over-500",location:"Brown Middle School, Fessenden School",website:"https://www.newtonbball.com/",regDate:"Tryouts ~Oct",commitment:"3-4x/week"},
@@ -1108,7 +1357,7 @@ const programs = [
   {sport:"clinics-camps",name:"YMCA April Break Programs",org:"West Suburban YMCA",desc:"Spring vacation programming with outdoor activities, sports, swimming, and field trips as weather warms up. Financial assistance available.",ages:"K - Grade 8",ageCategory:["k-2","3-5","6-8"],season:["spring"],level:"camp",cost:"Contact YMCA",costRange:"200-500",location:"276 Church St / Wells Ave, Newton",website:"https://wsymca.org",regDate:"By session",commitment:"Daily programs",breakType:"april-break"},
 
   // -- Summer Camps --
-  {sport:"clinics-camps",name:"NCE Presents: NAA Summer Basketball Program",org:"Newton Community Education / NAA",desc:"Co-ed, high-energy summer basketball clinics led by NAA alumni and current college athletes. Weekly themes: Ball Handling (Jun 29-Jul 3), Shooting (Jul 27-31), Finishing & Scoring (Aug 3-7), Championship Week (Aug 10-14). Register for individual weeks or the whole summer. Custom NAA Summer T-shirt included each week. $499 early bird per week until March 22!",ages:"Co-Ed, Grades 4-9",ageCategory:["3-5","6-8"],season:["summer"],level:"camp",cost:"$525/week ($499 early bird before Mar 22)",costRange:"over-500",location:"Newton South HS, Field House",website:"https://newtoncommunityed.asapconnected.com/#CourseID=324646",regDate:"Early bird until Mar 22",commitment:"Mon-Fri 9am-3:30pm",breakType:"summer",featured:true,ourPick:true,tags:["coed"]},
+  {sport:"clinics-camps",name:"NCE Presents: NAA Summer Basketball Program",org:"Newton Community Education / NAA",desc:"Co-ed, high-energy summer basketball clinics led by NAA alumni and current college athletes. Weekly themes: Ball Handling (Jun 29-Jul 3), Shooting (Jul 27-31), Finishing & Scoring (Aug 3-7), Championship Week (Aug 10-14). Register for individual weeks or the whole summer. Custom NAA Summer T-shirt included each week.",ages:"Co-Ed, Grades 4-9",ageCategory:["3-5","6-8"],season:["summer"],level:"camp",cost:"$525/week",costRange:"over-500",location:"Newton South HS, Field House",website:"https://newtoncommunityed.asapconnected.com/#CourseID=324646",regDate:"Rolling",commitment:"Mon-Fri 9am-3:30pm",breakType:"summer",featured:true,ourPick:true,tags:["coed"]},
   {sport:"clinics-camps",name:"Newton Parks & Rec Summer Camps",org:"City of Newton",desc:"The city's official summer camp program. General recreation, sports, nature, field trips, and specialty camps at Nahanton Park. Camp Extreme (Gr 5-8) with daily field trips.",ages:"Ages 3.5 - High School",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Varies by program",costRange:"200-500",location:"Various Newton parks and schools",website:"https://www.newtonma.gov/government/parks-recreation-culture/camps",regDate:"Jan 28 (residents)",commitment:"Weekly sessions",breakType:"summer"},
   {sport:"clinics-camps",name:"Viking Sports Summer Camp",org:"Viking Sports",desc:"11-week multi-sport summer camp. Basketball, soccer, baseball, flag football, floor hockey, swimming, and more. Extended day options (7:30am-5:30pm).",ages:"Ages 5-12",ageCategory:["k-2","3-5"],season:["summer"],level:"camp",cost:"~$475/week",costRange:"200-500",location:"Newton school facilities",website:"https://www.vikingcamps.com/newton/",regDate:"Jan 28 (residents)",commitment:"Full-week sessions",breakType:"summer"},
   {sport:"clinics-camps",name:"Camp Echo Bridge (Inclusive Summer Camp)",org:"City of Newton",desc:"6-week inclusive day camp for children with and without disabilities. Bridges recreation and academics. Residential week option for ages 10-21.",ages:"Entering Gr 1 - Post-grad",ageCategory:["k-2","3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Contact Parks & Rec",costRange:"200-500",location:"Mason-Rice School, Newton Centre",website:"https://www.newtonma.gov/government/parks-recreation-culture/camps/camp-echo-bridge",regDate:"Jan 28",commitment:"6-week camp",breakType:"summer",tags:["adaptive"]},
@@ -1222,7 +1471,10 @@ function createProgramCard(p) {
     </div>
     <div class="card-footer">
       <a href="${p.website}" target="_blank" rel="noopener" class="card-link">Visit Website <svg><use href="#icon-arrow"/></svg></a>
-      <span class="card-cost">${p.cost}</span>
+      <span style="display:flex;align-items:center;gap:8px;">
+        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
+        <span class="card-cost">${p.cost}</span>
+      </span>
     </div>
   </div>`;
 }
@@ -1336,7 +1588,8 @@ function getFiltered() {
   const level = document.getElementById('levelFilter').value;
   const cost = document.getElementById('costFilter').value;
   const sort = document.getElementById('sortFilter').value;
-  const activeSport = document.querySelector('.sq-btn.active')?.dataset.sport || 'all';
+  const sportFilterVal = document.getElementById('sportFilter').value;
+  const activeSport = sportFilterVal || (document.querySelector('.sq-btn.active')?.dataset.sport || 'all');
   const ageCategory = gradeToAgeCategory(grade);
 
   let filtered = programs.filter(p => {
@@ -1345,9 +1598,24 @@ function getFiltered() {
     if (ageCategory && !(p.ageCategory||[]).includes(ageCategory)) return false;
     if (gender) {
       const tags = p.tags || [];
-      if (gender === 'girls' && !tags.includes('girls')) return false;
-      if (gender === 'boys' && !tags.includes('boys')) return false;
-      if (gender === 'coed' && !tags.includes('coed')) return false;
+      const nameLower = p.name.toLowerCase();
+      const descLower = p.desc.toLowerCase();
+      if (gender === 'girls') {
+        const hasGirlTag = tags.includes('girls');
+        const hasGirlText = nameLower.includes('girl') || descLower.includes('girl');
+        if (!hasGirlTag && !hasGirlText) return false;
+      }
+      if (gender === 'boys') {
+        const hasBoyTag = tags.includes('boys');
+        const hasBoyText = (nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club');
+        if (!hasBoyTag && !hasBoyText) return false;
+      }
+      if (gender === 'coed') {
+        const hasCoedTag = tags.includes('coed');
+        const hasGirlTag = tags.includes('girls');
+        const hasBoyTag = tags.includes('boys');
+        if (!hasCoedTag && (hasGirlTag || hasBoyTag)) return false;
+      }
     }
     if (season) {
       if (season === 'year-round') {
@@ -1397,6 +1665,7 @@ function applyFilters() {
 function updateActiveFilters() {
   const container = document.getElementById('activeFilters');
   const filters = [];
+  const sportF = document.getElementById('sportFilter');
   const grade = document.getElementById('gradeFilter');
   const gender = document.getElementById('genderFilter');
   const season = document.getElementById('seasonFilter');
@@ -1405,6 +1674,7 @@ function updateActiveFilters() {
   const sort = document.getElementById('sortFilter');
   const search = document.getElementById('searchInput').value;
   if (search) filters.push({label:`"${search}"`, clear:()=>{document.getElementById('searchInput').value='';applyFilters();}});
+  if (sportF.value) filters.push({label:sportF.options[sportF.selectedIndex].text, clear:()=>{sportF.value='';document.querySelector('.sq-btn.active')?.classList.remove('active');document.querySelector('.sq-btn[data-sport="all"]').classList.add('active');applyFilters();}});
   if (grade.value) filters.push({label:grade.options[grade.selectedIndex].text, clear:()=>{grade.value='';applyFilters();}});
   if (gender.value) filters.push({label:gender.options[gender.selectedIndex].text, clear:()=>{gender.value='';applyFilters();}});
   if (season.value) filters.push({label:season.options[season.selectedIndex].text, clear:()=>{season.value='';applyFilters();}});
@@ -1421,8 +1691,16 @@ document.getElementById('searchInput').addEventListener('input', debounce(applyF
 ['gradeFilter','genderFilter','seasonFilter','levelFilter','costFilter','sortFilter'].forEach(id => {
   document.getElementById(id).addEventListener('change', applyFilters);
 });
+document.getElementById('sportFilter').addEventListener('change', () => {
+  const val = document.getElementById('sportFilter').value;
+  document.querySelector('.sq-btn.active')?.classList.remove('active');
+  const matchBtn = document.querySelector(`.sq-btn[data-sport="${val || 'all'}"]`);
+  if (matchBtn) matchBtn.classList.add('active');
+  applyFilters();
+});
 document.getElementById('clearFilters').addEventListener('click', () => {
   document.getElementById('searchInput').value = '';
+  document.getElementById('sportFilter').value = '';
   document.getElementById('gradeFilter').value = '';
   document.getElementById('genderFilter').value = '';
   document.getElementById('seasonFilter').value = '';
@@ -1439,6 +1717,8 @@ document.querySelectorAll('.sq-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelector('.sq-btn.active')?.classList.remove('active');
     btn.classList.add('active');
+    const sportVal = btn.dataset.sport === 'all' ? '' : btn.dataset.sport;
+    document.getElementById('sportFilter').value = sportVal;
     applyFilters();
     if (btn.dataset.sport !== 'all') {
       const section = document.querySelector(`[data-sport-section="${btn.dataset.sport}"]`);
@@ -1489,6 +1769,13 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.c
     window.addEventListener('resize', checkScroll);
     setTimeout(checkScroll, 100);
   }
+  if (arrow && inner) {
+    arrow.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      inner.scrollBy({left: 200, behavior: 'smooth'});
+    });
+  }
 })();
 
 // ===== NAV SPORT LINKS SMOOTH SCROLL =====
@@ -1509,8 +1796,303 @@ document.querySelectorAll('[data-nav-sport]').forEach(link => {
   });
 });
 
+// ===== KID PROFILES =====
+const KID_COLORS = ['#e8a838','#90caf9','#52b788','#ce93d8','#ff8a65','#4dd0e1'];
+function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
+function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
+
+function openKidsPanel() {
+  document.getElementById('kidsPanel').classList.add('open');
+  document.getElementById('kidsPanelOverlay').classList.add('open');
+  renderKidList();
+}
+function closeKidsPanel() {
+  document.getElementById('kidsPanel').classList.remove('open');
+  document.getElementById('kidsPanelOverlay').classList.remove('open');
+}
+
+function addKid() {
+  const name = document.getElementById('kidNameInput').value.trim();
+  const grade = document.getElementById('kidGradeInput').value;
+  const gender = document.getElementById('kidGenderInput').value;
+  if (!name || !grade || !gender) { alert('Please fill in all fields.'); return; }
+  const kids = getKidProfiles();
+  const id = Date.now();
+  const color = KID_COLORS[kids.length % KID_COLORS.length];
+  kids.push({ id, name, grade, gender, color });
+  saveKidProfiles(kids);
+  document.getElementById('kidNameInput').value = '';
+  document.getElementById('kidGradeInput').value = '';
+  document.getElementById('kidGenderInput').value = '';
+  renderKidList();
+  renderKidsBar();
+  renderPlanner();
+}
+
+function removeKid(id) {
+  let kids = getKidProfiles();
+  kids = kids.filter(k => k.id !== id);
+  saveKidProfiles(kids);
+  // Also remove from summer plan
+  let plan = getSummerPlan();
+  plan = plan.filter(p => p.kidId !== id);
+  saveSummerPlan(plan);
+  renderKidList();
+  renderKidsBar();
+  renderPlanner();
+}
+
+function renderKidList() {
+  const kids = getKidProfiles();
+  const container = document.getElementById('kidList');
+  if (kids.length === 0) {
+    container.innerHTML = '<p style="color:var(--slate);font-size:0.85rem;text-align:center;padding:16px;">No kids added yet. Add your children above to personalize program filtering.</p>';
+    return;
+  }
+  container.innerHTML = kids.map(k => `
+    <div class="kid-list-item">
+      <div class="kid-list-dot" style="background:${k.color}"></div>
+      <div class="kid-list-info">
+        <div class="kid-list-name">${k.name}</div>
+        <div class="kid-list-meta">${k.grade} &middot; ${k.gender}</div>
+      </div>
+      <button class="kid-remove-btn" onclick="removeKid(${k.id})">Remove</button>
+    </div>
+  `).join('');
+}
+
+function gradeToFilterValue(grade) {
+  const map = {
+    'Pre-K':'prek','Kindergarten':'k-2-k',
+    'Grade 1':'k-2-1','Grade 2':'k-2-2',
+    'Grade 3':'3-5-3','Grade 4':'3-5-4','Grade 5':'3-5-5',
+    'Grade 6':'6-8-6','Grade 7':'6-8-7','Grade 8':'6-8-8',
+    'Grade 9':'9-12-9','Grade 10':'9-12-10','Grade 11':'9-12-11','Grade 12':'9-12-12'
+  };
+  return map[grade] || '';
+}
+
+function gradeShortLabel(grade) {
+  if (grade === 'Pre-K') return 'Pre-K';
+  if (grade === 'Kindergarten') return 'K';
+  return grade.replace('Grade ', 'Gr ');
+}
+
+let activeKidId = null;
+
+function renderKidsBar() {
+  const kids = getKidProfiles();
+  const bar = document.getElementById('kidsBar');
+  if (kids.length === 0) {
+    bar.style.display = 'none';
+    activeKidId = null;
+    return;
+  }
+  bar.style.display = 'flex';
+  const allActive = activeKidId === null ? ' active' : '';
+  let html = `<span class="kid-pill${allActive}" style="background:#52b788" onclick="selectKidPill(null)">All</span>`;
+  kids.forEach(k => {
+    const isActive = activeKidId === k.id ? ' active' : '';
+    html += `<span class="kid-pill${isActive}" style="background:${k.color}" data-kid-id="${k.id}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
+  });
+  html += `<button class="add-kid-btn" onclick="openKidsPanel()">+ Add Child</button>`;
+  bar.innerHTML = html;
+}
+
+function selectKidPill(kidId) {
+  activeKidId = kidId;
+  if (kidId === null) {
+    // Reset grade and gender filters
+    document.getElementById('gradeFilter').value = '';
+    document.getElementById('genderFilter').value = '';
+  } else {
+    const kids = getKidProfiles();
+    const kid = kids.find(k => k.id === kidId);
+    if (kid) {
+      document.getElementById('gradeFilter').value = gradeToFilterValue(kid.grade);
+      document.getElementById('genderFilter').value = kid.gender === 'Girl' ? 'girls' : 'boys';
+    }
+  }
+  renderKidsBar();
+  applyFilters();
+}
+
+// ===== SUMMER PLANNER =====
+const SUMMER_WEEKS = ['Jun 22','Jun 29','Jul 6','Jul 13','Jul 20','Jul 27','Aug 3','Aug 10','Aug 17','Aug 24'];
+function getSummerPlan() { return JSON.parse(localStorage.getItem('nys-plan') || '[]'); }
+function saveSummerPlan(plan) { localStorage.setItem('nys-plan', JSON.stringify(plan)); }
+
+function togglePlanner() {
+  const section = document.getElementById('plannerSection');
+  const toggle = document.getElementById('plannerToggle');
+  section.classList.toggle('open');
+  const isOpen = section.classList.contains('open');
+  toggle.querySelector('span').textContent = isOpen ? '(click to collapse)' : '(click to expand)';
+}
+
+function renderPlanner() {
+  const plan = getSummerPlan();
+  const kids = getKidProfiles();
+  const container = document.getElementById('plannerContent');
+
+  if (plan.length === 0) {
+    container.innerHTML = `<div class="planner-grid-wrap"><div class="planner-grid">
+      <div class="planner-header"></div>
+      ${SUMMER_WEEKS.map(w => `<div class="planner-header">${w}</div>`).join('')}
+      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start planning your summer!</div>
+    </div></div>`;
+    return;
+  }
+
+  // Determine rows: group by kidId
+  const kidIds = [...new Set(plan.map(p => p.kidId))];
+  let html = '<div class="planner-grid-wrap"><div class="planner-grid">';
+  // Header row
+  html += '<div class="planner-header"></div>';
+  SUMMER_WEEKS.forEach(w => { html += `<div class="planner-header">${w}</div>`; });
+
+  kidIds.forEach(kidId => {
+    const kid = kids.find(k => k.id === kidId);
+    const label = kid ? kid.name : 'General';
+    const dotColor = kid ? kid.color : '#52b788';
+    const kidPlans = plan.filter(p => p.kidId === kidId);
+
+    // Count how many programs occupy each week for conflict detection
+    const weekCounts = new Array(10).fill(0);
+    kidPlans.forEach(p => { (p.weeks||[]).forEach(w => { weekCounts[w]++; }); });
+
+    // For each program belonging to this kid, render a row
+    kidPlans.forEach((p, pi) => {
+      if (pi === 0) {
+        html += `<div class="planner-kid-label"><div class="planner-kid-dot" style="background:${dotColor}"></div>${label}</div>`;
+      } else {
+        html += `<div class="planner-kid-label" style="font-size:0.72rem;color:rgba(255,255,255,0.4);padding-left:28px;"></div>`;
+      }
+      const weeks = (p.weeks || []).sort((a,b) => a - b);
+      let weekIdx = 0;
+      while (weekIdx < 10) {
+        if (weeks.includes(weekIdx)) {
+          // Find consecutive span
+          let spanStart = weekIdx;
+          while (weekIdx < 10 && weeks.includes(weekIdx)) weekIdx++;
+          let spanLen = weekIdx - spanStart;
+          const hasConflict = weekCounts.slice(spanStart, spanStart + spanLen).some(c => c > 1);
+          html += `<div class="planner-cell" style="grid-column: span ${spanLen};">
+            <div class="planner-bar${hasConflict ? ' conflict' : ''}" style="background:${p.color || dotColor}">${p.programName}</div>
+          </div>`;
+        } else {
+          html += `<div class="planner-cell"></div>`;
+          weekIdx++;
+        }
+      }
+    });
+  });
+
+  html += '</div></div>';
+  html += '<div class="planner-actions"><button class="planner-clear-btn" onclick="clearPlan()">Clear Plan</button></div>';
+  container.innerHTML = html;
+}
+
+function clearPlan() {
+  if (confirm('Clear your entire summer plan?')) {
+    localStorage.removeItem('nys-plan');
+    renderPlanner();
+  }
+}
+
+// Add to Plan popup
+function openPlanPopup(event, programName, programSport) {
+  event.stopPropagation();
+  event.preventDefault();
+  // Remove existing popup
+  closePlanPopup();
+
+  const kids = getKidProfiles();
+  const btn = event.currentTarget;
+  const rect = btn.getBoundingClientRect();
+
+  // Create overlay
+  const overlay = document.createElement('div');
+  overlay.className = 'plan-popup-overlay';
+  overlay.onclick = closePlanPopup;
+  document.body.appendChild(overlay);
+
+  // Create popup
+  const popup = document.createElement('div');
+  popup.className = 'plan-popup';
+  popup.id = 'planPopup';
+
+  let kidOptions = '<option value="general">General</option>';
+  kids.forEach(k => { kidOptions += `<option value="${k.id}">${k.name}</option>`; });
+
+  let weeksHtml = '';
+  SUMMER_WEEKS.forEach((w, i) => {
+    weeksHtml += `<label class="plan-week-cb"><input type="checkbox" name="plan-week" value="${i}"> ${w}</label>`;
+  });
+
+  popup.innerHTML = `
+    <h4>Add to Plan</h4>
+    <p style="font-size:0.82rem;color:var(--slate);margin-bottom:14px;">${programName}</p>
+    <label>For which child?</label>
+    <select id="planKidSelect">${kidOptions}</select>
+    <label>Which weeks?</label>
+    <div class="plan-weeks">${weeksHtml}</div>
+    <div class="plan-popup-actions">
+      <button class="plan-popup-cancel" onclick="closePlanPopup()">Cancel</button>
+      <button class="plan-popup-save" onclick="savePlanEntry('${programName.replace(/'/g,"\\'")}', '${programSport}')">Save</button>
+    </div>
+  `;
+
+  // Position popup
+  let top = rect.bottom + 8;
+  let left = rect.left;
+  if (top + 350 > window.innerHeight) top = rect.top - 350;
+  if (left + 300 > window.innerWidth) left = window.innerWidth - 320;
+  if (left < 10) left = 10;
+  if (top < 10) top = 10;
+  popup.style.top = top + 'px';
+  popup.style.left = left + 'px';
+
+  document.body.appendChild(popup);
+}
+
+function closePlanPopup() {
+  const popup = document.getElementById('planPopup');
+  if (popup) popup.remove();
+  const overlay = document.querySelector('.plan-popup-overlay');
+  if (overlay) overlay.remove();
+}
+
+function savePlanEntry(programName, programSport) {
+  const kidSelect = document.getElementById('planKidSelect');
+  const kidVal = kidSelect.value;
+  const weekCheckboxes = document.querySelectorAll('#planPopup input[name="plan-week"]:checked');
+  const weeks = Array.from(weekCheckboxes).map(cb => parseInt(cb.value));
+
+  if (weeks.length === 0) { alert('Please select at least one week.'); return; }
+
+  const kids = getKidProfiles();
+  const kidId = kidVal === 'general' ? 'general' : parseInt(kidVal);
+  const kid = kids.find(k => k.id === kidId);
+  const color = kid ? kid.color : '#52b788';
+
+  const plan = getSummerPlan();
+  plan.push({ kidId, programName, programSport, weeks, color });
+  saveSummerPlan(plan);
+  closePlanPopup();
+  renderPlanner();
+
+  // Open planner if not open
+  const section = document.getElementById('plannerSection');
+  if (!section.classList.contains('open')) {
+    togglePlanner();
+  }
+}
+
 // ===== INIT =====
 renderAll(programs);
+renderKidsBar();
+renderPlanner();
 </script>
 </body>
 </html>
