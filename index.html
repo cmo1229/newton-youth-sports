@@ -954,6 +954,22 @@ input, select, textarea { font-family: inherit; }
   font-weight: 600; cursor: pointer;
 }
 .planner-clear-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+.planner-share-btn {
+  padding: 8px 20px; background: var(--gold); color: var(--navy);
+  border: none; border-radius: 8px; font-size: 0.82rem;
+  font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+  transition: all 0.2s;
+}
+.planner-share-btn:hover { background: #d4952e; }
+.planner-share-btn svg { width: 14px; height: 14px; }
+.share-toast {
+  position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+  background: var(--green-deep); color: white; padding: 12px 24px;
+  border-radius: 10px; font-size: 0.88rem; font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 3000;
+  opacity: 0; transition: opacity 0.3s; pointer-events: none;
+}
+.share-toast.show { opacity: 1; }
 
 /* Add to Plan button on cards */
 .card-plan-btn {
@@ -2486,6 +2502,7 @@ function renderPlanner() {
 
   html += mobileHtml;
   html += `<div class="planner-actions">
+    <button class="planner-share-btn" onclick="sharePlan()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share Plan</button>
     <button class="planner-clear-btn" onclick="clearPlan('season')">Clear ${seasonData.label}</button>
     <button class="planner-clear-btn" onclick="clearPlan('all')">Clear All Seasons</button>
   </div>`;
@@ -2655,6 +2672,67 @@ function savePlanEntry(programName, programSport) {
   currentPlannerSeason = season;
   renderTimeline();
   document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== SHARE PLAN =====
+function sharePlan() {
+  const plan = getPlan().filter(p => p.season === currentPlannerSeason);
+  const kids = getKidProfiles();
+  const seasonData = PLANNER_SEASONS[currentPlannerSeason];
+  if (plan.length === 0) return;
+
+  let text = `🏅 ${seasonData.label} Sports Plan — Newton Youth Sports\n`;
+  text += `━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+  const kidIds = [...new Set(plan.map(p => p.kidId))];
+  kidIds.forEach(kidId => {
+    const kid = kids.find(k => k.id === kidId);
+    const label = kid ? kid.name : 'General';
+    const kidPlans = plan.filter(p => p.kidId === kidId);
+    text += `👤 ${label}\n`;
+    kidPlans.forEach(p => {
+      const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => seasonData.weeks[w] || '').filter(Boolean);
+      text += `  • ${p.programName}`;
+      if (weekLabels.length > 0) text += ` (${weekLabels[0]} – ${weekLabels[weekLabels.length - 1]})`;
+      text += '\n';
+    });
+    text += '\n';
+  });
+
+  text += `📅 View all programs at newtonyouthsports.com`;
+
+  // Use Web Share API on mobile if available, otherwise copy to clipboard
+  if (navigator.share && window.innerWidth <= 768) {
+    navigator.share({ title: `${seasonData.label} Sports Plan`, text }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text).then(() => {
+      showShareToast('Plan copied to clipboard!');
+    }).catch(() => {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showShareToast('Plan copied to clipboard!');
+    });
+  }
+}
+
+function showShareToast(msg) {
+  let toast = document.getElementById('shareToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'shareToast';
+    toast.className = 'share-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
 // ===== INIT =====
