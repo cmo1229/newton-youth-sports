@@ -618,7 +618,7 @@ input, select, textarea { font-family: inherit; }
 
   /* --- HERO --- */
   .hero { min-height: auto; padding-top: 56px; }
-  .hero h1 { font-size: 1.9rem; margin-bottom: 10px; line-height: 1.15; }
+  .hero h1 { font-size: 1.9rem; margin-bottom: 10px; line-height: 1.15; text-align: center; }
   .hero-sub { font-size: 0.85rem; margin-bottom: 16px; line-height: 1.5; }
   .hero-content { padding: 28px 20px 24px; }
   .hero-grid { display: flex; flex-direction: column; gap: 0; }
@@ -731,6 +731,34 @@ input, select, textarea { font-family: inherit; }
   .deadline-card .dl-badge { padding: 4px 10px; font-size: 0.7rem; }
   .planner-divider { padding: 0 16px; margin-bottom: 16px; }
   .planner-actions { padding: 0 16px; }
+  .planner-grid-wrap { display: none; }
+  .planner-mobile-list { display: block; padding: 0 16px; }
+  .planner-mobile-item {
+    background: rgba(255,255,255,0.08); border-radius: 10px;
+    padding: 12px 14px; margin-bottom: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .planner-mobile-item .pm-name {
+    font-weight: 600; font-size: 0.88rem; margin-bottom: 4px;
+  }
+  .planner-mobile-item .pm-kid {
+    font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .planner-mobile-item .pm-kid-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .planner-mobile-item .pm-weeks {
+    display: flex; flex-wrap: wrap; gap: 4px;
+  }
+  .planner-mobile-item .pm-week-tag {
+    padding: 3px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600;
+    background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8);
+  }
+  .planner-mobile-empty {
+    text-align: center; padding: 24px 16px;
+    color: rgba(255,255,255,0.4); font-size: 0.85rem;
+  }
 
   /* --- SUBMIT FORM --- */
   .submit-section { padding: 40px 0; }
@@ -760,8 +788,10 @@ input, select, textarea { font-family: inherit; }
   .kids-panel { width: 100%; max-width: 100%; padding: 24px 20px; }
   .kids-panel h2 { font-size: 1.3rem; }
 }
-/* Hide filter toggle on desktop */
+/* Hide mobile-only elements on desktop */
 .mobile-filter-toggle { display: none; }
+.planner-mobile-list { display: none; }
+.planner-mobile-empty { display: none; }
 @media (max-width: 420px) {
   .hero h1 { font-size: 1.6rem; }
   .hero-stat .num { font-size: 1.2rem; }
@@ -2318,7 +2348,8 @@ function renderPlanner() {
       <div class="planner-header"></div>
       ${weeks.map(w => `<div class="planner-header">${w}</div>`).join('')}
       <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start building your ${seasonData.label.toLowerCase()} schedule!</div>
-    </div></div>`;
+    </div></div>
+    <div class="planner-mobile-empty">Tap <strong>Plan</strong> on any program card to start building your ${seasonData.label.toLowerCase()} schedule.</div>`;
     return;
   }
 
@@ -2362,6 +2393,26 @@ function renderPlanner() {
   });
 
   html += '</div></div>';
+
+  // Mobile list view
+  let mobileHtml = '<div class="planner-mobile-list">';
+  kidIds.forEach(kidId => {
+    const kid = kids.find(k => k.id === kidId);
+    const label = kid ? kid.name : 'General';
+    const dotColor = kid ? kid.color : '#52b788';
+    const kidPlans = plan.filter(p => p.kidId === kidId);
+    kidPlans.forEach(p => {
+      const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => weeks[w] || '');
+      mobileHtml += `<div class="planner-mobile-item">
+        <div class="pm-name" style="border-left: 3px solid ${p.color || dotColor}; padding-left: 10px;">${p.programName}</div>
+        <div class="pm-kid"><div class="pm-kid-dot" style="background:${dotColor}"></div>${label}</div>
+        <div class="pm-weeks">${weekLabels.map(w => `<span class="pm-week-tag">${w}</span>`).join('')}</div>
+      </div>`;
+    });
+  });
+  mobileHtml += '</div>';
+
+  html += mobileHtml;
   html += `<div class="planner-actions">
     <button class="planner-clear-btn" onclick="clearPlan('season')">Clear ${seasonData.label}</button>
     <button class="planner-clear-btn" onclick="clearPlan('all')">Clear All Seasons</button>
