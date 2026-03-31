@@ -197,8 +197,11 @@ input, select, textarea { font-family: inherit; }
   background: var(--white); border-bottom: 1px solid rgba(0,0,0,0.06);
   position: sticky; top: 70px; z-index: 100;
 }
+.sports-quick-wrap {
+  position: relative; max-width: var(--max-w); margin: 0 auto;
+}
 .sports-quick-inner {
-  max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+  max-width: 100%; padding: 0 32px;
   display: flex; align-items: center; gap: 6px;
   overflow-x: auto; -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -213,6 +216,17 @@ input, select, textarea { font-family: inherit; }
 .sq-btn:hover, .sq-btn.active {
   color: var(--green-main); border-bottom-color: var(--green-main);
 }
+.sq-scroll-arrow {
+  position: absolute; right: 0; top: 0; bottom: 0; width: 60px;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 10px;
+  background: linear-gradient(to right, transparent, var(--white) 60%);
+  pointer-events: none; z-index: 2;
+  transition: opacity 0.3s;
+}
+.sq-scroll-arrow.hidden { opacity: 0; }
+.sq-scroll-arrow svg { color: var(--slate); opacity: 0.6; animation: scrollBounce 1.5s ease-in-out infinite; }
+@keyframes scrollBounce { 0%,100%{transform:translateX(0)} 50%{transform:translateX(4px)} }
 
 /* ===== FILTER BAR ===== */
 .filter-section {
@@ -577,13 +591,15 @@ input, select, textarea { font-family: inherit; }
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#sports">Sports</a>
-      <a href="#soccer">Soccer</a>
-      <a href="#basketball">Basketball</a>
-      <a href="#baseball">Baseball</a>
-      <a href="#hockey">Hockey</a>
+      <a href="#" data-nav-sport="soccer">Soccer</a>
+      <a href="#" data-nav-sport="basketball">Basketball</a>
+      <a href="#" data-nav-sport="baseball">Baseball</a>
+      <a href="#" data-nav-sport="hockey">Hockey</a>
       <a href="#timeline">Timeline</a>
       <a href="#enrichment">Enrichment</a>
       <a href="#clinics-camps">Clinics & Camps</a>
+      <a href="newton-facts.html">Newton Facts</a>
+      <a href="program-types-guide.html">Parent Guide</a>
       <a href="#submit" class="nav-cta">Submit a Program</a>
     </div>
     <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
@@ -601,7 +617,7 @@ input, select, textarea { font-family: inherit; }
         <h1>Every Youth Program.<br><span class="highlight">One Place.</span></h1>
         <p class="hero-sub">The complete, centralized guide to youth sports, camps, and enrichment programs in Newton, MA. Built by Newton parents, for Newton parents.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><div class="num">155+</div><div class="label">Programs Listed</div></div>
+          <div class="hero-stat"><div class="num">181</div><div class="label">Programs Listed</div></div>
           <div class="hero-stat"><div class="num">20+</div><div class="label">Sports & Activities</div></div>
           <div class="hero-stat"><div class="num">K-12</div><div class="label">Ages Served</div></div>
         </div>
@@ -624,22 +640,27 @@ input, select, textarea { font-family: inherit; }
 
 <!-- ===== SPORT QUICK NAV ===== -->
 <div class="sports-quick" id="sportsQuickNav">
-  <div class="sports-quick-inner">
-    <button class="sq-btn active" data-sport="all">All Sports</button>
-    <button class="sq-btn" data-sport="soccer">Soccer</button>
-    <button class="sq-btn" data-sport="basketball">Basketball</button>
-    <button class="sq-btn" data-sport="baseball">Baseball & Softball</button>
-    <button class="sq-btn" data-sport="hockey">Hockey</button>
-    <button class="sq-btn" data-sport="lacrosse">Lacrosse</button>
-    <button class="sq-btn" data-sport="swimming">Swimming</button>
-    <button class="sq-btn" data-sport="tennis">Tennis</button>
-    <button class="sq-btn" data-sport="track">Track & Field</button>
-    <button class="sq-btn" data-sport="football">Football</button>
-    <button class="sq-btn" data-sport="gymnastics">Gymnastics</button>
-    <button class="sq-btn" data-sport="martial-arts">Martial Arts</button>
-    <button class="sq-btn" data-sport="other-sports">More Sports</button>
-    <button class="sq-btn" data-sport="enrichment">Arts & STEM</button>
-    <button class="sq-btn" data-sport="clinics-camps">Clinics & Camps</button>
+  <div class="sports-quick-wrap">
+    <div class="sports-quick-inner" id="sportsQuickInner">
+      <button class="sq-btn active" data-sport="all">All Sports</button>
+      <button class="sq-btn" data-sport="soccer">Soccer</button>
+      <button class="sq-btn" data-sport="basketball">Basketball</button>
+      <button class="sq-btn" data-sport="baseball">Baseball & Softball</button>
+      <button class="sq-btn" data-sport="hockey">Hockey</button>
+      <button class="sq-btn" data-sport="lacrosse">Lacrosse</button>
+      <button class="sq-btn" data-sport="swimming">Swimming</button>
+      <button class="sq-btn" data-sport="tennis">Tennis</button>
+      <button class="sq-btn" data-sport="track">Track & Field</button>
+      <button class="sq-btn" data-sport="football">Football</button>
+      <button class="sq-btn" data-sport="gymnastics">Gymnastics</button>
+      <button class="sq-btn" data-sport="martial-arts">Martial Arts</button>
+      <button class="sq-btn" data-sport="other-sports">More Sports</button>
+      <button class="sq-btn" data-sport="enrichment">Arts & STEM</button>
+      <button class="sq-btn" data-sport="clinics-camps">Clinics & Camps</button>
+    </div>
+    <div class="sq-scroll-arrow" id="sqScrollArrow">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 4l6 6-6 6"/></svg>
+    </div>
   </div>
 </div>
 
@@ -652,14 +673,32 @@ input, select, textarea { font-family: inherit; }
         <input type="text" class="filter-input" id="searchInput" placeholder="Search programs, organizations...">
       </div>
       <div class="filter-group">
-        <label>Age / Grade</label>
-        <select class="filter-select" id="ageFilter">
-          <option value="">All Ages</option>
-          <option value="prek">Pre-K (3-5)</option>
-          <option value="k-2">K - Grade 2</option>
-          <option value="3-5">Grades 3-5</option>
-          <option value="6-8">Grades 6-8</option>
-          <option value="9-12">High School</option>
+        <label>Grade</label>
+        <select class="filter-select" id="gradeFilter">
+          <option value="">All Grades</option>
+          <option value="prek">Pre-K</option>
+          <option value="k-2-k">Kindergarten</option>
+          <option value="k-2-1">Grade 1</option>
+          <option value="k-2-2">Grade 2</option>
+          <option value="3-5-3">Grade 3</option>
+          <option value="3-5-4">Grade 4</option>
+          <option value="3-5-5">Grade 5</option>
+          <option value="6-8-6">Grade 6</option>
+          <option value="6-8-7">Grade 7</option>
+          <option value="6-8-8">Grade 8</option>
+          <option value="9-12-9">Grade 9</option>
+          <option value="9-12-10">Grade 10</option>
+          <option value="9-12-11">Grade 11</option>
+          <option value="9-12-12">Grade 12</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Gender</label>
+        <select class="filter-select" id="genderFilter">
+          <option value="">All</option>
+          <option value="boys">Boys</option>
+          <option value="girls">Girls</option>
+          <option value="coed">Co-Ed</option>
         </select>
       </div>
       <div class="filter-group">
@@ -692,6 +731,15 @@ input, select, textarea { font-family: inherit; }
           <option value="under-200">Under $200</option>
           <option value="200-500">$200 - $500</option>
           <option value="over-500">$500+</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label>Sort</label>
+        <select class="filter-select" id="sortFilter">
+          <option value="">Default</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="reg-date">Registration Deadline (Soonest)</option>
         </select>
       </div>
       <button class="filter-clear" id="clearFilters">Clear All</button>
@@ -829,12 +877,15 @@ input, select, textarea { font-family: inherit; }
       <h3>Newton Youth Sports</h3>
       <p>The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.</p>
       <p style="margin-top: 12px;">Questions? <a href="mailto:contact.nybc@gmail.com" style="color: var(--green-light);">contact.nybc@gmail.com</a></p>
+      <p style="margin-top: 8px;"><a href="#" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow us on Facebook</a></p>
     </div>
     <div class="footer-links">
       <h4>Quick Links</h4>
       <a href="#sports">Browse Programs</a>
       <a href="#timeline">Registration Timeline</a>
       <a href="#submit">Submit a Program</a>
+      <a href="newton-facts.html">Newton Facts</a>
+      <a href="program-types-guide.html">Parent Guide</a>
       <a href="#top">Back to Top</a>
     </div>
     <div class="footer-links">
@@ -871,13 +922,13 @@ const programs = [
   // ===== SOCCER =====
   {sport:"soccer",name:"Newton Youth Soccer - Intramural",org:"Newton Youth Soccer",desc:"Newton's primary town-based youth soccer since 1976. Co-ed intramural program with Saturday games and midweek practices for grades 3-6. Volunteer coaches in a player-centric environment.",ages:"Grades 1-6",ageCategory:["k-2","3-5"],season:["fall","spring"],level:"recreational",cost:"$215-$330/season",costRange:"200-500",location:"Nahanton Park, Brown/Oak Hill Middle School",website:"https://www.newtonsoccer.org",regDate:"Mar 13 (Spring)",commitment:"1-2x/week"},
   {sport:"soccer",name:"Newton Youth Soccer - Travel (BAYS)",org:"Newton Youth Soccer",desc:"Competitive travel soccer in the Boston Area Youth Soccer league. Tryout-based teams with 2 practices/week plus Saturday games. Two-season commitment required (fall + spring).",ages:"Grades 3-8",ageCategory:["3-5","6-8"],season:["fall","spring"],level:"competitive",cost:"Contact for pricing",costRange:"over-500",location:"Newton fields + away games",website:"https://www.newtonsoccer.org",regDate:"Tryouts Jun 2-15",commitment:"3-4x/week"},
-  {sport:"soccer",name:"Newton Girls Soccer - City (Rec)",org:"Newton Girls Soccer",desc:"Girls-only recreational soccer with 1,200+ players. Trained parent volunteer coaches. Saturday afternoon games plus one weekly practice for grades 3+.",ages:"Grades 3-9",ageCategory:["3-5","6-8","9-12"],season:["fall","spring"],level:"recreational",cost:"$185-$285/season",costRange:"200-500",location:"Newton fields",website:"https://newtongirlssoccer.org",regDate:"Early bird by Dec 21; Regular by Feb 15",commitment:"1-2x/week",tags:["girls"]},
+  {sport:"soccer",name:"Newton Girls Soccer - City (Rec)",org:"Newton Girls Soccer",desc:"Girls-only recreational soccer with 1,200+ players. Trained parent volunteer coaches. Saturday afternoon games plus one weekly practice for grades 3+.",ages:"Grades 3-12",ageCategory:["3-5","6-8","9-12"],season:["fall","spring"],level:"recreational",cost:"$185-$285/season",costRange:"200-500",location:"Newton fields",website:"https://newtongirlssoccer.org",regDate:"Early bird by Dec 21; Regular by Feb 15",commitment:"1-2x/week",tags:["girls"]},
   {sport:"soccer",name:"Newton Girls Soccer - Juniors",org:"Newton Girls Soccer",desc:"Introduction to soccer for the youngest girls. Saturday morning training sessions and scrimmages in a fun, supportive environment.",ages:"PreK - Grade 2",ageCategory:["prek","k-2"],season:["fall","spring"],level:"introductory",cost:"$170-$285/season",costRange:"200-500",location:"Newton fields",website:"https://newtongirlssoccer.org",regDate:"Rolling",commitment:"1x/week (Saturdays)",tags:["girls"]},
   {sport:"soccer",name:"Newton Girls Soccer - Travel",org:"Newton Girls Soccer",desc:"Competitive girls travel soccer in the BAYS league. Professional trainers, two-season commitment. Assessments held in early April.",ages:"Grades 3-8",ageCategory:["3-5","6-8"],season:["fall","spring"],level:"competitive",cost:"$530/year",costRange:"over-500",location:"Newton + away games",website:"https://newtongirlssoccer.org",regDate:"Jun 1-30; Late Jul 1-15",commitment:"3-4x/week",tags:["girls"]},
   {sport:"soccer",name:"Newton Girls Soccer - Academy",org:"Newton Girls Soccer",desc:"Elite, invitation-only program with professional coaches. Three-season commitment (fall, winter, spring). Up to 2 additional practices per week plus Sunday competitions.",ages:"Grades 1-8",ageCategory:["k-2","3-5","6-8"],season:["fall","winter","spring"],level:"elite",cost:"$755-$2,450/year",costRange:"over-500",location:"Newton fields",website:"https://newtongirlssoccer.org",regDate:"Apply Apr 15-30; Register May 1-31",commitment:"4-5x/week",tags:["girls"]},
   {sport:"soccer",name:"Newton Kindergarten Soccer",org:"Newton Kindergarten Soccer",desc:"Independent community program introducing the youngest kids to soccer since 1993. Saturday games at Lincoln Warren Park in a fun, low-pressure setting.",ages:"PreK - Kindergarten",ageCategory:["prek","k-2"],season:["spring"],level:"introductory",cost:"$90-$115",costRange:"under-200",location:"Lincoln Warren Park, Waban",website:"https://kindergartensoccer.org",regDate:"Feb 18 - Mar 18",commitment:"1x/week (Saturdays)"},
-  {sport:"soccer",name:"Valeo Futbol Club",org:"Valeo FC",desc:"Elite global futbol training at Newton's international-standard facility. Participates in MLS NEXT, the highest tier of US youth soccer. MLS NEXT teams are fully funded (free).",ages:"Ages 4-18",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"elite",cost:"Free (MLS NEXT) - varies",costRange:"free",location:"125 Wells Ave, Newton",website:"https://valeofc.com",regDate:"Rolling",commitment:"3-5x/week"},
-  {sport:"soccer",name:"Boston Bolts FC",org:"Boston Bolts FC",desc:"The longest continuously operating soccer club in Massachusetts (est. 1986). Competes in ECNL and MLS NEXT. Newton training at UMass Mt. Ida campus.",ages:"Ages 5-19",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"elite",cost:"Contact for pricing",costRange:"over-500",location:"UMass Mt. Ida, Newton",website:"https://bostonbolts.com",regDate:"Tryouts by season",commitment:"3-5x/week"},
+  {sport:"soccer",name:"Valeo Futbol Club",org:"Valeo FC",desc:"Elite global futbol training at Newton's international-standard facility. Participates in MLS NEXT, the highest tier of US youth soccer. MLS NEXT teams are fully funded (free).",ages:"Ages 4-23",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"elite",cost:"Free (MLS NEXT) - varies",costRange:"free",location:"125 Wells Ave, Newton",website:"https://valeofc.com",regDate:"Rolling",commitment:"3-5x/week"},
+  {sport:"soccer",name:"Boston Bolts FC",org:"Boston Bolts FC",desc:"The longest continuously operating soccer club in Massachusetts (est. 1986). Competes in ECNL and MLS NEXT. Newton training at UMass Charles River Campus.",ages:"Ages 5-19",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"elite",cost:"Contact for pricing",costRange:"over-500",location:"UMass Charles River Campus, Newton",website:"https://bostonbolts.com",regDate:"Tryouts by season",commitment:"3-5x/week"},
   {sport:"soccer",name:"NEFC - Chestnut Hill",org:"New England Futbol Club",desc:"Top-tier club partnered with Chestnut Hill Sports Club. Strong college placement track record. Financial aid available -- no player excluded for financial reasons.",ages:"PreK - High School",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","spring"],level:"competitive",cost:"$650+ (Academy)",costRange:"over-500",location:"Western Boston/Newton area",website:"https://www.chestnuthillsc.com",regDate:"By season",commitment:"3-4x/week"},
   {sport:"soccer",name:"West Suburban YMCA Soccer",org:"West Suburban YMCA",desc:"Fun, supportive instructional soccer including Little Kickers (ages 2-4), YMCA Soccer Class, and MLS GO team-based program with real MLS club gear.",ages:"Ages 2-10",ageCategory:["prek","k-2","3-5"],season:["fall","winter","spring"],level:"introductory",cost:"Contact YMCA",costRange:"under-200",location:"276 Church St / Wells Ave, Newton",website:"https://wsymca.org/youth-soccer",regDate:"By session",commitment:"1x/week"},
   {sport:"soccer",name:"HappyFeet / Legends Soccer",org:"HappyFeet Boston",desc:"Year-round youth soccer program focused on developing love for fitness and creative leadership. Saturday soccer, skills academy, after-school sessions, and camps.",ages:"Ages 2+",ageCategory:["prek","k-2","3-5"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Contact for pricing",costRange:"under-200",location:"200 Jackson Rd, Newton",website:"https://happyfeetboston.com",regDate:"Rolling",commitment:"1-2x/week"},
@@ -977,9 +1028,9 @@ const programs = [
   {sport:"football",name:"NAFF Summer Flag Football Clinics",org:"Newton Area Flag Football",desc:"NFL Flag certified coach-led clinics, Mon-Fri, 3-hour skill-building sessions. Seven weekly sessions available throughout the summer.",ages:"Youth ages",ageCategory:["k-2","3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"$345/week",costRange:"200-500",location:"Lincoln Park, Newton",website:"https://www.newtonareaflagfootball.com/summer-clinics.html",regDate:"Rolling",commitment:"Mon-Fri, 3hrs/day"},
 
   // ===== GYMNASTICS =====
-  {sport:"gymnastics",name:"Exxcel Gymnastics & Climbing",org:"Exxcel Gymnastics",desc:"Newton's premier gymnastics facility for 28+ years -- where Aly Raisman started. 200+ classes/week, rock climbing, ninja training, tumbling. Competitive teams available.",ages:"Preschool - Teens",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$40 membership + class fees",costRange:"200-500",location:"88 Wells Ave, Newton",website:"https://www.exxcel.net/",regDate:"Rolling",commitment:"1-5x/week"},
+  {sport:"gymnastics",name:"Exxcel Gymnastics & Climbing",org:"Exxcel Gymnastics",desc:"Training ground where Olympic gold medalist Aly Raisman began her career. 15,000 sq ft facility with 200+ gymnastics classes per week plus climbing and ninja training.",ages:"Preschool - Teens",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$40 membership + class fees",costRange:"200-500",location:"88 Wells Ave, Newton",website:"https://www.exxcel.net/",regDate:"Rolling",commitment:"1-5x/week"},
   {sport:"gymnastics",name:"Energy Fitness & Gymnastics",org:"Energy Fitness",desc:"Community-oriented gym offering beginner through advanced gymnastics, Xcel program, tumbling, and adult classes.",ages:"Toddlers - Teens",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"under-200",location:"70 Jaconnet St, Newton",website:"https://www.energyfitnessgym.com/",regDate:"Rolling",commitment:"1-2x/week"},
-  {sport:"gymnastics",name:"My Gym Newton",org:"My Gym",desc:"Parent-participation and independent classes for youngest children. Gymnastics, ninja training, camps, birthday parties. Classes 7 days a week.",ages:"6 weeks - 10 years",ageCategory:["prek","k-2","3-5"],season:["fall","winter","spring","summer"],level:"introductory",cost:"$179-$209/month",costRange:"200-500",location:"Newton, MA",website:"https://www.mygym.com/newton",regDate:"Rolling",commitment:"1-2x/week"},
+  {sport:"gymnastics",name:"My Gym Newton",org:"My Gym",desc:"Parent-participation and independent classes for youngest children. Gymnastics, ninja training, camps, birthday parties. Classes 7 days a week.",ages:"6 weeks - 10 years",ageCategory:["prek","k-2","3-5"],season:["fall","winter","spring","summer"],level:"introductory",cost:"$179-$209/month",costRange:"200-500",location:"88 Needham St, Newton",website:"https://www.mygym.com/newton",regDate:"Rolling",commitment:"1-2x/week"},
 
   // ===== MARTIAL ARTS =====
   {sport:"martial-arts",name:"SDSS Martial Arts of Newton",org:"SDSS",desc:"Focus on self-discipline, fitness, confidence, and self-defense. Programs from Tiny Tigers through Teens. Indoor air ionization system. First lesson free.",ages:"Young children - Adults",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"739 Beacon St, Newton Centre",website:"https://sdssnewton.com/",regDate:"Rolling",commitment:"1-3x/week"},
@@ -987,8 +1038,8 @@ const programs = [
   {sport:"martial-arts",name:"Esposito's Karate Fitness Center",org:"Esposito's",desc:"Jiu Jitsu, Judo, Karate, Kung Fu, Taekwondo. Semester-based ($286/12 weeks, no long-term contracts). SWAT/DELTA leadership program at advanced levels.",ages:"Ages 4-18",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$286/12 weeks",costRange:"200-500",location:"230 Adams St, Newton",website:"https://espositoskarate.com/kids-karate",regDate:"Rolling",commitment:"2-3x/week"},
   {sport:"martial-arts",name:"Helix Martial Academy",org:"Helix",desc:"Mix of Karate, Jiu Jitsu, Kickboxing, Kung Fu, Aikido. Personalized lessons, group classes, and after-school programs at 16 schools.",ages:"Preschool - High School",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"1639 Beacon St, Waban",website:"http://helixmartialacademy.com/",regDate:"Rolling",commitment:"1-3x/week"},
 
-  {sport:"martial-arts",name:"Gracie Barra Newton",org:"Gracie Barra",desc:"World-renowned Brazilian Jiu-Jitsu academy. Kids programs from Little Champs (ages 3-5) through Juniors (13-15). Structured curriculum focusing on discipline, self-defense, and fitness.",ages:"Ages 3-15",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact GB Newton",costRange:"200-500",location:"Newton, MA",website:"https://www.graciebarra.com/",regDate:"Rolling",commitment:"2-3x/week"},
-  {sport:"martial-arts",name:"Down Under Yoga - Kids Yoga",org:"Down Under Yoga",desc:"Kids yoga classes focusing on mindfulness, flexibility, and fun. Age-appropriate sessions blending movement, breathing, and relaxation techniques.",ages:"Ages 3-12",ageCategory:["prek","k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Drop-in or membership",costRange:"under-200",location:"1614 Beacon St, Newton",website:"https://www.downunderyoga.com/",regDate:"Rolling",commitment:"1x/week"},
+  {sport:"martial-arts",name:"Gracie Barra Newton",org:"Gracie Barra",desc:"World-renowned Brazilian Jiu-Jitsu academy. Kids programs from Little Champs (ages 3-5) through Juniors (13-15). Structured curriculum focusing on discipline, self-defense, and fitness.",ages:"Ages 3-15",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact GB Newton",costRange:"200-500",location:"1205 Washington St, West Newton",website:"https://gbnewton.com/",regDate:"Rolling",commitment:"2-3x/week"},
+  {sport:"martial-arts",name:"Down Under Yoga - Kids Yoga",org:"Down Under Yoga",desc:"Kids yoga classes focusing on mindfulness, flexibility, and fun. Age-appropriate sessions blending movement, breathing, and relaxation techniques.",ages:"Ages 3-12",ageCategory:["prek","k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Drop-in or membership",costRange:"under-200",location:"306 Walnut St, Newtonville",website:"https://www.downunderyoga.com/",regDate:"Rolling",commitment:"1x/week"},
 
   // ===== OTHER SPORTS =====
   {sport:"other-sports",name:"Newton Youth Volleyball / SMASH",org:"SMASH Volleyball",desc:"#1 juniors volleyball club in New England. Newton Youth Volleyball provides local recreational and developmental play. Weekday practices plus Saturday game days.",ages:"Youth divisions",ageCategory:["3-5","6-8","9-12"],season:["fall","winter"],level:"recreational",cost:"Contact SMASH",costRange:"200-500",location:"Newton, MA",website:"https://smashvolleyball.com/club/newtonyouth",regDate:"By season",commitment:"2x/week"},
@@ -1001,7 +1052,7 @@ const programs = [
   {sport:"other-sports",name:"Endurance Youth Field Hockey",org:"Endurance Youth FH",desc:"7-week fall clinic every Sunday 4-5:30pm. Assisted by Newton North and Newton South high school players. Rain or shine (no makeups).",ages:"Grades K-8",ageCategory:["k-2","3-5","6-8"],season:["fall"],level:"recreational",cost:"$250 (7 sessions)",costRange:"200-500",location:"Newton South HS Stadium Turf",website:"https://enduranceyouthfieldhockey.com/",regDate:"~Sep",commitment:"1x/week (Sundays)"},
   {sport:"other-sports",name:"Community Rowing - Junior Programs",org:"Community Rowing Inc.",desc:"Introductory rowing programs on the Charles River at the Auburndale/Newton boathouse. Middle School Summer Skills (ages 10-13) and Junior Learn to Row (ages 12-18).",ages:"Ages 10-18",ageCategory:["3-5","6-8","9-12"],season:["spring","summer"],level:"introductory",cost:"Contact CRI",costRange:"200-500",location:"Stoller Boathouse, Auburndale (Newton)",website:"https://www.communityrowing.org/",regDate:"By session",commitment:"2-3x/week"},
 
-  {sport:"other-sports",name:"Central Rock Gym Newton",org:"Central Rock Gym",desc:"Indoor rock climbing gym with youth programs including after-school climbing teams, youth clubs, summer camps, and birthday parties. Auto-belays and bouldering for all levels.",ages:"All ages (youth programs 5+)",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Day pass ~$22 / Membership $75-95/mo",costRange:"200-500",location:"55 Needham St, Newton",website:"https://centralrockgym.com/newton/",regDate:"Rolling",commitment:"Flexible"},
+  {sport:"other-sports",name:"Central Rock Gym Newton",org:"Central Rock Gym",desc:"Indoor rock climbing gym with youth programs including after-school climbing teams, youth clubs, summer camps, and birthday parties. Auto-belays and bouldering for all levels.",ages:"All ages (youth programs 5+)",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Day pass ~$22 / Membership $75-95/mo",costRange:"200-500",location:"CRG Watertown, Arsenal Yards, Watertown",website:"https://centralrockgym.com/watertown/",regDate:"Rolling",commitment:"Flexible"},
   {sport:"other-sports",name:"Nike Field Hockey Camp",org:"US Sports Camps",desc:"Nike-branded field hockey camp with top coaching staff. Full-day skills camp covering stick work, positioning, shooting, and game play.",ages:"Ages 10-18",ageCategory:["3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Contact for pricing",costRange:"200-500",location:"Newton area",website:"https://www.ussportscamps.com/field-hockey/nike/",regDate:"Rolling",commitment:"5-day camp"},
   {sport:"other-sports",name:"Newton Pickleball (Parks & Rec)",org:"City of Newton",desc:"Growing pickleball program through Newton Parks & Rec. Youth clinics and open play at Newton courts. Paddles and balls provided for beginners.",ages:"Ages 8+",ageCategory:["3-5","6-8","9-12"],season:["spring","summer","fall"],level:"introductory",cost:"Contact Parks & Rec",costRange:"under-200",location:"Newton public courts",website:"https://newtonma.myrec.com",regDate:"By session",commitment:"1x/week"},
   {sport:"other-sports",name:"Youth On Course Golf",org:"Youth On Course / Ouimet Fund",desc:"National program offering $5 rounds for youth at participating courses. Newton Commonwealth Golf Course is a participating venue. Great way to make golf affordable for families.",ages:"Ages 6-18",ageCategory:["k-2","3-5","6-8","9-12"],season:["spring","summer","fall"],level:"introductory",cost:"$5/round",costRange:"under-200",location:"Newton Commonwealth Golf Course",website:"https://youthoncourse.org/",regDate:"Membership required",commitment:"Flexible",bestValue:true},
@@ -1015,19 +1066,19 @@ const programs = [
   {sport:"enrichment",name:"New Art Center",org:"New Art Center",desc:"Newton's premier art education center. Drawing, ceramics, painting for children and teens. Summer camp with daily 2D, 3D, performing arts, and clay exploration.",ages:"Ages 3 - Grade 12",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Varies (financial aid available)",costRange:"200-500",location:"61 Washington Park, Newtonville",website:"https://newartcenter.org",regDate:"Rolling",commitment:"1x/week or camp weeks"},
   {sport:"enrichment",name:"Russian School of Mathematics (RSM)",org:"RSM Newton",desc:"Award-winning after-school math enrichment, 25+ years, 80+ locations. Average class size 12. Curriculum adapted from elite mathematical traditions for K-12.",ages:"K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"competitive",cost:"Contact for tuition",costRange:"200-500",location:"200 Wells Ave, Newton",website:"https://www.mathschool.com/locations/newton",regDate:"After evaluation",commitment:"1x/week (1.5-4 hours)"},
   {sport:"enrichment",name:"Penguin Coding School",org:"Penguin Coding",desc:"Minecraft coding (ages 6-9), Python (ages 9-12), Scratch, Roblox. 3 hours coding + 2 hours hands-on STEM (robotics, 3D printing, science experiments) per day.",ages:"Ages 6-12",ageCategory:["k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for rates",costRange:"200-500",location:"1223 Centre St, Newton",website:"https://penguincodingschool.com",regDate:"Rolling",commitment:"1x/week or camp"},
-  {sport:"enrichment",name:"The Innovation Institute (Ti2)",org:"Ti2",desc:"Leading STEM enrichment: robotics, genomics, astrophysics, neuro-engineering, programming, nanotechnology. Described by MIT faculty as 'bold and unapologetically challenging.'",ages:"Ages 5-17",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"competitive",cost:"Contact for rates",costRange:"200-500",location:"288 Walnut St, Newtonville",website:"https://newtonstem.org/2019/05/innovation-institute-a-stem-gem-in-newtonville/",regDate:"Rolling",commitment:"1-2x/week"},
+  {sport:"enrichment",name:"The Innovation Institute (Ti2)",org:"Ti2",desc:"Leading STEM enrichment: robotics, genomics, astrophysics, neuro-engineering, programming, nanotechnology. Described by MIT faculty as 'bold and unapologetically challenging.'",ages:"Ages 5-17",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"competitive",cost:"Contact for rates",costRange:"200-500",location:"288 Walnut St, Newtonville",website:"https://theinnovationinstitute.org/",regDate:"Rolling",commitment:"1-2x/week"},
   {sport:"enrichment",name:"Steve & Kate's Camp",org:"Steve & Kate's / Bright Horizons",desc:"Self-directed camp with 12+ daily activities: stop-motion animation, sewing, coding, performing arts, robotics, baking, sports, water play. Flexible day-by-day booking.",ages:"Ages 4-12",ageCategory:["prek","k-2","3-5"],season:["summer"],level:"camp",cost:"Contact for daily rate",costRange:"200-500",location:"2 Wells Ave, Newton",website:"https://steveandkatescamp.com/newton/",regDate:"Rolling",commitment:"Flexible days"},
   {sport:"enrichment",name:"Newton Community Education Programs",org:"Newton Community Education",desc:"100+ summer camps over 8 weeks plus year-round after-school and vacation programs. Visual arts, STEM, theater, AI Scholars, games, sports, and more.",ages:"K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"camp",cost:"Varies by program",costRange:"200-500",location:"Newton Public Schools",website:"https://newtoncommunityed.org",regDate:"Late Jan (summer)",commitment:"Varies"},
   {sport:"enrichment",name:"Camp Echo Bridge (Inclusive)",org:"City of Newton Parks & Rec",desc:"Inclusive day camp bridging recreation and academics for children with and without disabilities. Elementary and Middle School units. Residential week for ages 10-21.",ages:"Entering Grade 1 - Post-grad",ageCategory:["k-2","3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Contact Parks & Rec",costRange:"200-500",location:"Mason-Rice School, Newton Centre",website:"https://www.newtonma.gov/government/parks-recreation-culture/camps/camp-echo-bridge",regDate:"Jan 28",commitment:"6-week camp",tags:["adaptive"]},
   {sport:"enrichment",name:"K2 Enrichment Program",org:"K2 Enrichment",desc:"STEM/STEAM enrichment for young kids. 7-week sessions attending once per week. Different science activities and building projects each week. Follows NPS school calendar.",ages:"K - Grade 5",ageCategory:["k-2","3-5"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Contact for rates",costRange:"under-200",location:"307 Watertown St, Newton",website:"https://www.k2enrichment.com",regDate:"Rolling",commitment:"1x/week"},
   {sport:"enrichment",name:"JCC Camp Kaleidoscope",org:"JCC Greater Boston",desc:"8-week summer camp combining creative arts, sports, outdoor activities. Theater, filmmaking, music, culinary arts, science, daily swimming. Flexible enrollment.",ages:"Grades K-9",ageCategory:["k-2","3-5","6-8"],season:["summer"],level:"camp",cost:"Contact JCC",costRange:"over-500",location:"333 Nahanton St, Newton",website:"https://www.bostonjcc.org/campsataglance/",regDate:"Rolling",commitment:"Weekly sessions"},
 
-  {sport:"enrichment",name:"Code Ninjas Newton",org:"Code Ninjas",desc:"Kids learn to code by building video games in a fun, safe, inspiring environment. DROP-IN program - no set schedule. Scratch, JavaScript, Unity, and more. Summer camps available.",ages:"Ages 5-14",ageCategory:["k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for membership rates",costRange:"200-500",location:"Newton, MA",website:"https://www.codeninjas.com/newton-ma",regDate:"Rolling",commitment:"Flexible drop-in"},
-  {sport:"enrichment",name:"Suzuki School of Newton",org:"Suzuki School of Newton",desc:"Violin and cello lessons using the internationally acclaimed Suzuki method. Group and private instruction emphasizing parent involvement and ear training. Recitals and community performances.",ages:"Ages 3-18",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for tuition",costRange:"200-500",location:"Newton, MA",website:"https://www.suzukischoolofnewton.org/",regDate:"Rolling",commitment:"1-2x/week + daily practice"},
-  {sport:"enrichment",name:"School of Rock Newton",org:"School of Rock",desc:"Music school where students learn by performing. Group rehearsals, private lessons, and live shows. Rock 101, Performance, House Band, and AllStars programs.",ages:"Ages 7-18",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"Newton, MA area",website:"https://www.schoolofrock.com/",regDate:"Rolling",commitment:"1-2x/week"},
+  {sport:"enrichment",name:"Code Ninjas Newton",org:"Code Ninjas",desc:"Kids learn to code by building video games in a fun, safe, inspiring environment. DROP-IN program - no set schedule. Scratch, JavaScript, Unity, and more. Summer camps available.",ages:"Ages 5-14",ageCategory:["k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for membership rates",costRange:"200-500",location:"3 Crescent St, Waltham (serves Newton)",website:"https://www.codeninjas.com/waltham-newton-ma",regDate:"Rolling",commitment:"Flexible drop-in"},
+  {sport:"enrichment",name:"Suzuki School of Newton",org:"Suzuki School of Newton",desc:"Violin and cello lessons using the internationally acclaimed Suzuki method. Group and private instruction emphasizing parent involvement and ear training. Recitals and community performances.",ages:"Ages 3-18",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for tuition",costRange:"200-500",location:"Newton, MA",website:"https://www.suzukinewton.org/",regDate:"Rolling",commitment:"1-2x/week + daily practice"},
+  {sport:"enrichment",name:"School of Rock Newton",org:"School of Rock",desc:"Music school where students learn by performing. Group rehearsals, private lessons, and live shows. Rock 101, Performance, House Band, and AllStars programs.",ages:"Ages 7-18",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"120 Elm St, Watertown (near Newton)",website:"https://www.schoolofrock.com/watertown",regDate:"Rolling",commitment:"1-2x/week"},
   {sport:"enrichment",name:"Newton Chess Club / MetroWest Chess",org:"MetroWest Chess",desc:"Chess instruction and tournament play for youth. After-school programs at Newton elementary schools. Beginner through advanced groups. Tournament preparation available.",ages:"Grades K-8",ageCategory:["k-2","3-5","6-8"],season:["fall","winter","spring"],level:"recreational",cost:"$150-$250/session",costRange:"200-500",location:"Newton schools",website:"https://metrowestchess.org/",regDate:"By session",commitment:"1x/week"},
   {sport:"enrichment",name:"Newton Free Library - Youth Programs",org:"Newton Free Library",desc:"Free year-round programs including STEM workshops, coding clubs, maker space, book clubs, art projects, and homework help. No registration needed for most drop-in programs.",ages:"All ages",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Free",costRange:"free",location:"330 Homer St, Newton",website:"https://www.newtonfreelibrary.net/",regDate:"Drop-in / by program",commitment:"Flexible",bestValue:true},
-  {sport:"enrichment",name:"Newton Youth Players",org:"Newton Youth Players",desc:"Community children's theater company producing full musicals. Open auditions for Newton-area kids. Spring and fall productions with rehearsals after school.",ages:"Grades 3-8",ageCategory:["3-5","6-8"],season:["fall","spring"],level:"recreational",cost:"Contact for pricing",costRange:"under-200",location:"Newton, MA",website:"https://www.newtowneplayers.org/",regDate:"By audition",commitment:"2-3x/week during production"},
+  {sport:"enrichment",name:"Newton Youth Players",org:"Newton Youth Players",desc:"Community children's theater company producing full musicals. Open auditions for Newton-area kids. Spring and fall productions with rehearsals after school.",ages:"Grades 3-8",ageCategory:["3-5","6-8"],season:["fall","spring"],level:"recreational",cost:"Contact for pricing",costRange:"under-200",location:"Newton, MA",website:"https://www.newtonyouthplayers.com/",regDate:"By audition",commitment:"2-3x/week during production"},
   {sport:"enrichment",name:"LigerBots FIRST Robotics",org:"LigerBots (Team 2877)",desc:"Newton's award-winning FIRST Robotics Competition team. Students design, build, and program a robot for competition. Mentored by industry professionals. Also runs FIRST LEGO League feeder programs.",ages:"Grades 9-12 (FLL: Grades 4-8)",ageCategory:["3-5","6-8","9-12"],season:["fall","winter","spring"],level:"competitive",cost:"Contact team",costRange:"under-200",location:"Newton North High School",website:"https://www.ligerbots.org/",regDate:"Fall recruitment",commitment:"3-5x/week (build season)"},
   {sport:"enrichment",name:"Girl Scouts of Eastern Massachusetts",org:"Girl Scouts",desc:"Troops throughout Newton offering outdoor adventures, STEM activities, community service, and cookie entrepreneurship. Daisies through Ambassadors. Financial assistance available.",ages:"Grades K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$25/year + troop dues",costRange:"under-200",location:"Various Newton locations",website:"https://www.gsema.org/",regDate:"Rolling",commitment:"1-2x/month",bestValue:true},
   {sport:"enrichment",name:"BSA Scouts - Newton Troops",org:"Boy Scouts of America",desc:"Multiple Cub Scout packs and Scouts BSA troops active in Newton. Camping, hiking, service projects, skill-building, and leadership. Now welcoming all genders.",ages:"Grades K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"~$100/year + activity fees",costRange:"under-200",location:"Various Newton locations",website:"https://www.scouting.org/",regDate:"Rolling",commitment:"1x/week + monthly campouts",bestValue:true},
@@ -1070,6 +1121,59 @@ const programs = [
   {sport:"clinics-camps",name:"Camp Pikati (JCC Day Camp)",org:"JCC Greater Boston",desc:"Traditional outdoor day camp on the JCC's 22-acre campus. Swimming, sports, nature, arts, ropes course, and Shabbat celebrations. Specialty tracks including sports and outdoor adventure.",ages:"Entering Grades 1-8",ageCategory:["k-2","3-5","6-8"],season:["summer"],level:"camp",cost:"Contact JCC",costRange:"over-500",location:"333 Nahanton St, Newton",website:"https://www.bostonjcc.org/campsataglance/",regDate:"Rolling",commitment:"2, 4, 6, or 8-week sessions",breakType:"summer"},
   {sport:"clinics-camps",name:"Lavner Camps - Summer at Lasell",org:"Lavner Camps",desc:"Tech & creative camps: Minecraft, Roblox, coding, robotics, YouTube, fashion design. Small groups, AC spaces, extended day available.",ages:"Ages 6-14",ageCategory:["k-2","3-5","6-8"],season:["summer"],level:"camp",cost:"~$600-$800/week",costRange:"over-500",location:"Lasell University, Newton",website:"https://www.lavnercamps.com/",regDate:"Rolling",commitment:"1-week sessions",breakType:"summer"},
   {sport:"clinics-camps",name:"Boys & Girls Club Summer Camp",org:"Newton BGC",desc:"Summer camp with six core program areas: arts, education, leadership, sports, fitness, and technology. Curiosity Club (K-5) plus Torch Club (12-14) and Keystone (14-18).",ages:"Ages 6-18",ageCategory:["k-2","3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Contact BGC",costRange:"under-200",location:"675 Watertown St, Newton",website:"https://www.newtonbgc.com/summercamp2026",regDate:"Rolling",commitment:"Weekly sessions",breakType:"summer"},
+
+  // ===== NEW: AAU/TRAVEL BASKETBALL =====
+  {sport:"basketball",name:"Basketball 2 The Limit (B2L)",org:"B2L",desc:"Newton-based AAU program competing on the PUMA NXTPRO circuit. Elite and Fundamental level teams. Over 300 student-athletes placed in college basketball programs over 15 years.",ages:"Grades 2-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["spring","summer","fall"],level:"elite",cost:"Contact for pricing",costRange:"over-500",location:"Newton, MA",website:"https://www.basketball2thelimit.com/",regDate:"Contact program",commitment:"2-3x/week + tournaments"},
+  {sport:"basketball",name:"ASA Hoops / Wildcats AAU",org:"ASA Hoops",desc:"New England's premier AAU basketball program. Teams, camps, clinics and skills training. 15+ years operating with gyms in Newton area including Newton Country Day School and Gann Academy.",ages:"Grades 2-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["spring","summer","fall"],level:"competitive",cost:"Contact for pricing",costRange:"over-500",location:"Newton Country Day School / Gann Academy",website:"https://asahoops.com/",regDate:"Tryouts Aug (fall) / Jan (spring)",commitment:"2-3x/week + tournaments"},
+  {sport:"basketball",name:"Mass Huskies Girls AAU",org:"Mass Huskies",desc:"Premier girls-only AAU basketball organization. Professional high school and college coaches at all levels. Regional teams practice in Newton, Wellesley, and Dedham.",ages:"Girls, Grades 3-11",ageCategory:["3-5","6-8","9-12"],season:["spring","summer"],level:"competitive",cost:"$550-$1,450/season",costRange:"over-500",location:"Newton / Wellesley / Dedham",website:"https://www.masshuskies.com/",regDate:"Tryouts by season",commitment:"2-3x/week + tournaments",tags:["girls"]},
+  {sport:"basketball",name:"Middlesex Magic",org:"Middlesex Magic",desc:"One of the most elite AAU programs in New England. Competes on the Under Armour Association circuit nationally. 650+ athletes placed in college over 31 years. Skills Academy and clinics also available.",ages:"Grades K-11",ageCategory:["k-2","3-5","6-8","9-12"],season:["spring","summer","fall"],level:"elite",cost:"Contact for pricing",costRange:"over-500",location:"Wellesley / Concord / Reading",website:"https://middlesexmagic.com/",regDate:"Spring tryouts",commitment:"3-5x/week + travel"},
+  {sport:"basketball",name:"PTW Hoops (Prove Them Wrong)",org:"PTW Hoops",desc:"Invite-only elite basketball training program in MetroWest Boston. Run by former college head coach with 35 years experience. Over 2,500 athletes trained. Trains at West Suburban YMCA, Angier and Zervas schools.",ages:"Grades 5-11",ageCategory:["3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"elite",cost:"$450-$675/month",costRange:"over-500",location:"West Suburban YMCA / Angier & Zervas Elementary, Newton",website:"https://ptwhoops.com/",regDate:"Invite only",commitment:"2-4x/week"},
+
+  // ===== NEW: WRESTLING =====
+  {sport:"martial-arts",name:"Waltham Wrestling Club",org:"Waltham Wrestling Club",desc:"Youth folkstyle wrestling for grades K-8. Open to Newton-area kids. Structured by age group: K-3 (Mon/Tue), grades 4-6 and 7-8 (Tue/Thu). USA Wrestling affiliated.",ages:"Grades K-8",ageCategory:["k-2","3-5","6-8"],season:["winter"],level:"recreational",cost:"$195/season",costRange:"under-200",location:"34 Bruce Rd, Waltham",website:"https://www.walthamyouthwrestling.com/",regDate:"Fall registration",commitment:"2x/week"},
+  {sport:"martial-arts",name:"MetroWest United Wrestling",org:"MetroWest United",desc:"Off-season and competitive wrestling club serving area wrestlers from multiple communities. Youth (grades 4-8) and high school divisions. 20% family discount and scholarships available.",ages:"Grades 4-12",ageCategory:["3-5","6-8","9-12"],season:["winter","spring"],level:"competitive",cost:"~$350/season",costRange:"200-500",location:"11 Michigan Dr, Natick",website:"https://www.metrowestunited.com/",regDate:"By season",commitment:"2x/week"},
+
+  // ===== NEW: SOFTBALL =====
+  {sport:"baseball",name:"Ace of Diamonds Softball Training",org:"Ace of Diamonds",desc:"Indoor softball training facility near Newton. Private lessons (pitching, catching, hitting, fielding), vacation week camps, team training, batting cage rentals, and strength & conditioning. Run by Emily Sargent (RSCC).",ages:"Youth - High School",ageCategory:["3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"competitive",cost:"Contact for pricing",costRange:"200-500",location:"6 Brook Rd, Needham",website:"https://www.theacema.com/",regDate:"Rolling",commitment:"Varies"},
+  {sport:"baseball",name:"Extra Innings Watertown",org:"Extra Innings",desc:"13,000+ sq ft indoor baseball and softball training facility. Private/group lessons, camps, clinics, leagues, and HitTrax technology. 7 hitting/pitching tunnels.",ages:"All ages",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$60/30min lesson; camps vary",costRange:"200-500",location:"100 Parker St, Watertown",website:"https://www.extrainnings-watertown.com/",regDate:"Rolling",commitment:"Varies"},
+
+  // ===== NEW: TENNIS/PICKLEBALL =====
+  {sport:"tennis",name:"Court 16 Newton",org:"Court 16",desc:"New boutique indoor tennis and pickleball club. Kids Tennis Academy (ages 2.5-13+) with USPTR certified coaches, 5:1 ratios. Fall/Spring 20-week seasons, summer workshops, holiday camps. Free trial class available. Adult pickleball clinics, leagues, and open play.",ages:"Ages 2.5+ (kids tennis); Adults (pickleball)",ageCategory:["prek","k-2","3-5","6-8"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$685/yr membership (1 child)",costRange:"over-500",location:"300 Needham St, Newton",website:"https://www.court16.com/newton",regDate:"Pre-sale through Mar 31",commitment:"1-2x/week"},
+
+  // ===== NEW: PICKLEBALL =====
+  {sport:"other-sports",name:"Newton Parks & Rec Pickleball (Youth)",org:"Newton Parks & Recreation",desc:"Youth pickleball lessons, tween/teen clinics, and family pickleball sessions. Max 6 players per class. Learn serves, volleys, dinking, scoring, and rules. Offered seasonally at various Newton locations.",ages:"Youth - Teens",ageCategory:["3-5","6-8","9-12"],season:["spring","summer","fall"],level:"introductory",cost:"$60/2 lessons (adult); youth TBD",costRange:"under-200",location:"Cooper Center / Newton South HS / Kennard Park",website:"https://www.newtonma.gov/government/pickleball",regDate:"Seasonal - email nscammon@newtonma.gov",commitment:"1x/week"},
+  {sport:"other-sports",name:"Nike Pickleball U12 Camp",org:"US Sports Camps",desc:"Summer pickleball camp at Concord Academy. Ages 6-12, beginner to intermediate. Learn fundamentals, scoring, singles and doubles play. Half-day and full-day options, Monday-Thursday.",ages:"Ages 6-12",ageCategory:["k-2","3-5"],season:["summer"],level:"camp",cost:"$320-$520/week",costRange:"200-500",location:"Concord Academy, 153 Fairhaven Rd, Concord",website:"https://www.ussportscamps.com/pickleball/nike/concord-academy",regDate:"Rolling",commitment:"Mon-Thu camp weeks"},
+
+  // ===== NEW: SWIMMING =====
+  {sport:"swimming",name:"Newton Bluefish Rec Swim Team",org:"Newton Parks & Recreation",desc:"City of Newton recreational swim team for ages 6-18. Winter and summer league seasons. Application-based enrollment through Newton Parks & Rec.",ages:"Ages 6-18",ageCategory:["k-2","3-5","6-8","9-12"],season:["winter","summer"],level:"recreational",cost:"$400-$535/season",costRange:"200-500",location:"Newton North HS Pool / Crystal Lake",website:"https://www.newtonbluefish.org",regDate:"Mar 15 (current season)",commitment:"2-3x/week"},
+
+  // ===== NEW: LACROSSE =====
+  {sport:"lacrosse",name:"Newton Youth Lacrosse (Boys)",org:"Newton Youth Lacrosse",desc:"Spring boys lacrosse for grades 1-8. Classic program open to all, Select program (grades 5-8) for competitive play. Sunday games Apr-Jun, MYL Jamboree in June.",ages:"Grades 1-8",ageCategory:["k-2","3-5","6-8"],season:["spring"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"Newton fields",website:"https://newtonyouthlacrosse.com",regDate:"Spring registration open",commitment:"2-3x/week"},
+  {sport:"lacrosse",name:"Newton Girls Lacrosse",org:"Newton Girls Lacrosse",desc:"Spring girls lacrosse with practices Mon/Wed at Weeks Field and Sunday games Apr-Jun. MYL Jamboree Jun 13-14, 2026.",ages:"Girls, Grades 1-8",ageCategory:["k-2","3-5","6-8"],season:["spring"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"Weeks Field, Newton",website:"https://www.newtongirlslacrosse.com",regDate:"Spring registration open",commitment:"2-3x/week",tags:["girls"]},
+
+  // ===== NEW: FLAG FOOTBALL =====
+  {sport:"football",name:"Newton Area Flag Football (NFL Flag)",org:"Metro Boston Sports Group",desc:"Official NFL Flag Football league in Newton. Co-ed, ages 5-17 with divisions by age. Minimum 7 games plus playoffs guaranteed. Spring and fall seasons at Albemarle Field. Seasons sell out consistently.",ages:"Ages 5-17",ageCategory:["k-2","3-5","6-8","9-12"],season:["spring","fall"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"Albemarle Field, Newton",website:"https://www.newtonareaflagfootball.com/",regDate:"Register early - sells out",commitment:"1-2x/week",tags:["coed"]},
+  {sport:"football",name:"Patriot Girls NFL Flag Football",org:"Metro Boston Sports Group",desc:"Girls-only NFL Flag Football program based in Newton. Sunday afternoons 4-6pm. Part of the national NFL Flag initiative for girls.",ages:"Girls, Youth",ageCategory:["k-2","3-5","6-8"],season:["spring","fall"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"Newton North HS / Daly Field",website:"https://www.metrowestflagfootball.org/",regDate:"Register early",commitment:"1x/week (Sundays)",tags:["girls"]},
+
+  // ===== NEW: FENCING =====
+  {sport:"other-sports",name:"Dynamo Fencing Center",org:"Dynamo Fencing",desc:"Nationally ranked youth fencing center right in Newton. Elite and recreational sabre programs, camps, and birthday parties. Regular classes start September.",ages:"Youth - Adult",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring"],level:"competitive",cost:"Contact for pricing",costRange:"200-500",location:"11 Homer St, Newton",website:"https://dynamo-fencing.com/",regDate:"Sep 1 start",commitment:"1-2x/week"},
+  {sport:"other-sports",name:"Olympia Fencing Center - Newton",org:"Olympia Fencing",desc:"Youth and adult fencing with free trial classes. Month-to-month memberships. CORI and SafeSport certified coaches. Ages 7+.",ages:"Ages 7+",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"Contact for pricing",costRange:"200-500",location:"66 Winchester St, Newton",website:"https://olympiafencingcenter.com/newton-location/",regDate:"Rolling",commitment:"1-2x/week"},
+
+  // ===== NEW: SOCCER =====
+  {sport:"soccer",name:"Newton United Soccer",org:"Newton United",desc:"Affordable recreational soccer open to all children regardless of experience. Uniforms included. Age groups from Instructional through U15.",ages:"Ages 5-15",ageCategory:["k-2","3-5","6-8"],season:["fall","spring"],level:"recreational",cost:"$85/player ($50 siblings)",costRange:"under-200",location:"Newton fields",website:"https://www.newtonunited.org",regDate:"Spring closed Mar 22; Fall opens mid-Jun",commitment:"1x/week",bestValue:true},
+
+  // ===== NEW: LACROSSE (CLUB) =====
+  {sport:"lacrosse",name:"Newton Braves Lacrosse (Club/Travel)",org:"Newton Braves",desc:"Established 2004 club/travel lacrosse. 2024 7th/8th grade team went 19-0 and won NJJLL Group A Championship. Free pre-season clinics offered Feb-March.",ages:"Grades 3-8",ageCategory:["3-5","6-8"],season:["spring"],level:"competitive",cost:"Contact for pricing",costRange:"200-500",location:"Newton fields",website:"https://www.nblax.com",regDate:"Mar 8 deadline; $20 early discount by Jan 5",commitment:"3-4x/week"},
+
+  // ===== NEW: VOLLEYBALL =====
+  {sport:"other-sports",name:"Boston United Volleyball Club",org:"Boston UVC",desc:"Weekly volleyball clinics introducing children to the sport. Sessions at the YMCA on Wells Ave, Newton.",ages:"Kindergarten - Grade 9",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring"],level:"introductory",cost:"Contact for pricing",costRange:"under-200",location:"West Suburban YMCA, Wells Ave, Newton",website:"https://bostonuvc.com/",regDate:"By session",commitment:"1x/week"},
+  {sport:"other-sports",name:"Nike Volleyball Camp at Lasell University",org:"US Sports Camps",desc:"Nike day camp for boys and girls. Professional coaching, skill development, and competitive play.",ages:"Ages 10-18",ageCategory:["3-5","6-8","9-12"],season:["summer"],level:"camp",cost:"Contact for pricing",costRange:"200-500",location:"Lasell University, Newton",website:"https://www.ussportscamps.com/volleyball/nike/nike-volleyball-camp-newton-massachusetts",regDate:"Rolling",commitment:"5-day camp"},
+
+  // ===== NEW: MARTIAL ARTS =====
+  {sport:"martial-arts",name:"Giroux Brothers Martial Arts",org:"Giroux Brothers",desc:"Kids martial arts (ages 4+), adult karate, summer camps, and birthday parties. Intro offer: 4 weeks plus free uniform for $49.",ages:"Ages 4+",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"recreational",cost:"$49 intro (4 weeks + uniform)",costRange:"under-200",location:"Newtonville, MA",website:"https://www.girouxbrosnewtonville.com/",regDate:"Rolling",commitment:"1-2x/week"},
+
+  // ===== NEW: SWIMMING =====
+  {sport:"swimming",name:"West Suburban YMCA Blue Waves",org:"West Suburban YMCA",desc:"Nationally ranked competitive swim team. Fall/winter short course and spring/summer long course seasons. Tryouts held in August.",ages:"Ages 6-17",ageCategory:["k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"competitive",cost:"Contact YMCA",costRange:"200-500",location:"276 Church St, Newton",website:"https://wsymca.org/swim-teams",regDate:"Tryouts in August",commitment:"3-5x/week"},
 ];
 
 // ===== SPORT CONFIG =====
@@ -1183,19 +1287,68 @@ function renderAll(filtered) {
   document.getElementById('resultsCount').textContent = `Showing ${filtered.length} of ${programs.length} programs`;
 }
 
+// ===== GRADE-TO-AGE CATEGORY MAPPING =====
+function gradeToAgeCategory(gradeVal) {
+  if (!gradeVal) return '';
+  if (gradeVal === 'prek') return 'prek';
+  // Map specific grades to their ageCategory bucket
+  const map = {
+    'k-2-k':'k-2','k-2-1':'k-2','k-2-2':'k-2',
+    '3-5-3':'3-5','3-5-4':'3-5','3-5-5':'3-5',
+    '6-8-6':'6-8','6-8-7':'6-8','6-8-8':'6-8',
+    '9-12-9':'9-12','9-12-10':'9-12','9-12-11':'9-12','9-12-12':'9-12'
+  };
+  return map[gradeVal] || '';
+}
+
+// ===== COST SORT HELPER =====
+function parseCostForSort(costStr) {
+  if (!costStr) return null;
+  const s = costStr.toLowerCase();
+  if (s.includes('free')) return 0;
+  if (s.includes('contact')) return null;
+  const nums = s.match(/[\d,]+/g);
+  if (nums && nums.length > 0) return parseInt(nums[0].replace(/,/g,''), 10);
+  return null;
+}
+
+// ===== REG DATE SORT HELPER =====
+function parseRegDateForSort(regStr) {
+  if (!regStr) return 9999;
+  const s = regStr.toLowerCase();
+  const months = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  for (const [name, num] of Object.entries(months)) {
+    if (s.includes(name)) {
+      const dayMatch = s.match(new RegExp(name + '\\w*\\s+(\\d+)'));
+      return num * 100 + (dayMatch ? parseInt(dayMatch[1]) : 0);
+    }
+  }
+  if (s.includes('rolling') || s.includes('open')) return 8000;
+  return 9000;
+}
+
 // ===== FILTER LOGIC =====
 function getFiltered() {
   const search = document.getElementById('searchInput').value.toLowerCase();
-  const age = document.getElementById('ageFilter').value;
+  const grade = document.getElementById('gradeFilter').value;
+  const gender = document.getElementById('genderFilter').value;
   const season = document.getElementById('seasonFilter').value;
   const level = document.getElementById('levelFilter').value;
   const cost = document.getElementById('costFilter').value;
+  const sort = document.getElementById('sortFilter').value;
   const activeSport = document.querySelector('.sq-btn.active')?.dataset.sport || 'all';
+  const ageCategory = gradeToAgeCategory(grade);
 
-  return programs.filter(p => {
+  let filtered = programs.filter(p => {
     if (activeSport !== 'all' && p.sport !== activeSport) return false;
     if (search && !(p.name.toLowerCase().includes(search) || p.org.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search) || p.sport.toLowerCase().includes(search) || p.location.toLowerCase().includes(search))) return false;
-    if (age && !(p.ageCategory||[]).includes(age)) return false;
+    if (ageCategory && !(p.ageCategory||[]).includes(ageCategory)) return false;
+    if (gender) {
+      const tags = p.tags || [];
+      if (gender === 'girls' && !tags.includes('girls')) return false;
+      if (gender === 'boys' && !tags.includes('boys')) return false;
+      if (gender === 'coed' && !tags.includes('coed')) return false;
+    }
     if (season) {
       if (season === 'year-round') {
         if ((p.season||[]).length < 3) return false;
@@ -1213,6 +1366,27 @@ function getFiltered() {
     }
     return true;
   });
+
+  // Apply sorting
+  if (sort === 'price-low') {
+    filtered.sort((a, b) => {
+      const ca = parseCostForSort(a.cost); const cb = parseCostForSort(b.cost);
+      if (ca === null && cb === null) return 0;
+      if (ca === null) return 1; if (cb === null) return -1;
+      return ca - cb;
+    });
+  } else if (sort === 'price-high') {
+    filtered.sort((a, b) => {
+      const ca = parseCostForSort(a.cost); const cb = parseCostForSort(b.cost);
+      if (ca === null && cb === null) return 0;
+      if (ca === null) return 1; if (cb === null) return -1;
+      return cb - ca;
+    });
+  } else if (sort === 'reg-date') {
+    filtered.sort((a, b) => parseRegDateForSort(a.regDate) - parseRegDateForSort(b.regDate));
+  }
+
+  return filtered;
 }
 
 function applyFilters() {
@@ -1223,16 +1397,20 @@ function applyFilters() {
 function updateActiveFilters() {
   const container = document.getElementById('activeFilters');
   const filters = [];
-  const age = document.getElementById('ageFilter');
+  const grade = document.getElementById('gradeFilter');
+  const gender = document.getElementById('genderFilter');
   const season = document.getElementById('seasonFilter');
   const level = document.getElementById('levelFilter');
   const cost = document.getElementById('costFilter');
+  const sort = document.getElementById('sortFilter');
   const search = document.getElementById('searchInput').value;
   if (search) filters.push({label:`"${search}"`, clear:()=>{document.getElementById('searchInput').value='';applyFilters();}});
-  if (age.value) filters.push({label:age.options[age.selectedIndex].text, clear:()=>{age.value='';applyFilters();}});
+  if (grade.value) filters.push({label:grade.options[grade.selectedIndex].text, clear:()=>{grade.value='';applyFilters();}});
+  if (gender.value) filters.push({label:gender.options[gender.selectedIndex].text, clear:()=>{gender.value='';applyFilters();}});
   if (season.value) filters.push({label:season.options[season.selectedIndex].text, clear:()=>{season.value='';applyFilters();}});
   if (level.value) filters.push({label:level.options[level.selectedIndex].text, clear:()=>{level.value='';applyFilters();}});
   if (cost.value) filters.push({label:cost.options[cost.selectedIndex].text, clear:()=>{cost.value='';applyFilters();}});
+  if (sort.value) filters.push({label:sort.options[sort.selectedIndex].text, clear:()=>{sort.value='';applyFilters();}});
   container.innerHTML = filters.map((f,i) => `<span class="filter-tag">${f.label}<button onclick="clearFilter(${i})">&times;</button></span>`).join('');
   window._filterClears = filters.map(f => f.clear);
 }
@@ -1240,15 +1418,17 @@ window.clearFilter = function(i) { window._filterClears[i](); };
 
 // ===== EVENT LISTENERS =====
 document.getElementById('searchInput').addEventListener('input', debounce(applyFilters, 200));
-['ageFilter','seasonFilter','levelFilter','costFilter'].forEach(id => {
+['gradeFilter','genderFilter','seasonFilter','levelFilter','costFilter','sortFilter'].forEach(id => {
   document.getElementById(id).addEventListener('change', applyFilters);
 });
 document.getElementById('clearFilters').addEventListener('click', () => {
   document.getElementById('searchInput').value = '';
-  document.getElementById('ageFilter').value = '';
+  document.getElementById('gradeFilter').value = '';
+  document.getElementById('genderFilter').value = '';
   document.getElementById('seasonFilter').value = '';
   document.getElementById('levelFilter').value = '';
   document.getElementById('costFilter').value = '';
+  document.getElementById('sortFilter').value = '';
   document.querySelector('.sq-btn.active')?.classList.remove('active');
   document.querySelector('.sq-btn[data-sport="all"]').classList.add('active');
   applyFilters();
@@ -1294,6 +1474,40 @@ document.querySelectorAll('.hero-photo img').forEach(img => {
 });
 lightbox.addEventListener('click', (e) => { if (e.target !== lbImg) lightbox.classList.remove('active'); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
+
+// ===== SPORTS QUICK NAV SCROLL ARROW =====
+(function() {
+  const inner = document.getElementById('sportsQuickInner');
+  const arrow = document.getElementById('sqScrollArrow');
+  function checkScroll() {
+    if (!inner || !arrow) return;
+    const atEnd = inner.scrollLeft + inner.clientWidth >= inner.scrollWidth - 10;
+    arrow.classList.toggle('hidden', atEnd);
+  }
+  if (inner) {
+    inner.addEventListener('scroll', checkScroll);
+    window.addEventListener('resize', checkScroll);
+    setTimeout(checkScroll, 100);
+  }
+})();
+
+// ===== NAV SPORT LINKS SMOOTH SCROLL =====
+document.querySelectorAll('[data-nav-sport]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const sportKey = link.dataset.navSport;
+    // First activate the sport in the quick nav
+    document.querySelector('.sq-btn.active')?.classList.remove('active');
+    const btn = document.querySelector(`.sq-btn[data-sport="${sportKey}"]`);
+    if (btn) btn.classList.add('active');
+    applyFilters();
+    // Then scroll to the section
+    setTimeout(() => {
+      const section = document.querySelector(`[data-sport-section="${sportKey}"]`);
+      if (section) section.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 100);
+  });
+});
 
 // ===== INIT =====
 renderAll(programs);

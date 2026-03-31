@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Youth Sports Program Types | Newton Youth Sports</title>
+<meta name="description" content="A parent-friendly guide to rec leagues, travel teams, AAU, club, and select/elite programs. Costs, commitment levels, and questions to ask before joining.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232d6a4f'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #fafbfd;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #2d6a4f; text-decoration: underline; }
+a:hover { color: #1b4332; }
+
+:root {
+  --green-deep: #1b4332;
+  --green-main: #2d6a4f;
+  --green-mid: #40916c;
+  --green-light: #52b788;
+  --green-pale: #d8f3dc;
+  --gold: #e8a838;
+  --gold-light: #fceabb;
+  --navy: #16213e;
+  --slate: #4a5568;
+  --light-bg: #f0f4f0;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --max-w: 880px;
+}
+
+/* NAV BAR */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-md);
+}
+.nav-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 70px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 1.15rem; color: var(--green-deep);
+  text-decoration: none;
+}
+.nav-logo .logo-icon {
+  width: 38px; height: 38px; background: var(--green-main);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.nav-back {
+  padding: 8px 20px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 600; color: var(--white); background: var(--green-main);
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-back:hover { background: var(--green-deep); color: var(--white); }
+
+/* HERO */
+.guide-hero {
+  background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
+  padding: 120px 32px 60px;
+  color: white;
+  text-align: center;
+}
+.guide-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; line-height: 1.15;
+  max-width: 700px; margin: 0 auto 16px;
+}
+.guide-hero .subtitle {
+  font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 600px;
+  margin: 0 auto; font-weight: 300; line-height: 1.6;
+}
+
+/* TABLE OF CONTENTS */
+.toc {
+  max-width: var(--max-w); margin: -30px auto 0; padding: 0 24px; position: relative; z-index: 2;
+}
+.toc-inner {
+  background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px;
+  box-shadow: var(--shadow-lg);
+}
+.toc-inner h2 {
+  font-size: 1rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--green-main); margin-bottom: 14px;
+}
+.toc-inner ol {
+  list-style: none; counter-reset: toc; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 8px 24px;
+}
+.toc-inner li { counter-increment: toc; }
+.toc-inner li a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; font-size: 0.92rem; font-weight: 500; color: var(--navy);
+  text-decoration: none; transition: color 0.2s;
+}
+.toc-inner li a:hover { color: var(--green-main); }
+.toc-inner li a::before {
+  content: counter(toc); display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--green-pale); color: var(--green-main);
+  font-size: 0.78rem; font-weight: 700;
+}
+
+/* MAIN CONTENT */
+.guide-content {
+  max-width: var(--max-w); margin: 0 auto; padding: 48px 24px 80px;
+}
+
+/* PROGRAM TYPE CARDS */
+.program-type {
+  margin-bottom: 56px; scroll-margin-top: 90px;
+}
+.program-type-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); overflow: hidden;
+  border-left: 5px solid var(--green-main);
+}
+.program-type-card.rec { border-left-color: #52b788; }
+.program-type-card.travel { border-left-color: #e8a838; }
+.program-type-card.aau { border-left-color: #e76f51; }
+.program-type-card.club { border-left-color: #457b9d; }
+.program-type-card.elite { border-left-color: #6d28d9; }
+
+.pt-header {
+  padding: 28px 32px 0;
+}
+.pt-label {
+  display: inline-block; padding: 4px 14px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 12px;
+}
+.rec .pt-label { background: #d8f3dc; color: #1b4332; }
+.travel .pt-label { background: #fceabb; color: #7c5a0b; }
+.aau .pt-label { background: #fde8e3; color: #a0301a; }
+.club .pt-label { background: #dbeafe; color: #1e3a5f; }
+.elite .pt-label { background: #ede9fe; color: #4c1d95; }
+
+.pt-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 800; color: var(--green-deep);
+  margin-bottom: 8px; line-height: 1.25;
+}
+.pt-header .pt-aka {
+  font-size: 0.85rem; color: var(--slate); font-style: italic; margin-bottom: 12px;
+}
+
+.pt-body { padding: 20px 32px 28px; }
+.pt-body p { margin-bottom: 14px; color: #2d3748; font-size: 0.95rem; }
+.pt-body h4 {
+  font-size: 0.88rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--green-main); margin: 20px 0 10px;
+}
+
+/* QUICK STATS ROW */
+.quick-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1px; background: #e2e8f0; border-top: 1px solid #e2e8f0;
+}
+.quick-stat {
+  background: #f8faf8; padding: 16px 20px;
+}
+.quick-stat .qs-label {
+  font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--slate); margin-bottom: 4px;
+}
+.quick-stat .qs-value {
+  font-size: 0.92rem; font-weight: 600; color: var(--navy);
+}
+
+/* DETAIL LIST */
+.detail-list { list-style: none; padding: 0; }
+.detail-list li {
+  padding: 8px 0; border-bottom: 1px solid #f0f0f0;
+  display: flex; gap: 12px; font-size: 0.92rem;
+}
+.detail-list li:last-child { border-bottom: none; }
+.detail-list .dl-icon {
+  flex-shrink: 0; width: 22px; text-align: center;
+  color: var(--green-mid); font-size: 1rem; padding-top: 1px;
+}
+.detail-list strong { color: var(--navy); font-weight: 600; }
+
+/* COMPARISON TABLE */
+.comparison-section {
+  margin: 56px 0; scroll-margin-top: 90px;
+}
+.comparison-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 800; color: var(--green-deep);
+  margin-bottom: 24px;
+}
+.table-wrap {
+  overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow-md);
+}
+table {
+  width: 100%; border-collapse: collapse; background: var(--white);
+  font-size: 0.85rem; min-width: 700px;
+}
+thead { background: var(--green-deep); color: white; }
+th {
+  padding: 14px 16px; text-align: left; font-weight: 600;
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px;
+}
+td { padding: 12px 16px; border-bottom: 1px solid #edf2f7; vertical-align: top; }
+tbody tr:hover { background: #f8faf8; }
+tbody tr:last-child td { border-bottom: none; }
+.cell-label {
+  display: none; font-weight: 600; color: var(--green-main);
+  font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+/* CHECKLIST SECTION */
+.checklist-section {
+  margin: 56px 0; scroll-margin-top: 90px;
+}
+.checklist-section > h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 800; color: var(--green-deep);
+  margin-bottom: 8px;
+}
+.checklist-section > p {
+  color: var(--slate); margin-bottom: 32px; font-size: 0.95rem;
+}
+
+.checklist-group {
+  background: var(--white); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm); margin-bottom: 20px;
+  border: 1px solid #e8ede8;
+}
+.cg-header {
+  padding: 20px 24px; cursor: pointer; display: flex;
+  align-items: center; gap: 14px;
+  user-select: none;
+}
+.cg-icon {
+  width: 42px; height: 42px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; flex-shrink: 0;
+  background: var(--green-pale); color: var(--green-main);
+}
+.cg-header h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--navy);
+}
+.cg-header .cg-sub {
+  font-size: 0.82rem; color: var(--slate); font-weight: 400; margin-top: 2px;
+}
+.cg-body { padding: 0 24px 24px; }
+
+.check-item {
+  display: flex; gap: 12px; padding: 10px 0;
+  border-bottom: 1px solid #f0f4f0;
+}
+.check-item:last-child { border-bottom: none; }
+.check-box {
+  flex-shrink: 0; width: 22px; height: 22px;
+  border: 2px solid #c6d3c6; border-radius: 5px; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.2s;
+}
+.check-box.checked {
+  background: var(--green-main); border-color: var(--green-main);
+}
+.check-box.checked::after {
+  content: ''; display: block; width: 6px; height: 10px;
+  border: solid white; border-width: 0 2px 2px 0;
+  transform: rotate(45deg); margin-top: -2px;
+}
+.check-item .ci-text { flex: 1; }
+.check-item .ci-question {
+  font-size: 0.92rem; font-weight: 600; color: var(--navy);
+  margin-bottom: 4px;
+}
+.check-item .ci-why {
+  font-size: 0.84rem; color: var(--slate); line-height: 1.5;
+}
+
+/* CALLOUT BOX */
+.callout {
+  background: linear-gradient(135deg, #fef9ee 0%, #fdf4dc 100%);
+  border: 1px solid #f0d98d;
+  border-radius: var(--radius);
+  padding: 24px 28px;
+  margin: 28px 0;
+}
+.callout.green {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d8f3dc 100%);
+  border-color: #a7d7bf;
+}
+.callout.red {
+  background: linear-gradient(135deg, #fef2f2 0%, #fde8e8 100%);
+  border-color: #fca5a5;
+}
+.callout h4 {
+  font-size: 0.95rem; font-weight: 700; margin-bottom: 8px;
+  color: var(--navy);
+}
+.callout p, .callout li {
+  font-size: 0.9rem; color: #4a5568; line-height: 1.6;
+}
+.callout ul { margin-top: 8px; padding-left: 20px; }
+.callout li { margin-bottom: 4px; }
+
+/* FOOTER */
+.guide-footer {
+  background: var(--green-deep); color: rgba(255,255,255,0.7);
+  padding: 40px 32px; text-align: center; font-size: 0.85rem;
+}
+.guide-footer a { color: var(--green-light); }
+.guide-footer p + p { margin-top: 8px; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .toc-inner ol { grid-template-columns: 1fr; }
+  .quick-stats { grid-template-columns: 1fr 1fr; }
+  .pt-header, .pt-body { padding-left: 20px; padding-right: 20px; }
+  .cell-label { display: block; }
+  table { font-size: 0.82rem; }
+  th:first-child, td:first-child { position: sticky; left: 0; background: inherit; z-index: 1; }
+  .nav-inner { padding: 0 16px; }
+  .guide-hero { padding: 100px 20px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+      Newton Youth Sports
+    </a>
+    <a href="index.html" class="nav-back">Back to All Programs</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="guide-hero">
+  <h1>Understanding Youth Sports Program Types</h1>
+  <p class="subtitle">A straightforward guide for parents navigating rec leagues, travel teams, AAU, club, and elite programs &mdash; what they actually mean, what they actually cost, and what to ask before you sign up.</p>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-inner">
+    <h2>In This Guide</h2>
+    <ol>
+      <li><a href="#rec">Recreation (Rec) Leagues</a></li>
+      <li><a href="#travel">Travel Teams</a></li>
+      <li><a href="#aau">AAU Programs</a></li>
+      <li><a href="#club">Club Teams</a></li>
+      <li><a href="#elite">Select / Elite Programs</a></li>
+      <li><a href="#comparison">Side-by-Side Comparison</a></li>
+      <li><a href="#age-cutoffs">Age Cutoff Reference</a></li>
+      <li><a href="#multisport">Multi-Sport vs. Specialization</a></li>
+      <li><a href="#checklist">Parent Decision Checklist</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- MAIN GUIDE CONTENT -->
+<div class="guide-content">
+
+<!-- ========== 1. REC ========== -->
+<div class="program-type" id="rec">
+  <div class="program-type-card rec">
+    <div class="pt-header">
+      <div class="pt-label">Recreational</div>
+      <h3>Recreation (Rec) Leagues</h3>
+      <p class="pt-aka">Also called: town leagues, intramural, in-house, community leagues</p>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="qs-label">Annual Cost</div>
+        <div class="qs-value">$75 &ndash; $400/season</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Time Commitment</div>
+        <div class="qs-value">1&ndash;3 hours/week</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Tryouts</div>
+        <div class="qs-value">None &mdash; open enrollment</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Season Length</div>
+        <div class="qs-value">8&ndash;12 weeks</div>
+      </div>
+    </div>
+    <div class="pt-body">
+      <p>Rec leagues are the entry point for most families. They are run by your town or city (often through Parks &amp; Recreation or a volunteer-run nonprofit) and are designed so that <strong>every child who signs up gets to play</strong>. There are no tryouts, no cuts, and equal playing time is either guaranteed or strongly encouraged.</p>
+
+      <p>Teams are typically formed by the organization &mdash; not by parents hand-picking rosters &mdash; and coaches are usually parent volunteers who receive basic training. Games are played locally, almost always within your town, and usually on weekends.</p>
+
+      <h4>What to Expect</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9834;</span><div><strong>Practices:</strong> 1 per week, typically 1 hour on a weekday evening.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Games:</strong> 1 per week, usually Saturday mornings. All games are local.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Cost breakdown:</strong> Registration fee ($75&ndash;$400 depending on sport and town) typically covers uniform jersey, referee fees, field/gym time, and insurance. Some programs charge separately for a uniform kit. There are rarely hidden costs.</div></li>
+        <li><span class="dl-icon">&#128205;</span><div><strong>Travel:</strong> Games are within your town. Drive time is typically under 15 minutes.</div></li>
+        <li><span class="dl-icon">&#127942;</span><div><strong>Tournaments:</strong> Usually none. Some rec leagues hold an end-of-season jamboree or mini-tournament, but attendance is optional.</div></li>
+        <li><span class="dl-icon">&#128218;</span><div><strong>Philosophy:</strong> Skill development, fun, teamwork, and making sure every kid gets meaningful playing time. Scores may not even be kept at younger ages.</div></li>
+      </ul>
+
+      <div class="callout green">
+        <h4>Rec is right for you if...</h4>
+        <ul>
+          <li>Your child is trying a sport for the first time</li>
+          <li>Your family wants a predictable, low-cost time commitment</li>
+          <li>Your child plays multiple sports and you want flexibility</li>
+          <li>You value fun and participation over competition</li>
+        </ul>
+      </div>
+
+      <h4>Newton Rec Examples</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#127936;</span><div><strong><a href="https://newton-athletic-association.sportngin.com/" target="_blank">NAA Basketball League</a></strong> ($235&ndash;$270, grades 3&ndash;9): Newton's primary recreational basketball league. Volunteer-run, welcomes all abilities. Games on weekends at Brown Middle School, with one weeknight practice. Registration opens in the fall for the winter season. This is the program most Newton families start with for basketball.</div></li>
+        <li><span class="dl-icon">&#127936;</span><div><strong><a href="https://newtongirlsbball.com/" target="_blank">Newton Girls Basketball (NGBA)</a></strong> (~$180, girls grades 2&ndash;9): Girls-only recreational league emphasizing fun, skill development, and sportsmanship. Saturday games, weeknight practices. Registration deadline around late October.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Newton Youth Soccer Intramural</strong> ($215&ndash;$330/season): Classic rec soccer &mdash; Saturday games, one practice per week, volunteer coaches, open enrollment.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Newton Girls Soccer City Program</strong> ($185&ndash;$285/season): Similar structure for girls, with weekend games and weeknight practices.</div></li>
+        <li><span class="dl-icon">&#127936;</span><div><strong><a href="https://www.newtonbgc.com/" target="_blank">Boys &amp; Girls Club Basketball</a></strong> ($125 membership + program fee): Tiered leagues from development (fundamentals, 3v3) through premier level. An affordable option with a community focus.</div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 2. TRAVEL ========== -->
+<div class="program-type" id="travel">
+  <div class="program-type-card travel">
+    <div class="pt-header">
+      <div class="pt-label">Competitive</div>
+      <h3>Travel Teams</h3>
+      <p class="pt-aka">Also called: town travel, select travel, competitive league teams</p>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="qs-label">Annual Cost</div>
+        <div class="qs-value">$500 &ndash; $3,000+/year</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Time Commitment</div>
+        <div class="qs-value">5&ndash;10 hours/week</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Tryouts</div>
+        <div class="qs-value">Yes &mdash; cuts are common</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Season Length</div>
+        <div class="qs-value">2&ndash;3 seasons (some year-round)</div>
+      </div>
+    </div>
+    <div class="pt-body">
+      <p>Travel teams are the next step up from rec. The defining feature: <strong>your child's team plays against teams from other towns</strong>, which means driving to away games in neighboring communities. These teams are tryout-based, and not every child who tries out will make the team.</p>
+
+      <p>Travel teams are typically still organized under your town's youth sports organization (not a private company), and many are nonprofits. Coaching quality varies &mdash; some towns use paid, licensed coaches; others use experienced parent volunteers. Teams play in regional leagues (for example, in Massachusetts, soccer travel teams often play in the <a href="https://www.bfrsl.org" target="_blank">BAYS league</a> and basketball in <a href="https://www.metrowestbasketball.com" target="_blank">MetroWest</a> or similar leagues).</p>
+
+      <h4>What to Expect</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9834;</span><div><strong>Practices:</strong> 2&ndash;3 per week, often 1.5 hours each.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Games:</strong> 1&ndash;2 per week (weekday evening or Saturday), at home and away.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Cost breakdown:</strong> Registration ($500&ndash;$2,000). Additional costs often include: tournament entry fees ($200&ndash;$800/year), a separate uniform kit ($100&ndash;$250), and optional off-season training. Total first-year cost including everything is commonly $1,000&ndash;$3,000.</div></li>
+        <li><span class="dl-icon">&#128205;</span><div><strong>Travel:</strong> League games are typically within a 20&ndash;45 minute drive. Tournament travel (if applicable) can be 1&ndash;2 hours.</div></li>
+        <li><span class="dl-icon">&#127942;</span><div><strong>Tournaments:</strong> Most travel teams participate in 2&ndash;5 tournaments per season. Some are mandatory; some are optional. Weekend tournaments usually mean 2&ndash;3 games on Saturday/Sunday.</div></li>
+        <li><span class="dl-icon">&#128218;</span><div><strong>Philosophy:</strong> More competitive than rec but still focused on development. Playing time is typically more balanced at younger ages (U8&ndash;U12) but becomes less equal at older ages. Winning matters more, but the best programs still prioritize long-term player growth.</div></li>
+      </ul>
+
+      <div class="callout">
+        <h4>Key difference from rec</h4>
+        <p>Travel teams require a bigger family commitment. You are committing to a schedule &mdash; missed practices and games affect the whole team. Many programs require attendance at mandatory tournaments. Before you sign up, honestly assess whether your family can handle the driving, the weeknight practices, and the weekend tournament obligations for the full season.</p>
+      </div>
+
+      <h4>Hidden Costs Parents Often Miss</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#128176;</span><div><strong>Tournament hotels:</strong> Even "local" tournaments sometimes require staying nearby. Budget $150&ndash;$300/night for hotel rooms, multiplied by 2&ndash;5 tournament weekends per season.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Gas and tolls:</strong> Two away games per week at 30&ndash;45 minutes each way adds up fast. Many families spend $50&ndash;$100/month on gas alone for travel sports.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Meals on the road:</strong> Tournament days often mean fast food for lunch and dinner. A family of four eating out for a tournament weekend can easily spend $100&ndash;$200.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Extra gear:</strong> Travel teams often require specific equipment beyond what rec leagues need &mdash; backup uniforms, warm-up suits, team bags, and sport-specific gear upgrades.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Fundraising obligations:</strong> Some programs require each family to sell a certain amount or pay the difference. Ask about this before signing up.</div></li>
+      </ul>
+
+      <h4>When Is the Right Age for Travel?</h4>
+      <p>There is no single right answer, but here is general guidance from pediatric sports medicine and youth development experts:</p>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#10004;</span><div><strong>Ages 5&ndash;7 (grades K&ndash;2):</strong> Too early for travel. Focus on rec leagues, free play, and trying multiple sports. At this age, kids are still developing basic motor skills and should be playing for fun.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Ages 8&ndash;10 (grades 3&ndash;5):</strong> Some travel programs start here. If your child genuinely loves the sport, is asking for more challenge, and your family can handle the time commitment, a low-key town travel team can be appropriate. Avoid programs that demand year-round commitment at this age.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Ages 11&ndash;13 (grades 6&ndash;8):</strong> This is when most families make the travel decision. The jump in skill development, competition quality, and coaching is meaningful at this age. If your child wants to play in high school, this is a reasonable time to start competitive play &mdash; but multi-sport participation is still strongly recommended.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Ages 14+ (high school):</strong> Most serious athletes are on travel or club teams by now, often in addition to their high school team. This is where sport-specific training intensifies.</div></li>
+      </ul>
+
+      <div class="callout green">
+        <h4>The Newton travel landscape</h4>
+        <p><strong><a href="https://www.newtonbball.com/" target="_blank">Newton Metrowest Travel Basketball</a></strong> ($650&ndash;$700, grades 4&ndash;8) is the primary travel basketball option for Newton families. Tryouts are held in October, teams practice 3&ndash;4 times per week, and games are in the Metrowest League against surrounding towns. Partial scholarships are available. Newton Youth Soccer's BAYS travel teams (tryouts in June, 3&ndash;4x/week) and Newton Girls Soccer travel ($530/year) are the typical town soccer travel programs.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 3. AAU ========== -->
+<div class="program-type" id="aau">
+  <div class="program-type-card aau">
+    <div class="pt-header">
+      <div class="pt-label">AAU</div>
+      <h3>AAU (Amateur Athletic Union)</h3>
+      <p class="pt-aka">Also called: AAU ball, AAU circuit, grassroots basketball (in some contexts)</p>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="qs-label">Annual Cost</div>
+        <div class="qs-value">$2,000 &ndash; $6,000+/year</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Time Commitment</div>
+        <div class="qs-value">8&ndash;15+ hours/week</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Tryouts</div>
+        <div class="qs-value">Yes &mdash; selective</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Season Length</div>
+        <div class="qs-value">Year-round (peaks spring/summer)</div>
+      </div>
+    </div>
+    <div class="pt-body">
+      <p>The <strong>Amateur Athletic Union (AAU)</strong> is a national nonprofit organization founded in 1888, making it one of the oldest amateur sports organizations in the United States. Originally created to establish standards and uniformity in amateur sports, AAU governed much of American amateur athletics for over a century, including Olympic team selection, before those roles shifted to sport-specific national governing bodies in the late 1970s. Today, AAU's primary mission is promoting youth sports participation through its tournament sanctioning system. It registers over 700,000 participants and 100,000 teams annually across more than 40 sports.</p>
+
+      <p>AAU is most strongly associated with basketball, where it has become the dominant grassroots development pathway. It also sanctions major events in volleyball, track &amp; field, wrestling, karate, and other sports.</p>
+
+      <p>Here is what confuses many parents: <strong>AAU is not a league</strong>. It is a sanctioning body. Any coach or organization can register a team with AAU (for a fee) and then enter AAU-sanctioned tournaments. This means AAU team quality varies enormously &mdash; from a parent who rounds up neighborhood kids to elite organizations that feed players toward college scholarships. There is no centralized quality control.</p>
+
+      <h4>How AAU Actually Works</h4>
+      <p>A coach or organization forms a team, registers it with AAU (team registration is around $30&ndash;$60), and each player gets an AAU membership card (around $16&ndash;$20/year for youth). The team then enters AAU-sanctioned tournaments, paying entry fees per tournament. There is no regular-season schedule like a traditional league &mdash; teams pick which tournaments to attend.</p>
+
+      <h4>Cost Breakdown (the real numbers)</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#128176;</span><div><strong>AAU player membership:</strong> $16&ndash;$20/year (paid to AAU directly)</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Team/organization fee:</strong> $500&ndash;$3,000 (paid to the team's organization for coaching, gym time, etc.)</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Tournament entry fees:</strong> $250&ndash;$600 per tournament, split among families or covered by team fee. A typical season involves 6&ndash;15 tournaments.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Travel costs:</strong> Hotels, gas, food for away tournaments. Local/regional tournaments: $50&ndash;$150/weekend. National-level tournaments (Orlando, Las Vegas, etc.): $1,000&ndash;$3,000 per trip for flights, hotel, and food.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Uniforms/gear:</strong> $150&ndash;$400 (some programs provide, some charge)</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Realistic total:</strong> A moderately competitive AAU basketball season runs $2,000&ndash;$4,000 when you include everything. Elite/national-level programs with multiple out-of-state tournaments can exceed $6,000&ndash;$10,000.</div></li>
+      </ul>
+
+      <h4>What to Expect</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9834;</span><div><strong>Practices:</strong> 2&ndash;4 per week, often 1.5&ndash;2 hours. Some elite programs practice 5x/week.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Games:</strong> No weekly league games. Instead, tournament weekends where your child may play 3&ndash;5 games over Saturday&ndash;Sunday.</div></li>
+        <li><span class="dl-icon">&#128205;</span><div><strong>Travel:</strong> Ranges from local (30&ndash;60 min drive) to regional (1&ndash;3 hours) to national (flights). The level of travel depends entirely on the ambitions of your specific team.</div></li>
+        <li><span class="dl-icon">&#127942;</span><div><strong>Tournaments:</strong> This IS the schedule. Expect 1&ndash;3 tournament weekends per month during the primary season (spring/summer for basketball).</div></li>
+      </ul>
+
+      <div class="callout red">
+        <h4>Important: AAU quality varies wildly</h4>
+        <p>Because anyone can form an AAU team, you must do your homework. Some AAU programs are superbly run with experienced, vetted coaches and genuine player development. Others are poorly organized, coach-centric, or focused on collecting fees. The AAU brand alone tells you nothing about quality. Ask for references from current families, research the coaches, and attend a practice before committing.</p>
+      </div>
+
+      <h4>AAU Age Cutoff Rules</h4>
+      <p>AAU uses a <strong>birth-year-based</strong> age determination system. A player's age division is based on their age as of a specific date, which AAU sets each year. For the current season:</p>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#128197;</span><div><strong>Age determination date:</strong> AAU typically uses <strong>August 31 or September 1</strong> as the cutoff for most sports. For basketball, the grade-based division cutoff date has historically been set around August/September. Always verify the current year's rules at <a href="https://www.aausports.org" target="_blank">aausports.org</a>, as cutoff dates can change by sport and season.</div></li>
+        <li><span class="dl-icon">&#128197;</span><div><strong>What this means:</strong> If the cutoff is September 1 and your child turns 11 on August 15, they play in the 11U (11-and-under) division. If they turn 11 on September 15, they play in the 10U division.</div></li>
+        <li><span class="dl-icon">&#128197;</span><div><strong>Grade-based vs. age-based:</strong> AAU basketball offers both age-based and grade-based divisions at national championships. Grade-based divisions group kids by school grade, which some families prefer since it aligns with school teams. Local AAU tournaments may use either system.</div></li>
+        <li><span class="dl-icon">&#128197;</span><div><strong>Playing up:</strong> AAU allows kids to "play up" in an older age division if the team and family choose. You cannot play down in a younger division.</div></li>
+      </ul>
+
+      <h4>Pros and Cons for Parents</h4>
+      <div class="callout green">
+        <h4>Potential benefits of AAU</h4>
+        <ul>
+          <li><strong>Higher-level competition</strong> &mdash; your child plays against strong opponents from across the region, which accelerates development</li>
+          <li><strong>College exposure</strong> &mdash; at the top levels (typically age 14+), AAU tournaments are where college coaches scout and recruit</li>
+          <li><strong>Year-round skill development</strong> &mdash; consistent training with experienced coaches keeps skills sharp</li>
+          <li><strong>Flexibility in schedule</strong> &mdash; since AAU is tournament-based rather than league-based, some programs allow families to skip certain events</li>
+          <li><strong>Broader social network</strong> &mdash; your child plays with and against kids from many different towns and backgrounds</li>
+          <li><strong>Fills the gap between seasons</strong> &mdash; AAU basketball peaks in spring and summer, complementing the winter school/rec season</li>
+        </ul>
+      </div>
+      <div class="callout red">
+        <h4>Potential downsides of AAU</h4>
+        <ul>
+          <li><strong>Cost</strong> &mdash; even a moderate AAU commitment can run $2,000&ndash;$4,000/year when you add up all the fees, travel, and gear</li>
+          <li><strong>Wildly inconsistent quality</strong> &mdash; because anyone can form an AAU team, coaching ranges from excellent to unqualified</li>
+          <li><strong>Burnout risk</strong> &mdash; the tournament grind (multiple games per weekend, many weekends per month) can exhaust young athletes physically and mentally</li>
+          <li><strong>Pressure to specialize early</strong> &mdash; some AAU programs push kids toward year-round basketball commitment at ages when multi-sport participation is healthier</li>
+          <li><strong>Weekend consumption</strong> &mdash; tournament weekends mean long days at gyms, often with hours of waiting between games; this affects siblings and family plans</li>
+          <li><strong>Win-now coaching</strong> &mdash; some AAU coaches prioritize winning tournaments over developing all players, leading to unequal playing time and narrow skill development</li>
+          <li><strong>No academic safeguards</strong> &mdash; unlike high school sports, AAU has no academic eligibility requirements; the responsibility falls entirely on families</li>
+        </ul>
+      </div>
+
+      <h4>When Is the Right Age to Start AAU?</h4>
+      <p>AAU programs exist for kids as young as second grade, but that does not mean your child should start that early. Here is a realistic age-by-age perspective:</p>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#10004;</span><div><strong>Grades 2&ndash;4 (ages 7&ndash;10):</strong> Most sports development experts say this is too young for a serious AAU commitment. At this age, your child benefits more from rec leagues, free play, and trying multiple sports. If you do AAU at this age, look for programs that emphasize skill development and fun over winning, with a limited tournament schedule (no more than 4&ndash;6 per season). Be wary of programs charging elite-level fees for this age group.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Grades 5&ndash;6 (ages 10&ndash;12):</strong> This is when many families first consider AAU. If your child is passionate about basketball, has solid fundamentals from rec play, and is asking for more competition, a moderate AAU program can be a good fit. Look for programs with 2&ndash;3 practices per week and 6&ndash;10 tournament weekends per season.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Grades 7&ndash;8 (ages 12&ndash;14):</strong> The most common entry point for serious AAU. Players at this stage are developing real basketball skills and can benefit from the higher-level coaching and competition. This is also when the social experience of tournament travel starts to be genuinely fun for kids.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Grades 9&ndash;12 (ages 14&ndash;18):</strong> If college basketball is a goal, this is when AAU becomes most valuable for recruiting exposure. College coaches attend major AAU events during the spring and summer "live periods." At this level, players typically combine high school basketball (winter) with AAU (spring/summer).</div></li>
+      </ul>
+
+      <p><strong>Newton AAU example:</strong> <a href="https://www.basketball2thelimit.com/" target="_blank">Basketball 2 The Limit (B2L)</a> is an established AAU program that draws from the Newton area, coached by current college coaches. They offer both Elite and Fundamental team tracks for grades 2&ndash;12, with over 300 alumni who have gone on to play college basketball. The commitment is typically 4&ndash;5 days per week during the AAU season.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 4. CLUB ========== -->
+<div class="program-type" id="club">
+  <div class="program-type-card club">
+    <div class="pt-header">
+      <div class="pt-label">Club</div>
+      <h3>Club Teams</h3>
+      <p class="pt-aka">Also called: club program, club soccer, club volleyball, etc.</p>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="qs-label">Annual Cost</div>
+        <div class="qs-value">$1,500 &ndash; $5,000+/year</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Time Commitment</div>
+        <div class="qs-value">6&ndash;15 hours/week</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Tryouts</div>
+        <div class="qs-value">Yes &mdash; competitive</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Season Length</div>
+        <div class="qs-value">9&ndash;12 months (often year-round)</div>
+      </div>
+    </div>
+    <div class="pt-body">
+      <p><strong>"Club" is the term used most broadly across youth sports, and its meaning varies by sport.</strong> In general, a club team is a competitive team that operates independently from your town's rec program and is affiliated with a national governing body for that sport.</p>
+
+      <h4>How Club Differs by Sport</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9917;</span><div><strong>Soccer:</strong> "Club" is the dominant competitive pathway. Club teams are affiliated with US Soccer through their state association and play in leagues like <a href="https://www.mlsnextpro.com" target="_blank">MLS NEXT</a>, <a href="https://www.ecnl.com" target="_blank">ECNL</a>, or state-level premier leagues. Club soccer is the primary pathway to college soccer recruiting. A club typically has multiple teams at each age group, organized by skill level (e.g., a "first team" and a "second team").</div></li>
+        <li><span class="dl-icon">&#127952;</span><div><strong>Volleyball:</strong> Club volleyball is the main competitive pipeline for girls' volleyball. Clubs affiliate with <a href="https://usavolleyball.org" target="_blank">USA Volleyball</a> and compete in a winter/spring season of tournaments. This is effectively the only pathway to college volleyball recruiting.</div></li>
+        <li><span class="dl-icon">&#127936;</span><div><strong>Basketball:</strong> "Club" and "AAU" overlap significantly. Some basketball organizations call themselves clubs but operate on the AAU tournament circuit. Others operate in non-AAU leagues (like Hoop Group or Zero Gravity).</div></li>
+        <li><span class="dl-icon">&#127946;</span><div><strong>Lacrosse, field hockey, swimming:</strong> Club teams in these sports function similarly &mdash; tryout-based, affiliated with a national governing body, competing in regional/national events.</div></li>
+      </ul>
+
+      <h4>What to Expect</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9834;</span><div><strong>Practices:</strong> 2&ndash;4 per week with professional (paid) coaches. Many clubs also offer supplemental skills training or futsal in the off-season.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Games/matches:</strong> Regular league schedule plus tournaments. Could mean games or matches every weekend during the season.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Cost breakdown:</strong> Club fees ($1,500&ndash;$4,000) typically cover coaching, league registration, and training facility time. Uniform kits ($200&ndash;$500), tournament entry and travel ($500&ndash;$3,000+), and optional camps/clinics are additional. Total annual cost for a serious club player is commonly $2,500&ndash;$6,000+.</div></li>
+        <li><span class="dl-icon">&#128205;</span><div><strong>Travel:</strong> League games can be regional (30 min to 2 hours). Showcase and national tournaments may require overnight travel. The higher the level, the farther you travel.</div></li>
+        <li><span class="dl-icon">&#127942;</span><div><strong>Tournaments:</strong> Varies by sport. Club soccer: 3&ndash;8 tournaments per year. Club volleyball: 8&ndash;15 tournament weekends in a season. Many are mandatory.</div></li>
+      </ul>
+
+      <div class="callout">
+        <h4>Club vs. AAU &mdash; what is the actual difference?</h4>
+        <p>In basketball, the distinction is blurry &mdash; many club organizations play in AAU tournaments. In soccer and volleyball, "club" is the more accurate term, and those sports don't really use AAU. The practical difference: club programs tend to have more organizational structure (a club director, multiple teams, a training philosophy), while AAU teams can be a single coach running a single team. But there are exceptions in every direction. Focus less on the label and more on the specific program's coaching, organization, and reputation.</p>
+      </div>
+
+      <p><strong>Newton example:</strong> Valeo FC (125 Wells Ave, Newton) is a club soccer program competing in MLS NEXT, the highest tier of youth soccer in the US. Their MLS NEXT teams are fully funded.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ========== 5. SELECT/ELITE ========== -->
+<div class="program-type" id="elite">
+  <div class="program-type-card elite">
+    <div class="pt-header">
+      <div class="pt-label">Select / Elite</div>
+      <h3>Select and Elite Programs</h3>
+      <p class="pt-aka">Also called: premier, academy, showcase, high-performance, advanced</p>
+    </div>
+    <div class="quick-stats">
+      <div class="quick-stat">
+        <div class="qs-label">Annual Cost</div>
+        <div class="qs-value">$3,000 &ndash; $10,000+/year</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Time Commitment</div>
+        <div class="qs-value">10&ndash;20+ hours/week</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Tryouts</div>
+        <div class="qs-value">Highly selective / invitation-only</div>
+      </div>
+      <div class="quick-stat">
+        <div class="qs-label">Season Length</div>
+        <div class="qs-value">Year-round</div>
+      </div>
+    </div>
+    <div class="pt-body">
+      <p><strong>"Select" and "elite" are not standardized terms.</strong> They are used by programs to signal that they are at the top of the competitive pyramid for that sport. Some programs genuinely are; others use these terms as marketing. Here is how to interpret them:</p>
+
+      <h4>What "Select" Usually Means</h4>
+      <p>A select team is formed by picking the best players from a broader pool &mdash; typically the top tier within a club, or an all-star team assembled from across a region. The word "select" literally means the players were selected. In practice, many travel teams call themselves "select" to indicate they are tryout-based, making the term somewhat diluted.</p>
+
+      <h4>What "Elite" / "Academy" / "Premier" Usually Means</h4>
+      <p>These terms indicate the highest competitive level within an organization or league. In soccer, for example:</p>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9650;</span><div><strong>MLS NEXT / ECNL:</strong> These are genuinely elite, nationally competitive leagues with rigorous standards for clubs, coaches, and player development.</div></li>
+        <li><span class="dl-icon">&#9650;</span><div><strong>Academy programs:</strong> Some clubs run an "academy" as their top tier, with professional coaches, year-round training, and a pathway to national competition or college recruiting showcases.</div></li>
+        <li><span class="dl-icon">&#9650;</span><div><strong>Self-described "elite":</strong> Any program can call itself elite. The term is unregulated. A program calling itself "elite" in Facebook ads is not the same as a program competing in a nationally recognized elite league.</div></li>
+      </ul>
+
+      <h4>What to Expect at This Level</h4>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#9834;</span><div><strong>Practices:</strong> 3&ndash;5+ per week, often 1.5&ndash;2 hours, with professional coaching staff. Many programs also expect individual training outside of team sessions.</div></li>
+        <li><span class="dl-icon">&#9917;</span><div><strong>Competition:</strong> League games plus showcase/national tournaments. The schedule can consume most weekends during the season.</div></li>
+        <li><span class="dl-icon">&#128176;</span><div><strong>Cost:</strong> Base fees of $2,000&ndash;$6,000. Travel to showcases and nationals can add $2,000&ndash;$5,000+ per year. Some top-tier programs (like MLS NEXT academies) are partially or fully funded by the professional club, making them free or low-cost for accepted players.</div></li>
+        <li><span class="dl-icon">&#128205;</span><div><strong>Travel:</strong> Expect regional travel for league play and national travel (flights) for showcases and championships. Multiple overnight trips per year are standard.</div></li>
+        <li><span class="dl-icon">&#128218;</span><div><strong>Philosophy:</strong> Winning and player development for advancement (college, national team, professional). Playing time is not guaranteed and is based on performance. Multi-sport participation is often discouraged or impossible due to scheduling.</div></li>
+      </ul>
+
+      <div class="callout red">
+        <h4>A word of caution about "elite" labels</h4>
+        <p>The youth sports industry is a multi-billion dollar market, and "elite" is a marketing term as much as a competitive designation. Before paying elite-level prices, verify:</p>
+        <ul>
+          <li>What league does the team compete in? Is it a recognized, competitive league?</li>
+          <li>What is the coach's actual background (not just a bio on a website)?</li>
+          <li>Where have past players ended up? Can they provide specific names and schools?</li>
+          <li>Is the organization a registered nonprofit, and can you see their financials?</li>
+        </ul>
+      </div>
+
+      <p><strong>Newton example:</strong> Newton Girls Soccer's Academy program ($755&ndash;$2,450/year, invitation-only, 4&ndash;5x/week) and Valeo FC's MLS NEXT teams represent genuinely elite-level programs with structured development pathways.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ========== COMPARISON TABLE ========== -->
+<div class="comparison-section" id="comparison">
+  <h2>Side-by-Side Comparison</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>Rec</th>
+          <th>Travel</th>
+          <th>AAU</th>
+          <th>Club</th>
+          <th>Select / Elite</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Annual Cost</strong></td>
+          <td>$75&ndash;$400</td>
+          <td>$1,000&ndash;$3,000</td>
+          <td>$2,000&ndash;$6,000+</td>
+          <td>$2,500&ndash;$6,000+</td>
+          <td>$3,000&ndash;$10,000+</td>
+        </tr>
+        <tr>
+          <td><strong>Practices/Week</strong></td>
+          <td>1</td>
+          <td>2&ndash;3</td>
+          <td>2&ndash;4</td>
+          <td>2&ndash;4</td>
+          <td>3&ndash;5+</td>
+        </tr>
+        <tr>
+          <td><strong>Weekend Commitment</strong></td>
+          <td>1 game (local)</td>
+          <td>1&ndash;2 games + some tournaments</td>
+          <td>Tournament weekends (2&ndash;3/month)</td>
+          <td>Games + tournaments most weekends</td>
+          <td>Games + showcases nearly every weekend</td>
+        </tr>
+        <tr>
+          <td><strong>Tryouts / Cuts</strong></td>
+          <td>None</td>
+          <td>Yes</td>
+          <td>Yes (varies)</td>
+          <td>Yes</td>
+          <td>Highly selective</td>
+        </tr>
+        <tr>
+          <td><strong>Playing Time</strong></td>
+          <td>Equal for all</td>
+          <td>Mostly balanced (younger); earned (older)</td>
+          <td>Performance-based</td>
+          <td>Performance-based</td>
+          <td>Earned; not guaranteed</td>
+        </tr>
+        <tr>
+          <td><strong>Coaching</strong></td>
+          <td>Parent volunteers</td>
+          <td>Mix of volunteer and paid</td>
+          <td>Varies widely</td>
+          <td>Professional (paid)</td>
+          <td>Professional / licensed</td>
+        </tr>
+        <tr>
+          <td><strong>Farthest Regular Travel</strong></td>
+          <td>Within town</td>
+          <td>Neighboring towns (20&ndash;45 min)</td>
+          <td>Regional to national</td>
+          <td>Regional (1&ndash;2 hrs); some national</td>
+          <td>Regional + national (flights)</td>
+        </tr>
+        <tr>
+          <td><strong>Multi-Sport Friendly?</strong></td>
+          <td>Yes</td>
+          <td>Usually yes</td>
+          <td>Possible but difficult</td>
+          <td>Difficult at higher levels</td>
+          <td>Rarely</td>
+        </tr>
+        <tr>
+          <td><strong>Season Length</strong></td>
+          <td>8&ndash;12 weeks</td>
+          <td>2&ndash;3 seasons</td>
+          <td>Year-round (peaks spring/summer)</td>
+          <td>9&ndash;12 months</td>
+          <td>Year-round</td>
+        </tr>
+        <tr>
+          <td><strong>College Recruiting Exposure</strong></td>
+          <td>None</td>
+          <td>Minimal</td>
+          <td>Moderate (at top events)</td>
+          <td>Significant (showcases)</td>
+          <td>Primary pathway</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- ========== AGE CUTOFFS ========== -->
+<div class="comparison-section" id="age-cutoffs">
+  <h2>Age Cutoff Rules by Organization</h2>
+  <p style="color: var(--slate); margin-bottom: 20px;">Age cutoffs determine which age group your child plays in. Different organizations use different dates, which means your child could be in different age groups depending on the program. Always confirm the current year's cutoff with the specific organization.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Organization / Sport</th>
+          <th>Age Determination Date</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>AAU (most sports)</strong></td>
+          <td>Varies by sport; historically Aug 31 / Sep 1 for many sports</td>
+          <td>Also offers grade-based divisions for basketball nationals. Verify at aausports.org each season.</td>
+        </tr>
+        <tr>
+          <td><strong>US Soccer / Club Soccer</strong></td>
+          <td>January 1 (birth year)</td>
+          <td>As of 2016, US Soccer moved to birth-year registration. A child born in 2015 plays with all 2015-born kids regardless of month. This aligns with international (FIFA) standards.</td>
+        </tr>
+        <tr>
+          <td><strong>USA Basketball</strong></td>
+          <td>Grade-based or age-based depending on event</td>
+          <td>National championships use grade-based groupings. Local/AAU events may differ.</td>
+        </tr>
+        <tr>
+          <td><strong>Little League Baseball</strong></td>
+          <td>January 1 &ndash; August 31 "league age"</td>
+          <td>A player's "league age" is their age as of August 31 of the current year. A child who turns 12 on September 15 has a league age of 11.</td>
+        </tr>
+        <tr>
+          <td><strong>USA Hockey</strong></td>
+          <td>January 1 (birth year)</td>
+          <td>Uses birth-year groupings (e.g., 2014 birth year = 12U for 2025&ndash;26 season).</td>
+        </tr>
+        <tr>
+          <td><strong>USA Volleyball</strong></td>
+          <td>July 1</td>
+          <td>Age as of July 1 of the current season determines division. A child who turns 14 on July 15 plays 14s (their age before July 1 was 13).</td>
+        </tr>
+        <tr>
+          <td><strong>Town Rec Leagues</strong></td>
+          <td>Usually grade-based</td>
+          <td>Most rec leagues group by school grade, not birth date, which avoids cutoff confusion.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout" style="margin-top: 24px;">
+    <h4>Why this matters</h4>
+    <p>If your child has a late birthday (e.g., July&ndash;December), they might be among the youngest in their age group for one sport and among the oldest for another. This affects their physical development relative to peers and their experience on the team. Neither being the youngest nor the oldest is inherently bad, but it is worth being aware of.</p>
+  </div>
+</div>
+
+
+<!-- ========== MULTI-SPORT vs SPECIALIZATION ========== -->
+<div class="comparison-section" id="multisport">
+  <h2>Multi-Sport vs. Early Specialization</h2>
+  <p style="color: var(--slate); margin-bottom: 20px;">One of the biggest decisions parents face is whether to focus on one sport or keep their child playing multiple sports. The research is clear, even if the pressure from coaches and other parents is not.</p>
+
+  <div class="program-type-card rec" style="border-left-color: #2d6a4f; margin-bottom: 24px;">
+    <div class="pt-header">
+      <div class="pt-label" style="background: #d8f3dc; color: #1b4332;">What the research says</div>
+      <h3>The Case for Multi-Sport Participation</h3>
+    </div>
+    <div class="pt-body">
+      <p>The <strong>American Academy of Pediatrics</strong>, the <strong>National Athletic Trainers' Association</strong>, and virtually every major sports medicine organization recommend that children play multiple sports through at least age 12&ndash;14. Here is why:</p>
+      <ul class="detail-list">
+        <li><span class="dl-icon">&#10004;</span><div><strong>Injury prevention:</strong> Single-sport athletes are 70% more likely to suffer overuse injuries than multi-sport athletes, according to research published in the American Journal of Sports Medicine. Repetitive stress on the same joints, muscles, and growth plates is the primary driver.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Burnout reduction:</strong> Studies consistently show that early specialization is a leading predictor of sports dropout by age 15. Kids who play one sport year-round are significantly more likely to quit entirely than those who play multiple sports seasonally.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>Better long-term athletic development:</strong> Multi-sport athletes develop a broader base of motor skills, spatial awareness, and athletic adaptability. Many professional and Division I athletes played multiple sports through high school.</div></li>
+        <li><span class="dl-icon">&#10004;</span><div><strong>College recruiting reality:</strong> College coaches in most sports actively prefer multi-sport athletes, viewing them as more coachable, more durable, and more adaptable. The belief that early specialization gives your child a college advantage is, for most sports and most athletes, a myth.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout">
+    <h4>When specialization does make sense</h4>
+    <p>A few sports benefit from earlier focused training due to the nature of peak performance ages and technical requirements:</p>
+    <ul>
+      <li><strong>Gymnastics, figure skating, diving:</strong> Athletes in these sports often begin intensive training by ages 6&ndash;8 due to the technical demands and early competitive timelines. However, these athletes still benefit from cross-training.</li>
+      <li><strong>Swimming:</strong> Year-round swim training often begins by age 10&ndash;12, though many elite swimmers were multi-sport athletes in childhood.</li>
+      <li><strong>For team sports (soccer, basketball, baseball, hockey, lacrosse):</strong> There is no compelling evidence that specializing before age 14 produces better outcomes. In fact, the evidence points the other direction.</li>
+    </ul>
+  </div>
+
+  <div class="callout green">
+    <h4>Practical advice for Newton families</h4>
+    <ul>
+      <li><strong>Ages 5&ndash;10:</strong> Let your child try everything. Rec soccer in fall, rec basketball in winter, baseball or lacrosse in spring, swimming or camps in summer. This is the "sampling" phase, and it is the foundation for long-term athletic success.</li>
+      <li><strong>Ages 11&ndash;13:</strong> Your child will likely start gravitating toward one or two favorites. Support that interest with travel or club teams in their preferred sport(s), but try to keep at least two sports going. A child who plays soccer in fall and basketball in winter is getting excellent cross-training.</li>
+      <li><strong>Ages 14+:</strong> This is when most athletes naturally narrow to one or two sports, often driven by high school team schedules and their own motivation. Even then, playing two sports through high school is common and healthy.</li>
+      <li><strong>If a coach tells you your 10-year-old must quit all other sports to focus:</strong> That is a red flag. The best youth development programs in the world &mdash; including those in countries that dominate international competition &mdash; encourage multi-sport participation through adolescence.</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ========== CHECKLIST ========== -->
+<div class="checklist-section" id="checklist">
+  <h2>Questions Parents Should Ask Before Joining</h2>
+  <p>Print this list or pull it up on your phone at tryouts and information sessions. Good programs will answer these questions openly. Programs that dodge them or get defensive are telling you something.</p>
+
+  <!-- GROUP 1: MONEY -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">$</div>
+      <div>
+        <h3>The Real Cost</h3>
+        <div class="cg-sub">What will this actually cost my family for the full year?</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the total registration/membership fee?</div>
+          <div class="ci-why">Get the exact number, not a range. Ask if it is per season or per year.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is NOT included in the registration fee?</div>
+          <div class="ci-why">This is where hidden costs live. Ask specifically about: tournament entry fees, uniform/kit costs, travel costs, facility fees, fundraising obligations, end-of-year gifts or banquet fees, and off-season training programs.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">How many tournaments are there, and what does each one cost?</div>
+          <div class="ci-why">Tournament fees ($200&ndash;$600 each) plus hotel and travel costs are often the biggest surprise expense for new families.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is the uniform included, or is there a separate kit fee?</div>
+          <div class="ci-why">Uniform kits for club/travel can run $100&ndash;$500. Some programs require purchasing from a specific vendor. Ask if uniforms carry over year to year or if new ones are required each season.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is there a payment plan option? Are scholarships or financial aid available?</div>
+          <div class="ci-why">Many programs offer these but do not advertise them prominently. Nonprofits are more likely to have aid. Always ask.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the refund policy if my child is injured or needs to leave?</div>
+          <div class="ci-why">Some programs are no-refund-ever. Others prorate. Get this in writing before you pay.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is this a nonprofit or for-profit organization?</div>
+          <div class="ci-why">Neither is inherently better, but you should know. Nonprofit organizations can be looked up on <a href="https://projects.propublica.org/nonprofits/" target="_blank">ProPublica's Nonprofit Explorer</a> to see their financials.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 2: TIME -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#128337;</div>
+      <div>
+        <h3>Time Commitment</h3>
+        <div class="cg-sub">How much of our family's time will this realistically take?</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">How many practices per week, and when/where are they?</div>
+          <div class="ci-why">A 7pm practice 30 minutes away on a school night is a very different commitment than a 4pm practice at the school down the street.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the attendance policy for practices and games?</div>
+          <div class="ci-why">Some programs bench players for missed practices. Some require 80%+ attendance. Know the expectations before they become a conflict.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Which tournaments are mandatory vs. optional?</div>
+          <div class="ci-why">A program with "optional" tournaments where your kid gets benched for not attending is mandatory in practice. Ask direct follow-up: "Will my child lose playing time for missing an optional tournament?"</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Can my child play other sports, or does this program expect year-round commitment?</div>
+          <div class="ci-why">This is a critical question, especially for athletes under 14. The American Academy of Pediatrics and most sports medicine organizations recommend multi-sport participation through at least middle school. A program that demands single-sport commitment for a 10-year-old is a red flag.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What does the full annual calendar look like?</div>
+          <div class="ci-why">Ask for actual dates. When does the season start and end? When are the tournaments? When are the breaks? Can your family still take a summer vacation?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 3: PLAYING TIME & ROSTER -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#9917;</div>
+      <div>
+        <h3>Playing Time and Roster</h3>
+        <div class="cg-sub">Will my child actually play, or sit on the bench?</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">How many kids are on the roster?</div>
+          <div class="ci-why">A basketball team with 15 players means someone is sitting. A soccer team with 18 for 11v11 is normal. Know the numbers and what they mean for your child's sport.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the playing time policy?</div>
+          <div class="ci-why">Get specifics. "Everyone plays" could mean 2 minutes at the end of a blowout. Ask: "What is the minimum playing time my child can expect in a typical game?" A good program will give you a straight answer.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is this team focused on development or on winning?</div>
+          <div class="ci-why">There is no wrong answer, but you need to know which one it is. A development-focused program will rotate positions and play all kids. A results-focused program will play its best lineup. Make sure it matches what your family actually wants.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What positions will my child play? Will they be locked into one position?</div>
+          <div class="ci-why">At younger ages (under 12), best practice is to rotate players through multiple positions so they develop a complete understanding of the game.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 4: COACHING -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#128218;</div>
+      <div>
+        <h3>Coaching</h3>
+        <div class="cg-sub">Who is actually teaching my child?</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What are the coach's qualifications and experience?</div>
+          <div class="ci-why">For paid programs, you should know: coaching licenses (e.g., USSF, US Soccer grassroots, NSCAA), playing background, years coaching this age group, and whether they have been background-checked.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Can I watch a practice before committing?</div>
+          <div class="ci-why">A well-run practice has structure, keeps all players engaged, and maintains a positive tone. A poorly run practice has kids standing in lines, a coach yelling, or players sitting out for long stretches. Ask to observe before you pay.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">How does the coach communicate with parents?</div>
+          <div class="ci-why">Is there a team app, email list, or regular updates? How are schedule changes communicated? Is there a clear process if a parent has a concern? The best programs have a defined communication channel and a "24-hour rule" (wait 24 hours before contacting a coach about a game issue).</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Has the coach been background-checked?</div>
+          <div class="ci-why">This should be non-negotiable for any program, paid or volunteer. If a program does not require background checks for coaches, find a different program.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 5: LOGISTICS -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#128663;</div>
+      <div>
+        <h3>Logistics</h3>
+        <div class="cg-sub">The practical stuff that can make or break your season.</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Where are practices held, and are they at the same location each week?</div>
+          <div class="ci-why">Some programs rotate practice venues. This matters for families managing multiple kids' schedules.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is there a carpool network or parent group for coordinating rides?</div>
+          <div class="ci-why">Especially relevant for travel/club programs. You will be driving a lot. Programs with organized parent communities make this significantly easier.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What happens in bad weather? Is there an indoor backup facility?</div>
+          <div class="ci-why">For outdoor sports, cancelled practices and games are inevitable. Does the team have gym access for rain days, or do you just lose that session?</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">For tournaments: are families expected to book hotels through the team, or independently?</div>
+          <div class="ci-why">Some tournaments require booking through a specific hotel block (which can be more expensive). Others let families arrange their own accommodations. Know the expectation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 6: LONG-TERM -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#127942;</div>
+      <div>
+        <h3>Development and Pathway</h3>
+        <div class="cg-sub">Where does this lead, and is the path realistic?</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the pathway from this program to high school sports?</div>
+          <div class="ci-why">This matters more than most parents realize. Some club programs conflict with high school team schedules and rules. In Massachusetts, MIAA rules govern high school sports eligibility &mdash; ask how this program interacts with those rules.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">If the sales pitch mentions college recruiting, how many players has this program actually placed in college programs?</div>
+          <div class="ci-why">Ask for specific numbers and names. The reality: fewer than 7% of high school athletes play any college sport, and fewer than 2% receive athletic scholarships. Programs that imply your 10-year-old is on a college scholarship track are often selling you a story. It is fine to aspire to college sports, but keep expectations grounded in data.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What is the player development philosophy?</div>
+          <div class="ci-why">Good programs can articulate a clear philosophy about how they develop players over time &mdash; technical skills, tactical understanding, physical development, and love of the game. If the answer is just "we want to win," that tells you something about priorities.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">What happens if my child is not on the top team? Is there a development path within the organization?</div>
+          <div class="ci-why">The best club programs have multiple tiers and move players between teams as they develop. Programs with only one team at each age group may cut your child outright if they have a slow development year.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 7: ACADEMIC BALANCE -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#128218;</div>
+      <div>
+        <h3>Academic Balance</h3>
+        <div class="cg-sub">Sports should complement school, not compete with it.</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Will practice and game schedules leave enough time for homework?</div>
+          <div class="ci-why">Do the math: a 7pm practice that ends at 8:30pm, plus a 30-minute drive home, means your child is starting homework at 9pm on a school night. For younger kids, this is unsustainable. For middle schoolers and high schoolers with increasing academic demands, it can be a serious problem.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Does this program have an academic policy or expectations?</div>
+          <div class="ci-why">Some programs require maintaining a minimum GPA. High school sports in Massachusetts (governed by MIAA rules) require academic eligibility. Ask whether the club or AAU program has any academic standards, and what happens if your child needs to miss practice for a test or project.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">How many school days will my child miss for tournaments or travel?</div>
+          <div class="ci-why">Some elite and AAU programs schedule events that require missing school on Fridays or Mondays. Newton Public Schools have specific absence policies. Ask for a full tournament calendar and cross-reference with the school calendar before committing.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is your child getting enough sleep?</div>
+          <div class="ci-why">The American Academy of Sleep Medicine recommends 9&ndash;12 hours for ages 6&ndash;12 and 8&ndash;10 hours for ages 13&ndash;18. Late practices, early morning games, and tournament travel all cut into sleep. Chronic sleep deprivation hurts both athletic performance and academic performance. If your child is falling asleep in class, something needs to change.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GROUP 8: READINESS -->
+  <div class="checklist-group">
+    <div class="cg-header">
+      <div class="cg-icon">&#128161;</div>
+      <div>
+        <h3>Is Your Child Actually Ready?</h3>
+        <div class="cg-sub">Honest questions to ask yourself before moving up in competition level.</div>
+      </div>
+    </div>
+    <div class="cg-body">
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Is this your child's idea, or yours?</div>
+          <div class="ci-why">This is the most important question on this list. A child who is begging to play travel or AAU will handle the demands far better than one who is going along with a parent's ambition. If you are more excited about the team than your child is, pause and reflect.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Can your child handle not being the best player on the team?</div>
+          <div class="ci-why">Moving from rec to travel or club means going from being a standout to being average (or below average) in a more competitive pool. Some kids thrive on this challenge. Others lose confidence and enjoyment. Know your child.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Can your child handle losing &mdash; and being coached hard?</div>
+          <div class="ci-why">Competitive programs involve more losing, more correction from coaches, and less coddling than rec. Your child needs to be emotionally mature enough to process tough feedback without it crushing their enjoyment of the sport.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Can your family realistically handle the logistics?</div>
+          <div class="ci-why">Be honest about driving, siblings' schedules, work conflicts, and family time. If you have three kids in three different sports, adding a travel team with 4 practices per week and tournament weekends may break the family schedule. There is no shame in waiting a year until the timing works better.</div>
+        </div>
+      </div>
+      <div class="check-item">
+        <div class="check-box" onclick="this.classList.toggle('checked')"></div>
+        <div class="ci-text">
+          <div class="ci-question">Does the budget work without stress?</div>
+          <div class="ci-why">Youth sports should not put financial strain on your family. If paying for a travel or AAU program means cutting into savings, skipping family vacations, or creating tension at home, it is not worth it. Your child's happiness does not depend on playing at the highest level. A great rec or low-cost travel experience can be just as valuable for their development.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL NOTE -->
+<div class="callout green" style="margin-top: 40px;">
+  <h4>One final piece of advice</h4>
+  <p>Talk to families who are currently in the program &mdash; not just the families the program recommends you talk to. Ask them what they wish they had known before joining. Their answers will tell you more than any website or information session ever will.</p>
+  <p style="margin-top: 12px;">And remember: the right program is the one that fits <em>your child and your family</em> right now. Not the one with the fanciest name, the most expensive fees, or the most promises about the future. Kids who love playing are the ones who keep playing &mdash; and that matters more than anything else.</p>
+</div>
+
+</div><!-- /guide-content -->
+
+<!-- FOOTER -->
+<footer class="guide-footer">
+  <p><a href="index.html">Newton Youth Sports</a> &copy; 2026. Not affiliated with the City of Newton.</p>
+  <p>Information is general guidance and may not reflect every program. Always verify details directly with organizations.</p>
+</footer>
+
+</body>
+</html>

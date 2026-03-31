@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newton Facts | Sports Facilities, Parks & Youth Sports | Newton Youth Sports</title>
+<meta name="description" content="Verified facts about Newton, MA sports facilities, parks, pools, rinks, courts, and youth sports organizations. The complete reference for Newton families.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232d6a4f'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #fafbfd;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #2d6a4f; text-decoration: underline; }
+a:hover { color: #1b4332; }
+
+:root {
+  --green-deep: #1b4332;
+  --green-main: #2d6a4f;
+  --green-mid: #40916c;
+  --green-light: #52b788;
+  --green-pale: #d8f3dc;
+  --gold: #e8a838;
+  --gold-light: #fceabb;
+  --navy: #16213e;
+  --slate: #4a5568;
+  --light-bg: #f0f4f0;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --max-w: 920px;
+}
+
+/* NAV BAR */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-md);
+}
+.nav-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 70px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 1.15rem; color: var(--green-deep);
+  text-decoration: none;
+}
+.nav-logo .logo-icon {
+  width: 38px; height: 38px; background: var(--green-main);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.nav-back {
+  padding: 8px 20px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 600; color: var(--white); background: var(--green-main);
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-back:hover { background: var(--green-deep); color: var(--white); }
+
+/* HERO */
+.facts-hero {
+  background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
+  padding: 120px 32px 60px;
+  color: white;
+  text-align: center;
+}
+.facts-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900; line-height: 1.15;
+  max-width: 700px; margin: 0 auto 16px;
+}
+.facts-hero .subtitle {
+  font-size: 1.1rem; color: rgba(255,255,255,0.7); max-width: 620px;
+  margin: 0 auto; font-weight: 300; line-height: 1.6;
+}
+
+/* TABLE OF CONTENTS */
+.toc {
+  max-width: var(--max-w); margin: -30px auto 0; padding: 0 24px; position: relative; z-index: 2;
+}
+.toc-inner {
+  background: var(--white); border-radius: var(--radius-lg); padding: 28px 32px;
+  box-shadow: var(--shadow-lg);
+}
+.toc-inner h2 {
+  font-size: 1rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--green-main); margin-bottom: 14px;
+}
+.toc-inner ol {
+  list-style: none; counter-reset: toc; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 8px 24px;
+}
+.toc-inner li { counter-increment: toc; }
+.toc-inner li a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; font-size: 0.92rem; font-weight: 500; color: var(--navy);
+  text-decoration: none; transition: color 0.2s;
+}
+.toc-inner li a:hover { color: var(--green-main); }
+.toc-inner li a::before {
+  content: counter(toc); display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--green-pale); color: var(--green-main);
+  font-size: 0.78rem; font-weight: 700;
+}
+
+/* MAIN CONTENT */
+.facts-content {
+  max-width: var(--max-w); margin: 0 auto; padding: 48px 24px 80px;
+}
+
+/* SECTION STYLING */
+.facts-section {
+  margin-bottom: 56px; scroll-margin-top: 90px;
+}
+.section-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md); overflow: hidden;
+  border-left: 5px solid var(--green-main);
+}
+.section-card.blue { border-left-color: #457b9d; }
+.section-card.gold { border-left-color: #e8a838; }
+.section-card.red { border-left-color: #e76f51; }
+.section-card.purple { border-left-color: #6d28d9; }
+.section-card.teal { border-left-color: #0d9488; }
+.section-card.indigo { border-left-color: #4f46e5; }
+
+.section-header {
+  padding: 28px 32px 0;
+}
+.section-label {
+  display: inline-block; padding: 4px 14px; border-radius: 100px;
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.8px; margin-bottom: 12px;
+  background: var(--green-pale); color: var(--green-deep);
+}
+.blue .section-label { background: #dbeafe; color: #1e3a5f; }
+.gold .section-label { background: #fceabb; color: #7c5a0b; }
+.red .section-label { background: #fde8e3; color: #a0301a; }
+.purple .section-label { background: #ede9fe; color: #4c1d95; }
+.teal .section-label { background: #ccfbf1; color: #065f46; }
+.indigo .section-label { background: #e0e7ff; color: #3730a3; }
+
+.section-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; font-weight: 800; color: var(--green-deep);
+  margin-bottom: 8px; line-height: 1.25;
+}
+
+.section-body { padding: 20px 32px 28px; }
+.section-body p { margin-bottom: 14px; color: #2d3748; font-size: 0.95rem; }
+.section-body h3 {
+  font-size: 1.05rem; font-weight: 700; color: var(--navy);
+  margin: 24px 0 10px; padding-top: 8px;
+  border-top: 1px solid #edf2f7;
+}
+.section-body h3:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+.section-body h4 {
+  font-size: 0.88rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.5px; color: var(--green-main); margin: 20px 0 10px;
+}
+
+/* FACILITY ITEM */
+.facility {
+  padding: 16px 0;
+  border-bottom: 1px solid #edf2f7;
+}
+.facility:last-child { border-bottom: none; }
+.facility-name {
+  font-weight: 700; color: var(--navy); font-size: 1rem;
+  margin-bottom: 4px;
+}
+.facility-address {
+  font-size: 0.85rem; color: var(--slate); margin-bottom: 6px;
+  font-style: italic;
+}
+.facility-details {
+  font-size: 0.9rem; color: #2d3748; line-height: 1.6;
+}
+
+/* TAG BADGES */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px;
+}
+.tag-turf { background: #d1fae5; color: #065f46; }
+.tag-grass { background: #fef3c7; color: #92400e; }
+.tag-lights { background: #dbeafe; color: #1e40af; }
+.tag-no-lights { background: #f3f4f6; color: #6b7280; }
+.tag-indoor { background: #ede9fe; color: #5b21b6; }
+
+/* STATS GRID */
+.stats-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin: 20px 0;
+}
+.stat-card {
+  background: var(--light-bg); border-radius: var(--radius); padding: 20px;
+  text-align: center;
+}
+.stat-card .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 800; color: var(--green-main);
+  line-height: 1.2;
+}
+.stat-card .stat-label {
+  font-size: 0.8rem; color: var(--slate); margin-top: 4px; font-weight: 500;
+}
+
+/* SOURCE NOTE */
+.source-note {
+  font-size: 0.78rem; color: #94a3b8; font-style: italic;
+  margin-top: 8px; line-height: 1.5;
+}
+.source-note a { color: #64748b; }
+
+/* FOOTER */
+.facts-footer {
+  background: var(--green-deep); color: rgba(255,255,255,0.7);
+  text-align: center; padding: 40px 32px;
+  font-size: 0.88rem;
+}
+.facts-footer a { color: var(--green-light); }
+
+/* LIST STYLES */
+.section-body ul {
+  padding-left: 20px; margin-bottom: 14px;
+}
+.section-body ul li {
+  margin-bottom: 6px; font-size: 0.92rem; color: #2d3748;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .toc-inner ol { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .section-header, .section-body { padding-left: 20px; padding-right: 20px; }
+  .facts-hero { padding: 100px 20px 48px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+      Newton Youth Sports
+    </a>
+    <a href="index.html" class="nav-back">Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="facts-hero">
+  <h1>Newton Facts</h1>
+  <p class="subtitle">A verified reference guide to Newton's sports facilities, parks, pools, rinks, courts, and youth sports organizations. Built for Newton families.</p>
+</section>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <div class="toc-inner">
+    <h2>On This Page</h2>
+    <ol>
+      <li><a href="#demographics">Newton at a Glance</a></li>
+      <li><a href="#athletic-fields">Athletic Fields</a></li>
+      <li><a href="#indoor-facilities">Indoor Facilities</a></li>
+      <li><a href="#pools">Pools &amp; Aquatics</a></li>
+      <li><a href="#ice-rinks">Ice Rinks</a></li>
+      <li><a href="#tennis">Tennis Courts</a></li>
+      <li><a href="#basketball">Basketball Courts</a></li>
+      <li><a href="#youth-orgs">Youth Sports Organizations</a></li>
+    </ol>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="facts-content">
+
+  <!-- ========== 1. NEWTON AT A GLANCE ========== -->
+  <div class="facts-section" id="demographics">
+    <div class="section-card indigo">
+      <div class="section-header">
+        <span class="section-label">City Overview</span>
+        <h2>Newton at a Glance</h2>
+      </div>
+      <div class="section-body">
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-num">88,923</div>
+            <div class="stat-label">2020 Census Population</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">18,445</div>
+            <div class="stat-label">Residents Under 18</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">13</div>
+            <div class="stat-label">Villages</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">21</div>
+            <div class="stat-label">Public Schools (K-12)</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">11,494</div>
+            <div class="stat-label">K-12 Student Enrollment</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">104</div>
+            <div class="stat-label">City Parks</div>
+          </div>
+        </div>
+
+        <h3>"The Garden City"</h3>
+        <p>Newton has been nicknamed <strong>"The Garden City"</strong> since 1874, when it was incorporated as a city. The earliest known references appear in newspaper advertisements in 1874 and 1875, and the term gained wide use through speeches, administrative reports, and promotional literature during the 1880s. The nickname reflects Newton's abundance of tree-lined streets, parks, and natural areas set aside for recreation. No single official proclamation established the nickname; it grew organically from the community's identity.</p>
+
+        <h3>Demographics Relevant to Youth Sports</h3>
+        <ul>
+          <li><strong>2020 U.S. Census population:</strong> 88,923</li>
+          <li><strong>Latest ACS estimate (2019-2023 5-year):</strong> 88,415</li>
+          <li><strong>Population under 18:</strong> 18,445 (approximately 20.9% of the population)</li>
+          <li><strong>Population under 5:</strong> 3,655</li>
+          <li><strong>Median age:</strong> 42.0 years</li>
+          <li><strong>Median household income:</strong> $190,304</li>
+        </ul>
+
+        <h3>Schools</h3>
+        <ul>
+          <li><strong>15</strong> elementary schools (K-5)</li>
+          <li><strong>4</strong> middle schools (6-8)</li>
+          <li><strong>2</strong> comprehensive high schools (9-12): Newton North and Newton South</li>
+          <li><strong>2</strong> alternative high school programs</li>
+          <li><strong>Total K-12 enrollment:</strong> 11,494 students (October 2024)</li>
+          <li><strong>Integrated preschool program:</strong> 173 students</li>
+        </ul>
+
+        <h3>The 13 Villages</h3>
+        <p>Newton is composed of 13 distinct village centers: Auburndale, Chestnut Hill, Newton Centre, Newton Corner, Newton Highlands, Newton Lower Falls, Newton Upper Falls, Newtonville, Nonantum (also known as "The Lake"), Oak Hill, Thompsonville, Waban, and West Newton.</p>
+
+        <h3>Parks &amp; Open Space</h3>
+        <ul>
+          <li><strong>104 parks</strong> across the city</li>
+          <li><strong>~1,200 acres</strong> of parkland, playgrounds, school grounds, and burial grounds maintained by the city</li>
+          <li><strong>~450 acres</strong> managed by Parks, Recreation &amp; Culture for active and passive recreation</li>
+          <li><strong>~316 acres</strong> managed by the Conservation Commission for conservation and passive recreation</li>
+          <li><strong>19.6%</strong> of Newton's total land area is open space, of which 55% is publicly owned</li>
+        </ul>
+
+        <p class="source-note">Sources: <a href="https://www.census.gov/quickfacts/fact/table/newtoncitymassachusetts/PST045225">U.S. Census Bureau QuickFacts</a>, <a href="https://www.neilsberg.com/insights/newton-ma-population-by-age/">ACS 2019-2023 5-Year Estimates via Neilsberg</a>, <a href="https://www.newton.k12.ma.us/district-at-a-glance">Newton Public Schools</a>, <a href="https://www.newtonma.gov/government/parks-recreation-culture/parks-facilities">City of Newton Parks &amp; Facilities</a>, <a href="https://en.wikipedia.org/wiki/Newton,_Massachusetts">Wikipedia: Newton, Massachusetts</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 2. ATHLETIC FIELDS ========== -->
+  <div class="facts-section" id="athletic-fields">
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-label">Outdoor Facilities</span>
+        <h2>Athletic Fields</h2>
+      </div>
+      <div class="section-body">
+
+        <p>Newton's athletic fields are managed by the Parks, Recreation &amp; Culture Department. Fields are available for general athletic use on a first-come, first-served basis (weather permitting), supplemented by a permit system organized in tiers. The city has undertaken a multi-year, multi-million dollar field improvement program that began in 2020.</p>
+
+        <!-- Newton North -->
+        <div class="facility">
+          <div class="facility-name">Newton North High School Athletic Complex</div>
+          <div class="facility-address">457 Walnut St, Newtonville, MA 02460 &mdash; 18.4 acres</div>
+          <div class="facility-details">
+            Multipurpose stadium with synthetic turf field (installed 2024) for soccer, lacrosse, football, and field hockey. Also includes a baseball field, softball field, outdoor track, and tennis courts. Sports lighting installed in 2020.
+          </div>
+          <div class="tags">
+            <span class="tag tag-turf">Synthetic Turf</span>
+            <span class="tag tag-lights">Lighted</span>
+          </div>
+        </div>
+
+        <!-- Newton South -->
+        <div class="facility">
+          <div class="facility-name">Newton South High School Athletic Complex</div>
+          <div class="facility-address">140 Brandeis Rd, Newton Centre, MA 02459 &mdash; 7.0 acres (contiguous with Oak Hill Middle School)</div>
+          <div class="facility-details">
+            Two synthetic turf fields: an enclosed stadium field (soccer, lacrosse, football, field hockey) and a second turf field on Brandeis Rd/Lion Drive (soccer, lacrosse, field hockey). Turf installed 2023, sports lighting installed 2022. Also includes a baseball field, skinned softball field, basketball court, outdoor track, and 12 lighted tennis courts.
+          </div>
+          <div class="tags">
+            <span class="tag tag-turf">Synthetic Turf (x2)</span>
+            <span class="tag tag-lights">Lighted</span>
+          </div>
+        </div>
+
+        <!-- Albemarle -->
+        <div class="facility">
+          <div class="facility-name">Albemarle Field (Russell J. Halloran Sports &amp; Recreation Complex)</div>
+          <div class="facility-address">250 Albemarle Rd, Newtonville, MA 02460 &mdash; 24.9 acres</div>
+          <div class="facility-details">
+            Major $9.5 million renovation completed in 2025. North end now features a new high-school-regulation multiuse synthetic turf field, renovated Burke baseball field, renovated softball field, six new pickleball courts, a renovated basketball court, multiuse trails, accessible pathways, and sports and pedestrian lighting. Also home to the Gath Memorial Pool and Albemarle Field House.
+          </div>
+          <div class="tags">
+            <span class="tag tag-turf">Synthetic Turf (New 2025)</span>
+            <span class="tag tag-lights">Lighted</span>
+          </div>
+        </div>
+
+        <!-- Forte Park -->
+        <div class="facility">
+          <div class="facility-name">Richard J. Forte Memorial Park (formerly Allison Park)</div>
+          <div class="facility-address">235 California St (rear), Newton, MA 02459</div>
+          <div class="facility-details">
+            Lighted multipurpose field (soccer, lacrosse, frisbee), lighted softball field, lighted basketball court, bocce courts, tot lot, recreation building, and walking trails.
+          </div>
+          <div class="tags">
+            <span class="tag tag-grass">Grass</span>
+            <span class="tag tag-lights">Lighted</span>
+          </div>
+        </div>
+
+        <!-- McGrath/Warren -->
+        <div class="facility">
+          <div class="facility-name">Richard McGrath Park (Warren Fields)</div>
+          <div class="facility-address">1600 Washington St, West Newton, MA 02465 &mdash; 10.1 acres</div>
+          <div class="facility-details">
+            Three soccer/lacrosse fields, a football field, two junior baseball fields, seven tennis courts, and a fenced preschool play area. Grass fields used for U9, U11, and U13 practices and games. Six outdoor pickleball courts added as part of recent improvements. Off-leash dog recreation area. Note: use only recreation-designated parking (separate from residential building parking).
+          </div>
+          <div class="tags">
+            <span class="tag tag-grass">Grass</span>
+            <span class="tag tag-no-lights">No Lights on Fields</span>
+          </div>
+        </div>
+
+        <!-- Cold Spring Park -->
+        <div class="facility">
+          <div class="facility-name">Cold Spring Park</div>
+          <div class="facility-address">1094 Beacon St, Newton Highlands, MA 02461 &mdash; 65 acres</div>
+          <div class="facility-details">
+            Irrigated regulation soccer/lacrosse/field hockey field, softball field, baseball field, basketball courts, tennis courts, and a 1.4-mile life course trail. The park also hosts a weekly farmers' market in summer and includes an off-leash dog area at the southern end.
+          </div>
+          <div class="tags">
+            <span class="tag tag-grass">Grass</span>
+            <span class="tag tag-no-lights">No Lights</span>
+          </div>
+        </div>
+
+        <!-- Nahanton Park -->
+        <div class="facility">
+          <div class="facility-name">Nahanton Park</div>
+          <div class="facility-address">Nahanton St, Newton Centre, MA 02459 &mdash; 55 acres along the Charles River</div>
+          <div class="facility-details">
+            Irrigated regulation soccer field and softball field (at the Winchester Street entrance). Also includes a picnic area, fishing dock, canoe launch, nature study area with outdoor classroom, community gardens, and meadow area. Borders Needham along the Charles River.
+          </div>
+          <div class="tags">
+            <span class="tag tag-grass">Grass</span>
+            <span class="tag tag-no-lights">No Lights</span>
+          </div>
+        </div>
+
+        <!-- Cabot Park -->
+        <div class="facility">
+          <div class="facility-name">Cabot Park</div>
+          <div class="facility-address">101 East Side Pkwy, Newtonville, MA 02460</div>
+          <div class="facility-details">
+            Little League baseball field, softball field, regulation baseball field, soccer/football field, four bocce courts, two tennis courts, and a lighted full basketball court.
+          </div>
+          <div class="tags">
+            <span class="tag tag-grass">Grass</span>
+            <span class="tag tag-lights">Lighted (Basketball)</span>
+          </div>
+        </div>
+
+        <p class="source-note">Sources: <a href="https://www.newtonma.gov/government/parks-recreation-culture/parks-facilities">City of Newton Parks &amp; Facilities</a>, <a href="https://www.newtonma.gov/government/planning/community-preservation-program/proposals-projects/athletic-fields-improvements">Athletic Fields Improvements</a>, <a href="https://figcitynews.com/2025/02/breaking-ground-for-new-albemarle-turf-field/">Fig City News (Albemarle)</a>, <a href="https://newtonma.myrec.com/info/facilities/default.aspx">Newton Parks &amp; Recreation MyRec</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 3. INDOOR FACILITIES ========== -->
+  <div class="facts-section" id="indoor-facilities">
+    <div class="section-card purple">
+      <div class="section-header">
+        <span class="section-label">Indoor Facilities</span>
+        <h2>Indoor Sports Facilities</h2>
+      </div>
+      <div class="section-body">
+
+        <h3>Newton North Indoor Recreation Center</h3>
+        <p><strong>457 Walnut St, Newtonville, MA 02460</strong></p>
+        <p>Located within Newton North High School, this center offers a competition swimming pool, basketball gym, simulated outdoor area (SOA), dance studio, and fitness center. Open Monday through Thursday from October to mid-May, and weekends from November through April. Closed during school vacations and holidays.</p>
+
+        <h3>Newton South Indoor Recreation Complex</h3>
+        <p><strong>140 Brandeis Rd, Newton Centre, MA 02459</strong></p>
+        <p>State-of-the-art health and wellness facilities including a gymnasium, indoor track, fitness room, wrestling/dance room, wellness classroom, and locker rooms. Operated by Newton Parks, Recreation &amp; Culture.</p>
+
+        <h3>West Suburban YMCA &mdash; Church Street</h3>
+        <p><strong>276 Church St, Newton, MA 02458</strong></p>
+        <p>Serving Newton since 1897. Features an indoor gymnasium (open play for volleyball, basketball, pickleball), indoor pool, fitness center, cardio deck, and group exercise studios. Offers youth sports instructional classes, leagues, swim lessons, and personal training.</p>
+
+        <h3>West Suburban YMCA &mdash; Wells Avenue</h3>
+        <p><strong>135 Wells Ave, Newton, MA 02459</strong></p>
+        <p>Opened December 2022. Features a 4-court indoor Field House (volleyball, basketball, pickleball), indoor pool, fitness center, and group exercise studios. Between the two YMCA locations, there are 3 indoor pools total.</p>
+
+        <h3>School Gymnasiums</h3>
+        <p>Newton's 15 elementary schools, 4 middle schools, and 2 high schools each have gymnasium facilities used for youth sports leagues, practices, and programs. Many youth basketball, volleyball, and other programs utilize school gyms through permits issued by Newton Parks, Recreation &amp; Culture.</p>
+
+        <p class="source-note">Sources: <a href="https://www.newtonma.gov/government/parks-recreation-culture/indoor-recreation-centers/newton-north-indoor-rec-center">City of Newton &mdash; Newton North Indoor Rec</a>, <a href="https://www.newtonma.gov/government/parks-recreation-culture/indoor-recreation-centers/newton-south-indoor-rec-center">Newton South Rec Complex</a>, <a href="https://wsymca.org">West Suburban YMCA</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 4. POOLS & AQUATICS ========== -->
+  <div class="facts-section" id="pools">
+    <div class="section-card blue">
+      <div class="section-header">
+        <span class="section-label">Aquatics</span>
+        <h2>Pools &amp; Swimming</h2>
+      </div>
+      <div class="section-body">
+
+        <h3>Crystal Lake</h3>
+        <p><strong>30 Rogers St, Newton Highlands, MA 02459</strong></p>
+        <p>A 33-acre natural "great pond" with a designated swim zone marked by buoys, a sandy beach, docks, shaded lawn with picnic tables, and the "Gil Champagne" bathhouse (fully accessible, restrooms, seasonal use). Water quality is tested regularly by the Newton Department of Health &amp; Human Services during the summer swimming season.</p>
+        <h4>Season Membership Fees (Residents)</h4>
+        <ul>
+          <li>Adult (18-61): $85</li>
+          <li>Child (6-17): $60</li>
+          <li>Child (5 &amp; under): Free</li>
+          <li>Senior (62+): $60</li>
+          <li>Combo Membership (Pool + Lake) &mdash; Adult: $200, Child: $125, Senior: $125</li>
+        </ul>
+        <p>Daily passes available at the bathhouse front desk. Financial hardship scholarships available for Newton residents.</p>
+
+        <h3>Harry Gath Memorial Pool</h3>
+        <p><strong>256 Albemarle Rd, Newtonville, MA 02460</strong> &mdash; Phone: 617-796-1520</p>
+        <p>Outdoor public swimming pool located within the Albemarle Field complex. Features a fully accessible bathhouse with restrooms, showers, day lockers, changing areas, and gender-neutral bathrooms.</p>
+        <h4>Season Membership Fees</h4>
+        <ul>
+          <li>Resident Adult (18-61): $175</li>
+          <li>Resident Child (6-17): $100</li>
+          <li>Resident Child (5 &amp; under): Free</li>
+          <li>Resident Senior (62+): $100</li>
+          <li>Non-Resident (all ages): $275</li>
+          <li>Combo Membership (Pool + Lake) &mdash; Resident Adult: $200, Child: $125, Senior: $125</li>
+        </ul>
+        <p>Day passes available at the pool front desk. Financial hardship scholarships available.</p>
+
+        <h3>Newton North High School Pool (Indoor)</h3>
+        <p><strong>457 Walnut St, Newtonville, MA 02460</strong></p>
+        <p>Indoor competition swimming pool available for public use as part of the Newton North Indoor Recreation Center. Operating season: October through mid-May (Mon-Thu; weekends Nov-Apr). Winter and spring swim lessons held here, including Sunday morning classes for preschool through Level 6. Home pool for the Newton Bluefish swim team.</p>
+
+        <h3>West Suburban YMCA Pools</h3>
+        <p>Three indoor pools across the Church Street (276 Church St) and Wells Avenue (135 Wells Ave) locations. Offer year-round swim lessons for all ages, lap swimming, and aquatic fitness programs.</p>
+
+        <h3>Private Swim Clubs</h3>
+        <ul>
+          <li><strong>Brae Burn Country Club</strong> &mdash; 326 Fuller St, West Newton, MA 02465. Founded 1897. Private membership club with pool facilities.</li>
+          <li><strong>Charles River Country Club</strong> &mdash; 21 Union St, Newton, MA 02459. Private membership club with pool, including swimming lanes, high dive, and slide.</li>
+        </ul>
+
+        <p class="source-note">Sources: <a href="https://www.newtonma.gov/government/parks-recreation-culture/aquatics/crystal-lake">City of Newton &mdash; Crystal Lake</a>, <a href="https://www.newtonma.gov/government/parks-recreation-culture/aquatics/gath-pool">City of Newton &mdash; Gath Pool</a>, <a href="https://www.newtonma.gov/government/parks-recreation-culture/indoor-recreation-centers/newton-north-indoor-rec-center">Newton North Indoor Rec</a>, <a href="https://wsymca.org">West Suburban YMCA</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 5. ICE RINKS ========== -->
+  <div class="facts-section" id="ice-rinks">
+    <div class="section-card red">
+      <div class="section-header">
+        <span class="section-label">Ice Rinks</span>
+        <h2>Ice Skating &amp; Hockey Rinks</h2>
+      </div>
+      <div class="section-body">
+
+        <h3>John A. Daly Memorial Rink</h3>
+        <p><strong>1 Nonantum Rd, Newton, MA 02458</strong> &mdash; Phone: 617-527-1741</p>
+        <ul>
+          <li><strong>Built:</strong> 1966 by the Massachusetts Metropolitan District Commission (MDC) &mdash; the same year Bobby Orr debuted with the Boston Bruins</li>
+          <li><strong>Enclosed:</strong> 2010 &mdash; after 44 years of operating as a virtually open-air rink, the facility was enclosed to extend the skating season and improve comfort</li>
+          <li><strong>Owner:</strong> Commonwealth of Massachusetts / Department of Conservation &amp; Recreation (DCR)</li>
+          <li><strong>Operated by:</strong> Newton Country Day School in partnership with EDGE Sports Global</li>
+          <li><strong>Hours:</strong> Mon-Fri 9:00am-10:00pm, Sat-Sun 7:00am-10:00pm</li>
+          <li><strong>Public skating:</strong> 14 hours per week; ice resurfaced every hour on the hour during public sessions</li>
+          <li><strong>Admission:</strong> Adults $8, Children $6, Skate rental $8</li>
+          <li><strong>Payment:</strong> Cashless only for all rink transactions</li>
+          <li><strong>Amenities:</strong> Wheelchair accessible, on-site parking, party room, skate rentals, adaptive skating equipment</li>
+        </ul>
+        <p>Home rink for Newton Youth Hockey and numerous figure skating programs. Similar MDC-era rinks were built in Charlestown, Dorchester, and Cleveland Circle.</p>
+
+        <h3>Other Rinks Serving Newton Families</h3>
+        <p>While Daly Rink is the only ice rink within Newton city limits, Newton families also commonly use:</p>
+        <ul>
+          <li><strong>Reilly Memorial Rink</strong> (DCR) &mdash; 355 Faneul St, Brighton, MA 02135. Close to Newton's Nonantum neighborhood.</li>
+          <li><strong>Brookline/Larz Anderson Rink</strong> (seasonal outdoor) &mdash; Newton St, Brookline. Near Newton's Chestnut Hill area.</li>
+          <li><strong>Veterans Memorial Rink</strong> (DCR) &mdash; 570 Somerville Ave, Somerville, MA.</li>
+        </ul>
+
+        <p class="source-note">Sources: <a href="https://www.dalyrink.org/about/">The Daly Rink &mdash; About</a>, <a href="https://www.mass.gov/locations/daly-memorial-rink">Mass.gov &mdash; Daly Memorial Rink</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 6. TENNIS COURTS ========== -->
+  <div class="facts-section" id="tennis">
+    <div class="section-card gold">
+      <div class="section-header">
+        <span class="section-label">Tennis</span>
+        <h2>Public Tennis Courts</h2>
+      </div>
+      <div class="section-body">
+
+        <div class="facility">
+          <div class="facility-name">Newton Centre Playground &mdash; Clay Courts</div>
+          <div class="facility-address">69 Tyler Terrace, Newton Centre, MA 02459</div>
+          <div class="facility-details">
+            5 fast-drying Har-Tru clay courts. Season: May 1 &ndash; October 15. Closed daily for maintenance (noon-3pm weekdays, 1-3pm weekends). Registration fee: $10, plus seasonal permit: Resident Adult $285, Non-Resident Adult $330, Student (under 17) $100, Non-Resident Student $150. Contact: 617-796-1524.
+          </div>
+        </div>
+
+        <div class="facility">
+          <div class="facility-name">Newton South High School</div>
+          <div class="facility-address">140 Brandeis Rd, Newton Centre, MA 02459</div>
+          <div class="facility-details">
+            12 lighted hard courts. Available for public use when not in use by school athletics. The largest public tennis court complex in Newton.
+          </div>
+        </div>
+
+        <div class="facility">
+          <div class="facility-name">Richard McGrath Park (Warren Fields)</div>
+          <div class="facility-address">1600 Washington St, West Newton, MA 02465</div>
+          <div class="facility-details">
+            7 hard courts. First-come, first-served public access.
+          </div>
+        </div>
+
+        <div class="facility">
+          <div class="facility-name">Weeks Park</div>
+          <div class="facility-address">Hereward Rd / Paul St / Cedric St, Newton, MA 02459</div>
+          <div class="facility-details">
+            4 hard courts. Public access.
+          </div>
+        </div>
+
+        <div class="facility">
+          <div class="facility-name">Cold Spring Park</div>
+          <div class="facility-address">1094 Beacon St, Newton Highlands, MA 02461</div>
+          <div class="facility-details">Hard courts. Public access.</div>
+        </div>
+
+        <div class="facility">
+          <div class="facility-name">Cabot Park</div>
+          <div class="facility-address">101 East Side Pkwy, Newtonville, MA 02460</div>
+          <div class="facility-details">2 hard courts. Public access.</div>
+        </div>
+
+        <h4>Pickleball Courts</h4>
+        <ul>
+          <li><strong>Albemarle Field:</strong> 6 new pickleball courts (opened 2025 as part of the $9.5M renovation)</li>
+          <li><strong>McGrath Park (Warren):</strong> 6 outdoor pickleball courts</li>
+        </ul>
+
+        <p class="source-note">Sources: <a href="https://www.newtonma.gov/government/tennis">City of Newton &mdash; Tennis Programs &amp; Clay Court Info</a>, <a href="https://newtonma.myrec.com/info/facilities/default.aspx">Newton Parks &amp; Recreation MyRec</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 7. BASKETBALL COURTS ========== -->
+  <div class="facts-section" id="basketball">
+    <div class="section-card teal">
+      <div class="section-header">
+        <span class="section-label">Basketball</span>
+        <h2>Outdoor Basketball Courts</h2>
+      </div>
+      <div class="section-body">
+        <p>Newton has public outdoor basketball courts at multiple parks, including:</p>
+        <ul>
+          <li><strong>Forte Memorial Park</strong> &mdash; 235 California St (rear), Newton, MA 02459 &mdash; Lighted court</li>
+          <li><strong>Albemarle Field</strong> &mdash; 250 Albemarle Rd, Newtonville, MA 02460 &mdash; Renovated court (2025)</li>
+          <li><strong>Cabot Park</strong> &mdash; 101 East Side Pkwy, Newtonville, MA 02460 &mdash; Lighted full court</li>
+          <li><strong>Cold Spring Park</strong> &mdash; 1094 Beacon St, Newton Highlands, MA 02461</li>
+          <li><strong>Newton South High School</strong> &mdash; 140 Brandeis Rd, Newton Centre, MA 02459</li>
+        </ul>
+        <p>Additional courts are located at various elementary and middle school grounds throughout the city. The West Suburban YMCA (Church St location) also has an outdoor basketball hoop in addition to its indoor courts.</p>
+
+        <p class="source-note">Sources: <a href="https://www.newtonma.gov/government/parks-recreation-culture/parks-facilities">City of Newton Parks &amp; Facilities</a>, <a href="https://www.courtsoftheworld.com/united-states/newton-ma/">Courts of the World &mdash; Newton, MA</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 8. YOUTH SPORTS ORGANIZATIONS ========== -->
+  <div class="facts-section" id="youth-orgs">
+    <div class="section-card gold">
+      <div class="section-header">
+        <span class="section-label">Organizations</span>
+        <h2>Youth Sports Organizations</h2>
+      </div>
+      <div class="section-body">
+
+        <p>Newton is home to a robust network of youth sports organizations spanning nearly every sport. Below is a directory of the major organizations:</p>
+
+        <h3>Soccer</h3>
+        <ul>
+          <li><a href="https://www.newtonsoccer.org/">Newton Youth Soccer (NYS)</a> &mdash; Intramural and BAYS travel programs since 1976</li>
+          <li><a href="https://newtongirlssoccer.org/">Newton Girls Soccer</a> &mdash; Recreational and travel programs</li>
+          <li><a href="https://www.kindergartensoccer.com/">Newton Kindergarten Soccer</a></li>
+        </ul>
+
+        <h3>Baseball &amp; Softball</h3>
+        <ul>
+          <li><a href="http://www.newtonsoutheastll.org/">Newton SouthEast Little League</a> &mdash; Serves Memorial Spaulding, Bowen, Mason Rice, Angier, Zervas, and Countryside elementary school areas</li>
+          <li><a href="http://www.newtongirlssoftball.org/">Newton Girls Softball</a></li>
+        </ul>
+
+        <h3>Basketball</h3>
+        <ul>
+          <li><a href="http://www.ngba.net/">Newton Girls Basketball Association (NGBA)</a></li>
+          <li><a href="http://www.naabasketball.org/">NAA Basketball</a></li>
+          <li><a href="https://www.newtonbball.com/">Newton Travel Basketball</a></li>
+        </ul>
+
+        <h3>Ice Hockey</h3>
+        <ul>
+          <li><a href="https://www.newtonyouthhockey.com/">Newton Youth Hockey</a> &mdash; Learn to Play program (Sat/Sun mornings, November-March)</li>
+        </ul>
+
+        <h3>Lacrosse</h3>
+        <ul>
+          <li><a href="https://newtonyouthlacrosse.com/">Newton Youth Lacrosse</a></li>
+          <li><a href="http://newtongirlslacrosse.com/">Newton Girls Lacrosse</a></li>
+        </ul>
+
+        <h3>Football &amp; Cheer</h3>
+        <ul>
+          <li><a href="http://www.newtonmustangs.org/">Newton Youth Football and Cheer (Mustangs)</a></li>
+        </ul>
+
+        <h3>Swimming</h3>
+        <ul>
+          <li><strong>Newton Recreational Swim Team</strong> &mdash; Operated by Newton Parks, Recreation &amp; Culture</li>
+        </ul>
+
+        <h3>Tennis</h3>
+        <ul>
+          <li><a href="http://www.newtontennis.com/">Newton Tennis</a> &mdash; Directed by Mike Lewitt</li>
+        </ul>
+
+        <h3>Multi-Sport / Other</h3>
+        <ul>
+          <li><a href="https://wsymca.org/youth-sports">West Suburban YMCA</a> &mdash; Soccer, basketball, archery, football, karate, tee ball, tennis, track, and sports conditioning</li>
+          <li><a href="https://www.vikingcamps.com/newton/">Viking Sports</a> &mdash; 33+ years of youth sports clinics, camps, and leagues in Newton</li>
+          <li><strong>Newton Parks, Recreation &amp; Culture</strong> &mdash; Offers skiing/snowboarding programs (at Nashoba Valley), swimming lessons, ice skating lessons, golf clinics, archery, badminton, and more</li>
+        </ul>
+
+        <p class="source-note">Sources: <a href="https://www.bowenpto.org/resources/youth-sports-in-newton/">Bowen PTO &mdash; Youth Sports in Newton</a>, <a href="https://newtonma.myrec.com/info/activities/default.aspx?type=activities">Newton Parks &amp; Recreation Programs</a></p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end facts-content -->
+
+<!-- FOOTER -->
+<footer class="facts-footer">
+  <p>Newton Youth Sports &mdash; <a href="index.html">Home</a> | <a href="program-types-guide.html">Program Types Guide</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">Information compiled from official City of Newton, U.S. Census Bureau, Newton Public Schools, and organization sources. Last updated March 2026. If you spot an error, <a href="index.html#submit">let us know</a>.</p>
+</footer>
+
+</body>
+</html>
