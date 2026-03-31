@@ -1887,7 +1887,12 @@ function updateScrollSpy() {
       if (newActive && currentActive !== newActive) {
         currentActive?.classList.remove('active');
         newActive.classList.add('active');
-        newActive.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Scroll the sports nav horizontally without shifting the page
+        const container = document.getElementById('sportsQuickInner');
+        if (container) {
+          const scrollLeft = newActive.offsetLeft - container.offsetWidth / 2 + newActive.offsetWidth / 2;
+          container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+        }
       }
     }
     scrollSpyTicking = false;
