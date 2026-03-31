@@ -585,34 +585,123 @@ input, select, textarea { font-family: inherit; }
   .programs-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 }
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-links.open {
-    display: flex; flex-direction: column; position: absolute;
-    top: 70px; left: 0; right: 0; background: white;
-    padding: 16px; box-shadow: var(--shadow-lg);
+  /* --- MOBILE NAV --- */
+  .nav-inner { height: 60px; padding: 0 16px; }
+  .nav-logo { font-size: 1rem; gap: 8px; }
+  .nav-logo .logo-icon { width: 32px; height: 32px; border-radius: 8px; }
+  .nav-links {
+    display: flex; flex-direction: column; position: fixed;
+    top: 0; right: -100%; width: 280px; height: 100vh;
+    background: white; padding: 80px 24px 32px;
+    box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+    transition: right 0.3s ease; z-index: 1001;
+    gap: 4px;
   }
-  .mobile-toggle { display: block; }
-  .hero h1 { font-size: 2.4rem; }
+  .nav-links.open { right: 0; }
+  .nav-links a {
+    padding: 14px 16px; border-radius: 10px; font-size: 0.95rem;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .nav-links a:hover { background: var(--green-pale); }
+  .nav-links .nav-cta {
+    margin-left: 0; margin-top: 8px; text-align: center;
+    padding: 14px 20px; border-radius: 10px;
+  }
+  .nav-kids-btn { padding: 14px 16px !important; font-size: 0.95rem !important; }
+  .mobile-toggle { display: block; z-index: 1002; }
+  .mobile-nav-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+    z-index: 1000; opacity: 0; visibility: hidden; transition: all 0.3s;
+  }
+  .mobile-nav-overlay.open { opacity: 1; visibility: visible; }
+
+  /* --- HERO --- */
+  .hero { min-height: auto; padding-top: 60px; }
+  .hero h1 { font-size: 2rem; margin-bottom: 16px; }
+  .hero-sub { font-size: 0.95rem; margin-bottom: 20px; }
+  .hero-content { padding: 32px 20px; }
   .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-  .hero-photos { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
+  .hero-photos { grid-template-columns: repeat(4, 1fr); max-width: 100%; gap: 8px; }
   .hero-photo { border-radius: 8px; }
-  .hero-stats { gap: 12px; flex-wrap: nowrap; justify-content: center; }
+  .hero-stats {
+    gap: 8px; flex-wrap: nowrap; justify-content: center;
+    background: rgba(255,255,255,0.08); border-radius: 12px;
+    padding: 16px 12px;
+  }
   .hero-stat { text-align: center; flex: 1; }
-  .hero-stat .num { font-size: 1.4rem; }
-  .hero-stat .label { font-size: 0.65rem; }
-  .sport-header h2 { font-size: 1.6rem; }
-  .sport-hero-img { height: 200px; }
-  .programs-grid { grid-template-columns: 1fr; }
-  .filter-row { flex-direction: column; align-items: stretch; }
-  .filter-select, .filter-input { min-width: 100%; }
-  .form-grid { grid-template-columns: 1fr; }
-  .card-details { grid-template-columns: 1fr; }
-  .footer-inner { flex-direction: column; }
+  .hero-stat .num { font-size: 1.3rem; }
+  .hero-stat .label { font-size: 0.62rem; }
+  .hero-badge { font-size: 0.72rem; padding: 6px 14px; margin-bottom: 20px; }
+  .hero-actions { gap: 10px; }
+  .btn { padding: 12px 24px; font-size: 0.88rem; }
+
+  /* --- SPORTS NAV --- */
+  .sports-quick { top: 60px; }
+  .sports-quick-inner { padding: 0 16px; gap: 2px; }
+  .sq-btn { padding: 12px 14px; font-size: 0.78rem; }
+
+  /* --- FILTERS --- */
+  .filter-section { padding: 16px 0; }
+  .filter-inner { padding: 0 16px; }
+  .filter-row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .filter-group label { font-size: 0.68rem; margin-bottom: 2px; }
+  .filter-select, .filter-input { min-width: 100%; padding: 10px 14px; font-size: 0.85rem; }
+  .filter-search-row .filter-input { padding: 12px 16px; font-size: 0.92rem; }
+  .filter-clear { margin-top: 12px; padding: 8px 16px; }
+
+  /* --- SPORT SECTIONS --- */
+  .sport-section { padding: 48px 0 24px; scroll-margin-top: 120px; }
+  .sport-header { margin-bottom: 24px; gap: 16px; }
+  .sport-icon { width: 56px; height: 56px; border-radius: 14px; font-size: 1.6rem; }
+  .sport-header h2 { font-size: 1.5rem; }
+  .sport-hero-img { height: 180px; margin-bottom: 24px; border-radius: 12px; }
+
+  /* --- PROGRAM CARDS --- */
+  .programs-grid { grid-template-columns: 1fr; gap: 16px; }
+  .card-top { padding: 16px 16px 0; }
+  .card-body { padding: 12px 16px 16px; }
+  .card-body h3 { font-size: 1.05rem; }
+  .card-body .card-desc { font-size: 0.82rem; margin-bottom: 12px; }
+  .card-details { grid-template-columns: 1fr 1fr; gap: 6px; }
+  .card-detail { font-size: 0.75rem; }
+  .card-footer { padding: 12px 16px; }
+  .program-card:hover { transform: none; }
+
+  /* --- CALENDAR/TIMELINE --- */
+  .timeline-section { padding: 48px 0; }
+  .timeline-section h2 { font-size: 1.6rem; }
+  .timeline-tabs { padding: 0 16px; gap: 4px; flex-wrap: wrap; }
+  .timeline-tab-btn { padding: 8px 16px; font-size: 0.82rem; }
+  .deadline-grid { grid-template-columns: 1fr; padding: 0 16px; }
+  .deadline-card { padding: 14px 16px; }
+  .deadline-card .dl-name { font-size: 0.85rem; }
+  .planner-divider { padding: 0 16px; }
+  .planner-actions { padding: 0 16px; }
+
+  /* --- SUBMIT FORM --- */
+  .submit-section { padding: 48px 0; }
+  .submit-inner { padding: 0 16px; }
+  .submit-inner h2 { font-size: 1.5rem; }
+  .form-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* --- FOOTER --- */
+  .footer { padding: 32px 0 24px; }
+  .footer-inner { flex-direction: column; padding: 0 16px; gap: 24px; }
+  .footer-brand { max-width: 100%; }
+  .footer-bottom { padding: 16px 16px 0; }
+
+  /* --- MISC --- */
+  .back-to-top { bottom: 20px; right: 20px; width: 42px; height: 42px; border-radius: 10px; }
+  .kids-panel { width: 100%; max-width: 100%; padding: 24px 20px; }
 }
 @media (max-width: 480px) {
-  .section-inner, .nav-inner, .filter-inner, .submit-inner { padding: 0 16px; }
-  .hero-content { padding: 40px 16px; }
-  .sport-section { padding: 60px 0 30px; }
+  .hero h1 { font-size: 1.7rem; }
+  .hero-photos { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .hero-stat .num { font-size: 1.15rem; }
+  .sq-btn { padding: 10px 12px; font-size: 0.74rem; }
+  .card-details { grid-template-columns: 1fr; }
+  .timeline-tabs { justify-content: stretch; }
+  .timeline-tab-btn { flex: 1; text-align: center; padding: 10px 8px; font-size: 0.78rem; }
 }
 
 /* ===== ANIMATIONS ===== */
@@ -804,11 +893,12 @@ input, select, textarea { font-family: inherit; }
       </button>
       <a href="#submit" class="nav-cta">Submit a Program</a>
     </div>
-    <button class="mobile-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+    <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
   </div>
 </nav>
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="toggleMobileNav()"></div>
 
 <!-- ===== KIDS PANEL ===== -->
 <div class="kids-panel-overlay" id="kidsPanelOverlay" onclick="closeKidsPanel()"></div>
@@ -842,6 +932,7 @@ input, select, textarea { font-family: inherit; }
         <option value="">Gender...</option>
         <option value="Boy">Boy</option>
         <option value="Girl">Girl</option>
+        <option value="No Preference">No Preference</option>
       </select>
     </div>
     <button class="kid-add-btn" onclick="addKid()">Add Child</button>
@@ -858,7 +949,7 @@ input, select, textarea { font-family: inherit; }
         <h1>Every Youth Program.<br><span class="highlight">One Place.</span></h1>
         <p class="hero-sub">The complete, centralized guide to youth sports, camps, and enrichment programs in Newton, MA. Built by Newton parents, for Newton parents.</p>
         <div class="hero-stats">
-          <div class="hero-stat"><div class="num">181</div><div class="label">Programs Listed</div></div>
+          <div class="hero-stat"><div class="num">166</div><div class="label">Programs Listed</div></div>
           <div class="hero-stat"><div class="num">20+</div><div class="label">Sports & Activities</div></div>
           <div class="hero-stat"><div class="num">K-12</div><div class="label">Ages Served</div></div>
         </div>
@@ -1769,6 +1860,22 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.c
   }
 })();
 
+// ===== MOBILE NAV =====
+function toggleMobileNav() {
+  const nav = document.getElementById('navLinks');
+  const overlay = document.getElementById('mobileNavOverlay');
+  nav.classList.toggle('open');
+  overlay.classList.toggle('open');
+  document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+}
+// Close mobile nav when any link is clicked
+document.querySelectorAll('#navLinks a').forEach(link => {
+  link.addEventListener('click', () => {
+    const nav = document.getElementById('navLinks');
+    if (nav.classList.contains('open')) toggleMobileNav();
+  });
+});
+
 // ===== NAV SPORT LINKS SMOOTH SCROLL =====
 document.querySelectorAll('[data-nav-sport]').forEach(link => {
   link.addEventListener('click', (e) => {
@@ -1901,7 +2008,7 @@ function selectKidPill(kidId) {
     const kid = kids.find(k => k.id === kidId);
     if (kid) {
       document.getElementById('gradeFilter').value = gradeToFilterValue(kid.grade);
-      document.getElementById('genderFilter').value = kid.gender === 'Girl' ? 'girls' : 'boys';
+      document.getElementById('genderFilter').value = kid.gender === 'Girl' ? 'girls' : kid.gender === 'Boy' ? 'boys' : '';
     }
   }
   renderKidsBar();
