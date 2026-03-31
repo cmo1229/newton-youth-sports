@@ -1782,20 +1782,18 @@ function getFiltered() {
       const tags = p.tags || [];
       const nameLower = p.name.toLowerCase();
       const descLower = p.desc.toLowerCase();
+      const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
+      const isBoysOnly = tags.includes('boys') || ((nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club') && !nameLower.includes('girls'));
       if (gender === 'girls') {
-        const hasGirlTag = tags.includes('girls');
-        const hasGirlText = nameLower.includes('girl') || descLower.includes('girl');
-        if (!hasGirlTag && !hasGirlText) return false;
+        // Show girls-only + co-ed programs (exclude boys-only)
+        if (isBoysOnly) return false;
       }
       if (gender === 'boys') {
-        const hasBoyTag = tags.includes('boys');
-        const hasBoyText = (nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club');
-        if (!hasBoyTag && !hasBoyText) return false;
+        // Show boys-only + co-ed programs (exclude girls-only)
+        if (isGirlsOnly) return false;
       }
       if (gender === 'coed') {
-        // Co-ed = everything that isn't explicitly girls-only or boys-only
-        const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
-        const isBoysOnly = tags.includes('boys');
+        // Show only programs that aren't gender-specific
         if (isGirlsOnly || isBoysOnly) return false;
       }
     }
@@ -2218,10 +2216,26 @@ function renderKidsBar() {
   let html = `<span class="kid-pill${allActive}" style="background:#52b788" onclick="selectKidPill(null)">All</span>`;
   kids.forEach(k => {
     const isActive = activeKidId === k.id ? ' active' : '';
-    html += `<span class="kid-pill${isActive}" style="background:${k.color}" data-kid-id="${k.id}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
+    html += `<span class="kid-pill${isActive}" style="background:${k.color}" data-kid-id="${k.id}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender}) <button onclick="event.stopPropagation();removeKidFromBar(${k.id})" style="background:none;border:none;color:rgba(255,255,255,0.7);font-size:0.9rem;cursor:pointer;padding:0 0 0 4px;line-height:1;">&times;</button></span>`;
   });
   html += `<button class="add-kid-btn" onclick="openKidsPanel()">+ Add Child</button>`;
   bar.innerHTML = html;
+}
+
+function removeKidFromBar(kidId) {
+  let kids = getKidProfiles();
+  kids = kids.filter(k => k.id !== kidId);
+  localStorage.setItem('nys-kids', JSON.stringify(kids));
+  if (activeKidId === kidId) activeKidId = null;
+  document.getElementById('gradeFilter').value = '';
+  document.getElementById('genderFilter').value = '';
+  renderKidsBar();
+  applyFilters();
+  // Also update the kids panel list
+  const listEl = document.getElementById('kidList');
+  if (listEl) {
+    listEl.innerHTML = kids.map(k => `<div class="kid-list-item"><div class="kid-list-dot" style="background:${k.color}"></div><div class="kid-list-info"><div class="kid-list-name">${k.name}</div><div class="kid-list-meta">${k.grade} &middot; ${k.gender}</div></div><button class="kid-remove-btn" onclick="removeKid(${k.id})">Remove</button></div>`).join('');
+  }
 }
 
 function selectKidPill(kidId) {
