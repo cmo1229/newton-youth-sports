@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Newton Youth Sports</title>
+<meta name="description" content="About Newton Youth Sports - the centralized resource for Newton, MA families to find every youth sports program, camp, and enrichment activity in one place.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232d6a4f'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #1a1a2e;
+  background: #fafbfd;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #2d6a4f; text-decoration: underline; }
+a:hover { color: #1b4332; }
+
+:root {
+  --green-deep: #1b4332;
+  --green-main: #2d6a4f;
+  --green-mid: #40916c;
+  --green-light: #52b788;
+  --green-pale: #d8f3dc;
+  --gold: #e8a838;
+  --navy: #16213e;
+  --slate: #4a5568;
+  --light-bg: #f0f4f0;
+  --white: #ffffff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --max-w: 760px;
+}
+
+/* NAV BAR */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-md);
+}
+.nav-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 70px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 800; font-size: 1.15rem; color: var(--green-deep);
+  text-decoration: none;
+}
+.nav-logo .logo-icon {
+  width: 38px; height: 38px; background: var(--green-main);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.nav-back {
+  padding: 8px 20px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 600; color: var(--white); background: var(--green-main);
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-back:hover { background: var(--green-deep); color: var(--white); }
+
+/* HERO */
+.about-hero {
+  background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
+  padding: 140px 32px 80px;
+  color: white;
+  text-align: center;
+}
+.about-hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900; line-height: 1.15;
+  max-width: 700px; margin: 0 auto 20px;
+}
+.about-hero .subtitle {
+  font-size: 1.15rem; color: rgba(255,255,255,0.75); max-width: 560px;
+  margin: 0 auto; font-weight: 300; line-height: 1.7;
+}
+
+/* CONTENT */
+.about-content {
+  max-width: var(--max-w); margin: 0 auto; padding: 60px 24px 80px;
+}
+
+.about-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg); padding: 48px 44px;
+  margin-bottom: 40px;
+  border-top: 5px solid var(--green-main);
+}
+
+.about-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 800; color: var(--green-deep);
+  margin-bottom: 16px; line-height: 1.3;
+}
+
+.about-card p {
+  color: #2d3748; font-size: 0.95rem; margin-bottom: 16px; line-height: 1.8;
+}
+
+.about-card p:last-child { margin-bottom: 0; }
+
+.founders {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-top: 28px;
+}
+
+.founder-card {
+  background: var(--light-bg); border-radius: var(--radius);
+  padding: 28px; text-align: center;
+}
+
+.founder-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--green-main); color: white;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  font-size: 1.5rem; font-weight: 800;
+  font-family: 'Playfair Display', serif;
+}
+
+.founder-name {
+  font-weight: 700; color: var(--navy); font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+.founder-role {
+  font-size: 0.82rem; color: var(--slate); font-weight: 500;
+}
+
+.coming-soon {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin-top: 32px; padding: 20px;
+  background: var(--green-pale); border-radius: var(--radius);
+  color: var(--green-deep); font-weight: 600; font-size: 0.92rem;
+}
+
+.coming-soon-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--green-main);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* FOOTER */
+.about-footer {
+  background: var(--green-deep); color: rgba(255,255,255,0.7);
+  text-align: center; padding: 40px 32px;
+  font-size: 0.88rem;
+}
+.about-footer a { color: var(--green-light); }
+
+@media (max-width: 600px) {
+  .about-hero { padding: 120px 20px 60px; }
+  .about-card { padding: 32px 24px; }
+  .founders { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+      Newton Youth Sports
+    </a>
+    <a href="index.html" class="nav-back">Back to Home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <h1>About Us</h1>
+  <p class="subtitle">Newton Youth Sports was built by Newton parents who got tired of Googling 15 different websites to find a basketball league for their kid.</p>
+</section>
+
+<!-- CONTENT -->
+<div class="about-content">
+
+  <div class="about-card">
+    <h2>The Problem We're Solving</h2>
+    <p>Newton has an incredible youth sports ecosystem &mdash; over 20 organizations running 180+ programs across 14 sports. But finding them? That's another story. Information is scattered across dozens of websites, Facebook groups, word-of-mouth recommendations, and flyers taped to the wall at Cabot's.</p>
+    <p>We built Newton Youth Sports to put everything in one place. Every program, every season, every age group. Search, filter, compare, and plan &mdash; all without creating an account or downloading an app.</p>
+  </div>
+
+  <div class="about-card">
+    <h2>Who We Are</h2>
+    <p>Newton Youth Sports was founded by two Newton community members who saw a gap and decided to fill it.</p>
+
+    <div class="founders">
+      <div class="founder-card">
+        <div class="founder-icon">SN</div>
+        <div class="founder-name">Seth Newman</div>
+        <div class="founder-role">Co-Founder</div>
+      </div>
+      <div class="founder-card">
+        <div class="founder-icon">CM</div>
+        <div class="founder-name">Charlie Morris</div>
+        <div class="founder-role">Co-Founder</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-card">
+    <h2>What's Next</h2>
+    <p>We're just getting started. We're working on expanding our program database, adding more features to help parents plan their kids' sports seasons, and building partnerships with Newton's youth sports organizations.</p>
+    <p>Have a program we're missing? Know something we got wrong? We'd love to hear from you.</p>
+    <div class="coming-soon">
+      <div class="coming-soon-dot"></div>
+      More coming soon &mdash; stay tuned
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="about-footer">
+  <p>Newton Youth Sports &mdash; <a href="index.html">Home</a> | <a href="newton-facts.html">Newton Facts</a> | <a href="program-types-guide.html">Program Types Guide</a></p>
+  <p style="margin-top: 8px; font-size: 0.78rem;">Built with care for Newton families.</p>
+</footer>
+
+</body>
+</html>
