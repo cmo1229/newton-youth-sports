@@ -625,25 +625,17 @@ input, select, textarea { font-family: inherit; }
   .hero-badge { font-size: 0.7rem; padding: 5px 12px; margin-bottom: 16px; }
   .hero-right { display: none; }
   .hero-stats {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0; background: rgba(255,255,255,0.1); border-radius: 12px;
-    padding: 14px 0; margin-bottom: 20px;
+    display: flex; gap: 24px; flex-wrap: nowrap; justify-content: flex-start;
+    margin-bottom: 18px;
   }
-  .hero-stat {
-    text-align: center; position: relative;
-  }
-  .hero-stat + .hero-stat::before {
-    content: ''; position: absolute; left: 0; top: 15%; height: 70%;
-    width: 1px; background: rgba(255,255,255,0.15);
-  }
-  .hero-stat .num { font-size: 1.4rem; }
-  .hero-stat .label { font-size: 0.65rem; letter-spacing: 0.3px; }
-  .hero-actions { flex-direction: column; gap: 10px; }
+  .hero-stat { text-align: left; }
+  .hero-stat .num { font-size: 1.3rem; }
+  .hero-stat .label { font-size: 0.62rem; }
+  .hero-actions { display: flex; flex-direction: row; gap: 10px; }
   .hero-actions .btn {
-    padding: 14px 24px; font-size: 0.9rem; justify-content: center;
-    text-align: center; width: 100%; border-radius: 12px;
+    padding: 10px 18px; font-size: 0.82rem; justify-content: center;
+    text-align: center; border-radius: 10px;
   }
-  .hero-actions .btn-primary { font-size: 0.95rem; padding: 15px 24px; }
 
   /* --- SPORTS NAV --- */
   .sports-quick { top: 56px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
@@ -693,7 +685,7 @@ input, select, textarea { font-family: inherit; }
   .sport-icon { width: 40px; height: 40px; border-radius: 10px; font-size: 1.2rem; }
   .sport-header-text h2 { font-size: 1.25rem; }
   .sport-header-text .sport-count { font-size: 0.78rem; }
-  .sport-hero-img { display: none; }
+  .sport-hero-img { height: 160px; margin-bottom: 16px; border-radius: 10px; }
 
   /* --- PROGRAM CARDS --- */
   .programs-grid { grid-template-columns: 1fr; gap: 10px; }
@@ -1926,10 +1918,7 @@ function debounce(fn, ms) {
   let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); };
 }
 
-// ===== MOBILE NAV CLOSE ON CLICK =====
-document.querySelectorAll('#navLinks a').forEach(a => {
-  a.addEventListener('click', () => { document.getElementById('navLinks').classList.remove('open'); });
-});
+// (mobile nav close handled by toggleMobileNav listeners below)
 
 // ===== LIGHTBOX =====
 const lightbox = document.createElement('div');
@@ -1986,10 +1975,10 @@ function toggleMobileNav() {
 // Close mobile nav when any link is clicked, then scroll
 document.querySelectorAll('#navLinks a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
-    e.preventDefault();
-    const target = link.getAttribute('href');
     const nav = document.getElementById('navLinks');
     if (nav.classList.contains('open')) {
+      e.preventDefault();
+      const target = link.getAttribute('href');
       toggleMobileNav();
       setTimeout(() => {
         document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
