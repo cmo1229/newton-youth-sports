@@ -623,9 +623,10 @@ input, select, textarea { font-family: inherit; }
   .hero-content { padding: 28px 20px 24px; }
   .hero-grid { grid-template-columns: 1fr; gap: 0; }
   .hero-badge { font-size: 0.7rem; padding: 5px 12px; margin-bottom: 16px; }
-  .hero-right { display: block; }
-  .hero-photos { grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 100%; }
-  .hero-photo { border-radius: 6px; aspect-ratio: 1/1; }
+  .hero-grid { grid-template-columns: 1fr; gap: 0; }
+  .hero-right { display: block; order: -1; margin-bottom: 16px; }
+  .hero-photos { grid-template-columns: repeat(4, 1fr); gap: 8px; max-width: 100%; }
+  .hero-photo { border-radius: 8px; aspect-ratio: 4/3; }
   .hero-stats {
     display: flex; gap: 24px; flex-wrap: nowrap; justify-content: flex-start;
     margin-bottom: 18px;
@@ -1583,7 +1584,7 @@ function createProgramCard(p) {
     <div class="card-footer">
       <a href="${p.website}" target="_blank" rel="noopener" class="card-link">Visit Website <svg><use href="#icon-arrow"/></svg></a>
       <span style="display:flex;align-items:center;gap:8px;">
-        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
+        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', ${JSON.stringify(p.season)})"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
         <span class="card-cost">${p.cost}</span>
       </span>
     </div>
@@ -2383,8 +2384,8 @@ function clearPlan(mode) {
 }
 
 // Guess best default season for a program based on its sport/season data
-function guessSeasonForProgram(programSport) {
-  const s = (programSport || '').toLowerCase();
+function guessSeasonForProgram(programText) {
+  const s = (programText || '').toLowerCase();
   if (s.includes('summer') || s.includes('camp')) return 'summer';
   if (s.includes('fall') || s.includes('autumn')) return 'fall';
   if (s.includes('winter')) return 'winter';
@@ -2393,7 +2394,7 @@ function guessSeasonForProgram(programSport) {
 }
 
 // Add to Plan popup
-function openPlanPopup(event, programName, programSport) {
+function openPlanPopup(event, programName, programSport, programSeasons) {
   event.stopPropagation();
   event.preventDefault();
   // Remove existing popup
@@ -2417,7 +2418,8 @@ function openPlanPopup(event, programName, programSport) {
   let kidOptions = '<option value="general">General</option>';
   kids.forEach(k => { kidOptions += `<option value="${k.id}">${k.name}</option>`; });
 
-  const defaultSeason = guessSeasonForProgram(programSport);
+  // Use the program's actual season data if available
+  const defaultSeason = (programSeasons && programSeasons.length === 1) ? programSeasons[0] : guessSeasonForProgram(programName + ' ' + programSport);
   let seasonOptions = '';
   Object.keys(PLANNER_SEASONS).forEach(key => {
     const s = PLANNER_SEASONS[key];
