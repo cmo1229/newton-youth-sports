@@ -623,7 +623,9 @@ input, select, textarea { font-family: inherit; }
   .hero-content { padding: 28px 20px 24px; }
   .hero-grid { grid-template-columns: 1fr; gap: 0; }
   .hero-badge { font-size: 0.7rem; padding: 5px 12px; margin-bottom: 16px; }
-  .hero-right { display: none; }
+  .hero-right { display: block; }
+  .hero-photos { grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 100%; }
+  .hero-photo { border-radius: 6px; aspect-ratio: 1/1; }
   .hero-stats {
     display: flex; gap: 24px; flex-wrap: nowrap; justify-content: flex-start;
     margin-bottom: 18px;
