@@ -20,6 +20,7 @@
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
+body { overflow-x: hidden; }
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: #1a1a2e;
@@ -438,7 +439,7 @@ input, select, textarea { font-family: inherit; }
 /* ===== TIMELINE SECTION ===== */
 .timeline-section {
   padding: 80px 0; background: var(--green-deep); color: white;
-  scroll-margin-top: 70px;
+  scroll-margin-top: 70px; overflow: hidden;
 }
 .timeline-section h2 {
   font-family: 'Playfair Display', serif; font-size: 2.2rem;
@@ -750,15 +751,13 @@ input, select, textarea { font-family: inherit; }
   .timeline-section h2 { font-size: 1.5rem; }
   .timeline-section .section-sub { font-size: 0.85rem; margin-bottom: 20px; }
   .timeline-tabs {
-    padding: 0 16px; gap: 6px; flex-wrap: nowrap; overflow-x: auto;
-    -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    justify-content: flex-start;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 0 16px; gap: 6px; overflow: hidden;
   }
-  .timeline-tabs::-webkit-scrollbar { display: none; }
-  .timeline-tab-btn { padding: 9px 18px; font-size: 0.82rem; flex-shrink: 0; border-radius: 10px; }
+  .timeline-tab-btn { padding: 10px 0; font-size: 0.82rem; border-radius: 10px; text-align: center; }
   .deadline-grid { grid-template-columns: 1fr; padding: 0 16px; gap: 8px; }
   .deadline-card { padding: 14px 16px; border-radius: 10px; }
-  .deadline-card .dl-name { font-size: 0.85rem; }
+  .deadline-card .dl-name { font-size: 0.85rem; white-space: normal; }
   .deadline-card .dl-org { font-size: 0.72rem; }
   .deadline-card .dl-badge { padding: 4px 10px; font-size: 0.7rem; }
   .planner-divider { padding: 0 16px; margin-bottom: 16px; }
