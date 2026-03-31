@@ -617,7 +617,7 @@ input, select, textarea { font-family: inherit; }
   .mobile-nav-overlay.open { opacity: 1; visibility: visible; }
 
   /* --- HERO --- */
-  .hero { min-height: auto; padding-top: 60px; }
+  .hero { min-height: calc(100vh - 60px); min-height: calc(100svh - 60px); padding-top: 60px; }
   .hero h1 { font-size: 2rem; margin-bottom: 16px; }
   .hero-sub { font-size: 0.95rem; margin-bottom: 20px; }
   .hero-content { padding: 32px 20px; }
@@ -633,8 +633,10 @@ input, select, textarea { font-family: inherit; }
   .hero-stat .num { font-size: 1.3rem; }
   .hero-stat .label { font-size: 0.62rem; }
   .hero-badge { font-size: 0.72rem; padding: 6px 14px; margin-bottom: 20px; }
-  .hero-actions { gap: 10px; }
-  .btn { padding: 12px 24px; font-size: 0.88rem; }
+  .hero-actions {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .hero-actions .btn { padding: 12px 16px; font-size: 0.85rem; justify-content: center; text-align: center; }
 
   /* --- SPORTS NAV --- */
   .sports-quick { top: 60px; }
@@ -1869,8 +1871,22 @@ function toggleMobileNav() {
   overlay.classList.toggle('open');
   document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
 }
-// Close mobile nav when any link is clicked
-document.querySelectorAll('#navLinks a').forEach(link => {
+// Close mobile nav when any link is clicked, then scroll
+document.querySelectorAll('#navLinks a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = link.getAttribute('href');
+    const nav = document.getElementById('navLinks');
+    if (nav.classList.contains('open')) {
+      toggleMobileNav();
+      setTimeout(() => {
+        document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+      }, 350);
+    }
+  });
+});
+// Close mobile nav for external page links
+document.querySelectorAll('#navLinks a:not([href^="#"])').forEach(link => {
   link.addEventListener('click', () => {
     const nav = document.getElementById('navLinks');
     if (nav.classList.contains('open')) toggleMobileNav();
