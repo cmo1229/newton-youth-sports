@@ -1278,7 +1278,7 @@ input, select, textarea { font-family: inherit; }
   <div class="submit-inner">
     <h2>Submit a Program</h2>
     <p class="section-sub">Know of a program we're missing? Help us keep this resource complete. Submissions are reviewed before being added.</p>
-    <form id="submitForm" action="https://formsubmit.co/contact.nybc@gmail.com" method="POST">
+    <form id="submitForm" action="https://formsubmit.co/contact.newtonyouthsports@gmail.com" method="POST">
       <input type="hidden" name="_subject" value="New Program Submission - Newton Youth Sports">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
@@ -1347,8 +1347,9 @@ input, select, textarea { font-family: inherit; }
     <div class="footer-brand">
       <h3>Newton Youth Sports</h3>
       <p>The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.</p>
-      <p style="margin-top: 12px;">Questions? <a href="mailto:contact.nybc@gmail.com" style="color: var(--green-light);">contact.nybc@gmail.com</a></p>
-      <p style="margin-top: 8px;"><a href="#" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow us on Facebook</a></p>
+      <p style="margin-top: 12px;">Questions? <a href="mailto:contact.newtonyouthsports@gmail.com" style="color: var(--green-light);">contact.newtonyouthsports@gmail.com</a></p>
+      <p style="margin-top: 8px;"><a href="https://www.facebook.com/groups/1091326471449122" target="_blank" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Parents & Community</a></p>
+      <p style="margin-top: 4px;"><a href="https://www.facebook.com/groups/1091326471449122" target="_blank" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Youth Athletics</a></p>
     </div>
     <div class="footer-links">
       <h4>Quick Links</h4>
@@ -2693,7 +2694,7 @@ function sharePlan() {
     kidPlans.forEach(p => {
       const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => seasonData.weeks[w] || '').filter(Boolean);
       text += `  • ${p.programName}`;
-      if (weekLabels.length > 0) text += ` (${weekLabels[0]} – ${weekLabels[weekLabels.length - 1]})`;
+      if (weekLabels.length > 0) text += `\n    Weeks: ${weekLabels.join(', ')}`;
       text += '\n';
     });
     text += '\n';
