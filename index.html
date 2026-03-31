@@ -1685,7 +1685,36 @@ document.querySelectorAll('.sq-btn').forEach(btn => {
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
   document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
+  updateScrollSpy();
 });
+
+// Sport nav scroll spy (throttled)
+let scrollSpyTicking = false;
+function updateScrollSpy() {
+  if (scrollSpyTicking) return;
+  scrollSpyTicking = true;
+  requestAnimationFrame(() => {
+    const sections = document.querySelectorAll('[data-sport-section]');
+    if (sections.length) {
+      const offset = 200;
+      let activeSport = 'all';
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= offset && rect.bottom > offset) {
+          activeSport = sec.dataset.sportSection;
+        }
+      });
+      const currentActive = document.querySelector('.sq-btn.active');
+      const newActive = document.querySelector(activeSport === 'all' ? '.sq-btn[data-sport="all"]' : `.sq-btn[data-sport="${activeSport}"]`);
+      if (newActive && currentActive !== newActive) {
+        currentActive?.classList.remove('active');
+        newActive.classList.add('active');
+        newActive.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+    scrollSpyTicking = false;
+  });
+}
 
 function debounce(fn, ms) {
   let t; return function(...a) { clearTimeout(t); t = setTimeout(() => fn.apply(this, a), ms); };
