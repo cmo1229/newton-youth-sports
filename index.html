@@ -437,42 +437,66 @@ input, select, textarea { font-family: inherit; }
 /* ===== TIMELINE SECTION ===== */
 .timeline-section {
   padding: 80px 0; background: var(--green-deep); color: white;
+  scroll-margin-top: 70px;
 }
 .timeline-section h2 {
   font-family: 'Playfair Display', serif; font-size: 2.2rem;
-  font-weight: 800; text-align: center; margin-bottom: 16px;
+  font-weight: 800; text-align: center; margin-bottom: 8px;
 }
 .timeline-section .section-sub {
   text-align: center; color: rgba(255,255,255,0.65);
-  margin-bottom: 48px; font-size: 1rem;
+  margin-bottom: 32px; font-size: 1rem;
 }
-.timeline-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 20px; max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+.timeline-tabs {
+  display: flex; gap: 4px; margin-bottom: 28px; justify-content: center;
+  max-width: var(--max-w); margin-left: auto; margin-right: auto; padding: 0 32px;
 }
-.timeline-card {
+.timeline-tab-btn {
+  padding: 10px 22px; border-radius: 8px; font-size: 0.88rem;
+  font-weight: 600; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
+  cursor: pointer; border: none; transition: all 0.2s;
+}
+.timeline-tab-btn.active { background: var(--gold); color: var(--green-deep); }
+.timeline-tab-btn:hover { background: rgba(255,255,255,0.2); color: white; }
+.timeline-tab-btn.active:hover { background: var(--gold); }
+.deadline-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  max-width: var(--max-w); margin: 0 auto 36px; padding: 0 32px;
+}
+.deadline-card {
   background: rgba(255,255,255,0.08); border-radius: var(--radius);
-  padding: 28px; border: 1px solid rgba(255,255,255,0.1);
-  transition: all 0.3s;
+  padding: 16px 20px; border: 1px solid rgba(255,255,255,0.1);
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  transition: all 0.2s; cursor: pointer;
 }
-.timeline-card:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
-.timeline-card .season-label {
-  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1px; margin-bottom: 12px;
+.deadline-card:hover { background: rgba(255,255,255,0.14); }
+.deadline-card .dl-info { flex: 1; min-width: 0; }
+.deadline-card .dl-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.deadline-card .dl-org { font-size: 0.75rem; color: rgba(255,255,255,0.45); }
+.deadline-card .dl-badge {
+  flex-shrink: 0; padding: 5px 12px; border-radius: 100px;
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3px;
+  white-space: nowrap;
 }
-.timeline-card .season-label.spring { color: #81c784; }
-.timeline-card .season-label.summer { color: var(--gold); }
-.timeline-card .season-label.fall { color: #ffab91; }
-.timeline-card .season-label.winter { color: #90caf9; }
-.timeline-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
-.timeline-item {
-  font-size: 0.82rem; color: rgba(255,255,255,0.7);
-  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-  display: flex; justify-content: space-between; gap: 12px;
+.dl-badge.urgent { background: #ff5252; color: white; }
+.dl-badge.soon { background: #ffa726; color: #1a1a2e; }
+.dl-badge.upcoming { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); }
+.dl-badge.open { background: #66bb6a; color: #1a1a2e; }
+.deadline-empty {
+  grid-column: 1 / -1; text-align: center; padding: 32px;
+  color: rgba(255,255,255,0.4); font-size: 0.9rem;
 }
-.timeline-item:last-child { border-bottom: none; }
-.timeline-item .tl-name { font-weight: 500; }
-.timeline-item .tl-date { color: rgba(255,255,255,0.5); white-space: nowrap; font-size: 0.78rem; }
+.planner-divider {
+  max-width: var(--max-w); margin: 0 auto 24px; padding: 0 32px;
+  display: flex; align-items: center; gap: 12px;
+}
+.planner-divider::before, .planner-divider::after {
+  content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.15);
+}
+.planner-divider span {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: rgba(255,255,255,0.4);
+}
 
 /* ===== SUBMIT SECTION ===== */
 .submit-section {
@@ -557,7 +581,7 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
-  .timeline-grid { grid-template-columns: repeat(2, 1fr); }
+  .deadline-grid { grid-template-columns: 1fr; }
   .programs-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
 }
 @media (max-width: 768px) {
@@ -579,7 +603,6 @@ input, select, textarea { font-family: inherit; }
   .sport-header h2 { font-size: 1.6rem; }
   .sport-hero-img { height: 200px; }
   .programs-grid { grid-template-columns: 1fr; }
-  .timeline-grid { grid-template-columns: 1fr; }
   .filter-row { flex-direction: column; align-items: stretch; }
   .filter-select, .filter-input { min-width: 100%; }
   .form-grid { grid-template-columns: 1fr; }
@@ -671,18 +694,6 @@ input, select, textarea { font-family: inherit; }
 .kid-remove-btn:hover { background: #ffebee; }
 
 /* ===== YEAR PLANNER ===== */
-.planner-toggle {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  padding: 12px 24px; background: var(--green-pale); color: var(--green-deep);
-  font-weight: 700; font-size: 0.9rem; cursor: pointer; border: none;
-  width: 100%; border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-.planner-toggle:hover { background: #c8edce; }
-.planner-section {
-  background: var(--green-deep); padding: 0; max-height: 0; overflow: hidden;
-  transition: max-height 0.4s ease, padding 0.4s ease;
-}
-.planner-section.open { max-height: 2000px; padding: 32px 0; }
 .planner-grid-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .planner-grid {
   display: grid;
@@ -725,15 +736,6 @@ input, select, textarea { font-family: inherit; }
   font-weight: 600; cursor: pointer;
 }
 .planner-clear-btn:hover { background: rgba(255,255,255,0.2); color: white; }
-.planner-tabs { display: flex; gap: 4px; margin-bottom: 16px; justify-content: center; max-width: var(--max-w); margin-left: auto; margin-right: auto; padding: 0 32px; }
-.planner-tab {
-  padding: 8px 20px; border-radius: 8px; font-size: 0.85rem;
-  font-weight: 600; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
-  cursor: pointer; border: none; transition: all 0.2s;
-}
-.planner-tab.active { background: var(--gold); color: var(--green-deep); }
-.planner-tab:hover { background: rgba(255,255,255,0.2); color: white; }
-.planner-tab.active:hover { background: var(--gold); }
 
 /* Add to Plan button on cards */
 .card-plan-btn {
@@ -792,7 +794,7 @@ input, select, textarea { font-family: inherit; }
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#sports">Browse Programs</a>
-      <a href="#timeline">Timeline</a>
+      <a href="#timeline">Deadlines & Planner</a>
       <a href="newton-facts.html">Newton Facts</a>
       <a href="program-types-guide.html">Parent Guide</a>
       <a href="about.html">About</a>
@@ -1012,65 +1014,18 @@ input, select, textarea { font-family: inherit; }
 </div>
 
 <!-- ===== YEAR PLANNER ===== -->
-<button class="planner-toggle" id="plannerToggle" onclick="togglePlanner()">
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-  Plan Your Year
-  <span style="font-weight:400;font-size:0.8rem;opacity:0.7">(click to expand)</span>
-</button>
-<div class="planner-section" id="plannerSection">
-  <div class="section-inner" id="plannerContent"></div>
-</div>
-
 <!-- ===== MAIN CONTENT (Generated by JS) ===== -->
 <main id="mainContent"></main>
 
-<!-- ===== REGISTRATION TIMELINE ===== -->
+<!-- ===== UNIFIED TIMELINE + PLANNER ===== -->
 <section class="timeline-section" id="timeline">
   <div class="section-inner">
-    <h2>Registration Timeline</h2>
-    <p class="section-sub">Key dates so you never miss a signup window</p>
-    <div class="timeline-grid">
-      <div class="timeline-card">
-        <div class="season-label spring">Spring 2026</div>
-        <h3>Spring Registrations</h3>
-        <div class="timeline-item"><span class="tl-name">Newton Girls Softball (Gr 1-8)</span><span class="tl-date">Mar 20</span></div>
-        <div class="timeline-item"><span class="tl-name">Newton SE Little League (AA/AAA)</span><span class="tl-date">Mar 29</span></div>
-        <div class="timeline-item"><span class="tl-name">Newton Little League (All)</span><span class="tl-date">Mar 31</span></div>
-        <div class="timeline-item"><span class="tl-name">NYS Intramural Soccer</span><span class="tl-date">Mar 13</span></div>
-        <div class="timeline-item"><span class="tl-name">Newton Kindergarten Soccer</span><span class="tl-date">Mar 18</span></div>
-        <div class="timeline-item"><span class="tl-name">Flag Football Spring</span><span class="tl-date">Apr 26 start</span></div>
-      </div>
-      <div class="timeline-card">
-        <div class="season-label summer">Summer 2026</div>
-        <h3>Summer Registrations</h3>
-        <div class="timeline-item"><span class="tl-name">Newton Parks & Rec Camps</span><span class="tl-date">Jan 28</span></div>
-        <div class="timeline-item"><span class="tl-name">Camp Echo Bridge</span><span class="tl-date">Jan 28</span></div>
-        <div class="timeline-item"><span class="tl-name">NCE Summer Programs</span><span class="tl-date">Late Jan</span></div>
-        <div class="timeline-item"><span class="tl-name">Babe Ruth Tryouts</span><span class="tl-date">Apr 25-26</span></div>
-        <div class="timeline-item"><span class="tl-name">NGS Travel Assessments</span><span class="tl-date">Early Apr</span></div>
-        <div class="timeline-item"><span class="tl-name">NYS Travel Tryouts</span><span class="tl-date">Jun 2-15</span></div>
-      </div>
-      <div class="timeline-card">
-        <div class="season-label fall">Fall 2026</div>
-        <h3>Fall Registrations</h3>
-        <div class="timeline-item"><span class="tl-name">NYS Fall Intramural</span><span class="tl-date">~Jul-Aug</span></div>
-        <div class="timeline-item"><span class="tl-name">NGS Fall City/Travel</span><span class="tl-date">Jun 1-30</span></div>
-        <div class="timeline-item"><span class="tl-name">NGBA Girls Basketball</span><span class="tl-date">~Oct</span></div>
-        <div class="timeline-item"><span class="tl-name">NAA Basketball</span><span class="tl-date">~Fall</span></div>
-        <div class="timeline-item"><span class="tl-name">Field Hockey Clinic</span><span class="tl-date">~Sep</span></div>
-        <div class="timeline-item"><span class="tl-name">Cross Country (Waltham TC)</span><span class="tl-date">~Aug</span></div>
-      </div>
-      <div class="timeline-card">
-        <div class="season-label winter">Winter 2026-27</div>
-        <h3>Winter Registrations</h3>
-        <div class="timeline-item"><span class="tl-name">Newton Youth Hockey</span><span class="tl-date">Open now</span></div>
-        <div class="timeline-item"><span class="tl-name">YMCA Basketball (YBA)</span><span class="tl-date">~Oct-Nov</span></div>
-        <div class="timeline-item"><span class="tl-name">Newton Wrestling Club</span><span class="tl-date">~Nov</span></div>
-        <div class="timeline-item"><span class="tl-name">Ice Skating Lessons</span><span class="tl-date">~Sep-Oct</span></div>
-        <div class="timeline-item"><span class="tl-name">Metrowest Travel Bball</span><span class="tl-date">~Jul tryouts Oct</span></div>
-        <div class="timeline-item"><span class="tl-name">Scoops Learn to Lax</span><span class="tl-date">~Dec-Jan</span></div>
-      </div>
-    </div>
+    <h2>Registration Deadlines & Planner</h2>
+    <p class="section-sub">Never miss a signup window. Plan your family's sports year.</p>
+    <div class="timeline-tabs" id="timelineTabs"></div>
+    <div id="deadlineContent"></div>
+    <div class="planner-divider"><span>Your Plan</span></div>
+    <div id="plannerContent"></div>
   </div>
 </section>
 
@@ -1154,7 +1109,7 @@ input, select, textarea { font-family: inherit; }
     <div class="footer-links">
       <h4>Quick Links</h4>
       <a href="#sports">Browse Programs</a>
-      <a href="#timeline">Registration Timeline</a>
+      <a href="#timeline">Deadlines & Planner</a>
       <a href="#submit">Submit a Program</a>
       <a href="newton-facts.html">Newton Facts</a>
       <a href="program-types-guide.html">Parent Guide</a>
@@ -1945,17 +1900,133 @@ let currentPlannerSeason = getCurrentSeason();
 function getPlan() { return JSON.parse(localStorage.getItem('nys-plan') || '[]'); }
 function savePlan(plan) { localStorage.setItem('nys-plan', JSON.stringify(plan)); }
 
-function togglePlanner() {
-  const section = document.getElementById('plannerSection');
-  const toggle = document.getElementById('plannerToggle');
-  section.classList.toggle('open');
-  const isOpen = section.classList.contains('open');
-  toggle.querySelector('span').textContent = isOpen ? '(click to collapse)' : '(click to expand)';
+function switchSeason(season) {
+  currentPlannerSeason = season;
+  renderTimeline();
 }
 
-function switchPlannerSeason(season) {
-  currentPlannerSeason = season;
+function renderTimeline() {
+  const seasonData = PLANNER_SEASONS[currentPlannerSeason];
+
+  // Render season tabs
+  const tabsContainer = document.getElementById('timelineTabs');
+  let tabsHtml = '';
+  Object.keys(PLANNER_SEASONS).forEach(key => {
+    const s = PLANNER_SEASONS[key];
+    const activeClass = key === currentPlannerSeason ? ' active' : '';
+    tabsHtml += `<button class="timeline-tab-btn${activeClass}" onclick="switchSeason('${key}')">${s.label}</button>`;
+  });
+  tabsContainer.innerHTML = tabsHtml;
+
+  // Render deadlines
+  renderDeadlines();
+  // Render planner
   renderPlanner();
+}
+
+function renderDeadlines() {
+  const container = document.getElementById('deadlineContent');
+  const seasonKey = currentPlannerSeason;
+
+  // Filter programs that have this season and a real regDate
+  const seasonPrograms = programs.filter(p => {
+    if (!p.season || !p.regDate) return false;
+    if (!p.season.includes(seasonKey)) return false;
+    const rd = p.regDate.toLowerCase();
+    if (rd === 'rolling' || rd === 'by session' || rd === 'contact program' || rd === '') return false;
+    return true;
+  });
+
+  // Parse dates and sort by urgency
+  const now = new Date();
+  const currentYear = now.getFullYear();
+
+  function parseRegDate(dateStr) {
+    const cleaned = dateStr.replace(/~|deadline |start |register |registration |opens? |closed? /gi, '').trim();
+    // Try common formats
+    const formats = [
+      /^([A-Za-z]+)\s+(\d{1,2})(?:,?\s*(\d{4}))?$/,  // "Mar 20" or "Mar 20, 2026"
+      /^([A-Za-z]+)\s+(\d{1,2})\s*[-–]\s*(\d{1,2})$/,  // "Apr 25-26"
+      /^([A-Za-z]+)\s+(\d{1,2})\s*[-–]\s*([A-Za-z]+)\s+(\d{1,2})$/,  // "Jun 1 - Jul 15"
+    ];
+    const m1 = cleaned.match(formats[0]);
+    if (m1) {
+      const d = new Date(`${m1[1]} ${m1[2]}, ${m1[3] || currentYear}`);
+      if (!isNaN(d)) return d;
+    }
+    const m2 = cleaned.match(formats[1]);
+    if (m2) {
+      const d = new Date(`${m2[1]} ${m2[2]}, ${currentYear}`);
+      if (!isNaN(d)) return d;
+    }
+    const m3 = cleaned.match(formats[2]);
+    if (m3) {
+      const d = new Date(`${m3[1]} ${m3[2]}, ${currentYear}`);
+      if (!isNaN(d)) return d;
+    }
+    // Try month-only: "Late Jan", "Early Apr", "~Oct"
+    const monthMatch = cleaned.match(/([A-Za-z]{3,})/);
+    if (monthMatch) {
+      const d = new Date(`${monthMatch[1]} 15, ${currentYear}`);
+      if (!isNaN(d)) return d;
+    }
+    return null;
+  }
+
+  function getUrgency(date) {
+    if (!date) return { label: 'TBD', cls: 'upcoming' };
+    const diff = Math.ceil((date - now) / (1000 * 60 * 60 * 24));
+    if (diff < 0) return { label: 'Passed', cls: 'upcoming' };
+    if (diff <= 3) return { label: `${diff}d left`, cls: 'urgent' };
+    if (diff <= 14) return { label: `${diff}d left`, cls: 'soon' };
+    if (diff <= 60) return { label: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), cls: 'open' };
+    return { label: date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), cls: 'upcoming' };
+  }
+
+  // Build deadline items
+  let items = seasonPrograms.map(p => {
+    const parsed = parseRegDate(p.regDate);
+    const urgency = getUrgency(parsed);
+    return { name: p.name, org: p.org, regDate: p.regDate, parsed, urgency, sport: p.sport };
+  });
+
+  // Sort: urgent first, then soon, then by date
+  const urgencyOrder = { urgent: 0, soon: 1, open: 2, upcoming: 3 };
+  items.sort((a, b) => {
+    const oa = urgencyOrder[a.urgency.cls] ?? 4;
+    const ob = urgencyOrder[b.urgency.cls] ?? 4;
+    if (oa !== ob) return oa - ob;
+    if (a.parsed && b.parsed) return a.parsed - b.parsed;
+    if (a.parsed) return -1;
+    if (b.parsed) return 1;
+    return 0;
+  });
+
+  // Filter out passed deadlines unless nothing else
+  const active = items.filter(i => i.urgency.label !== 'Passed');
+  if (active.length > 0) items = active;
+
+  // Cap at 8 items
+  items = items.slice(0, 8);
+
+  if (items.length === 0) {
+    container.innerHTML = `<div class="deadline-grid"><div class="deadline-empty">No specific registration deadlines found for ${PLANNER_SEASONS[currentPlannerSeason].label}. Many programs have rolling registration &mdash; browse programs above to find them.</div></div>`;
+    return;
+  }
+
+  let html = '<div class="deadline-grid">';
+  items.forEach(item => {
+    const sportIcon = sportConfig[item.sport] ? sportConfig[item.sport].icon : '';
+    html += `<div class="deadline-card" onclick="document.getElementById('searchInput').value='${item.name.replace(/'/g,"").substring(0,30)}';filterAndRender();window.scrollTo({top:document.getElementById('sports').offsetTop-80,behavior:'smooth'})">
+      <div class="dl-info">
+        <div class="dl-name">${sportIcon ? sportIcon + ' ' : ''}${item.name}</div>
+        <div class="dl-org">${item.org} &bull; ${item.regDate}</div>
+      </div>
+      <div class="dl-badge ${item.urgency.cls}">${item.urgency.label}</div>
+    </div>`;
+  });
+  html += '</div>';
+  container.innerHTML = html;
 }
 
 function renderPlanner() {
@@ -1967,28 +2038,17 @@ function renderPlanner() {
   const weeks = seasonData.weeks;
   const weekCount = weeks.length;
 
-  // Season tabs
-  let tabsHtml = '<div class="planner-tabs">';
-  Object.keys(PLANNER_SEASONS).forEach(key => {
-    const s = PLANNER_SEASONS[key];
-    const activeClass = key === currentPlannerSeason ? ' active' : '';
-    tabsHtml += `<button class="planner-tab${activeClass}" onclick="switchPlannerSeason('${key}')">${s.label}<br><span style="font-size:0.7rem;font-weight:400;opacity:0.8">${s.sublabel}</span></button>`;
-  });
-  tabsHtml += '</div>';
-
   if (plan.length === 0) {
-    container.innerHTML = tabsHtml + `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">
+    container.innerHTML = `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">
       <div class="planner-header"></div>
       ${weeks.map(w => `<div class="planner-header">${w}</div>`).join('')}
-      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start planning your ${seasonData.label.toLowerCase()}!</div>
+      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start building your ${seasonData.label.toLowerCase()} schedule!</div>
     </div></div>`;
     return;
   }
 
-  // Determine rows: group by kidId
   const kidIds = [...new Set(plan.map(p => p.kidId))];
-  let html = tabsHtml + `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">`;
-  // Header row
+  let html = `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">`;
   html += '<div class="planner-header"></div>';
   weeks.forEach(w => { html += `<div class="planner-header">${w}</div>`; });
 
@@ -1998,11 +2058,9 @@ function renderPlanner() {
     const dotColor = kid ? kid.color : '#52b788';
     const kidPlans = plan.filter(p => p.kidId === kidId);
 
-    // Count how many programs occupy each week for conflict detection
     const weekCounts = new Array(weekCount).fill(0);
     kidPlans.forEach(p => { (p.weeks||[]).forEach(w => { weekCounts[w]++; }); });
 
-    // For each program belonging to this kid, render a row
     kidPlans.forEach((p, pi) => {
       if (pi === 0) {
         html += `<div class="planner-kid-label"><div class="planner-kid-dot" style="background:${dotColor}"></div>${label}</div>`;
@@ -2013,7 +2071,6 @@ function renderPlanner() {
       let weekIdx = 0;
       while (weekIdx < weekCount) {
         if (pWeeks.includes(weekIdx)) {
-          // Find consecutive span
           let spanStart = weekIdx;
           while (weekIdx < weekCount && pWeeks.includes(weekIdx)) weekIdx++;
           let spanLen = weekIdx - spanStart;
@@ -2041,14 +2098,14 @@ function clearPlan(mode) {
   if (mode === 'all') {
     if (confirm('Clear your plan for ALL seasons?')) {
       localStorage.removeItem('nys-plan');
-      renderPlanner();
+      renderTimeline();
     }
   } else {
     const seasonLabel = PLANNER_SEASONS[currentPlannerSeason].label;
     if (confirm('Clear your plan for ' + seasonLabel + '?')) {
       const plan = getPlan().filter(p => p.season !== currentPlannerSeason);
       savePlan(plan);
-      renderPlanner();
+      renderTimeline();
     }
   }
 }
@@ -2172,21 +2229,16 @@ function savePlanEntry(programName, programSport) {
   savePlan(plan);
   closePlanPopup();
 
-  // Switch planner to the season that was just added
+  // Switch to the season that was just added and scroll to planner
   currentPlannerSeason = season;
-  renderPlanner();
-
-  // Open planner if not open
-  const section = document.getElementById('plannerSection');
-  if (!section.classList.contains('open')) {
-    togglePlanner();
-  }
+  renderTimeline();
+  document.getElementById('timeline').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ===== INIT =====
 renderAll(programs);
 renderKidsBar();
-renderPlanner();
+renderTimeline();
 </script>
 </body>
 </html>
