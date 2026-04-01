@@ -140,11 +140,16 @@ a:hover { color: #1b4332; }
 .founder-role {
   font-size: 0.82rem; color: var(--slate); font-weight: 500;
 }
-.founder-quote {
-  margin-top: 12px; font-style: italic; font-size: 0.85rem;
-  color: var(--green-deep); font-weight: 500; line-height: 1.5;
-  padding: 10px 16px; background: var(--green-pale); border-radius: 8px;
-  border-left: 3px solid var(--green-main);
+.quote-block {
+  text-align: center; padding: 32px 20px; margin-bottom: 40px;
+}
+.quote-block p {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem; font-weight: 800; font-style: italic;
+  color: var(--green-deep); line-height: 1.5; margin-bottom: 8px;
+}
+.quote-attr {
+  font-size: 0.85rem; color: var(--slate); font-weight: 500;
 }
 
 .coming-soon {
@@ -196,7 +201,7 @@ a:hover { color: #1b4332; }
 <!-- HERO -->
 <section class="about-hero">
   <h1>About Us</h1>
-  <p class="subtitle">Newton Youth Sports was built by Newton parents who got tired of Googling 15&nbsp;different websites to find the right basketball league &mdash; the <em>right</em>&nbsp;fit.</p>
+  <p class="subtitle">Built by Newton parents who got tired of searching<br>15 different websites just to find the right program.</p>
 </section>
 
 <!-- CONTENT -->
@@ -208,6 +213,11 @@ a:hover { color: #1b4332; }
     <p>We built Newton Youth Sports to put everything in one place. Every program, every season, every age group. Search, filter, compare, and plan &mdash; all without creating an account or downloading an app.</p>
   </div>
 
+  <div class="quote-block">
+    <p>"You don't know what you don't know."</p>
+    <span class="quote-attr">&mdash; Seth Newman, Co-Founder</span>
+  </div>
+
   <div class="about-card">
     <h2>Who We Are</h2>
     <p>Newton Youth Sports was founded by two Newton community members who saw a gap and decided to fill it.</p>
@@ -217,7 +227,6 @@ a:hover { color: #1b4332; }
         <div class="founder-icon"><img src="sn.jpeg" alt="Seth Newman"></div>
         <div class="founder-name">Seth Newman</div>
         <div class="founder-role">Co-Founder</div>
-        <div class="founder-quote">"You don't know what you don't know."</div>
       </div>
       <div class="founder-card">
         <div class="founder-icon"><img src="charlie-morris.png" alt="Charlie Morris" style="object-position: center 0%; transform: scale(1.2);"></div>
