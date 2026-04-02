@@ -2397,7 +2397,7 @@ function renderDeadlines() {
   let items = seasonPrograms.map(p => {
     const parsed = parseRegDate(p.regDate);
     const urgency = getUrgency(parsed);
-    return { name: p.name, org: p.org, regDate: p.regDate, parsed, urgency, sport: p.sport };
+    return { name: p.name, org: p.org, regDate: p.regDate, parsed, urgency, sport: p.sport, website: p.website };
   });
 
   // Sort: urgent first, then soon, then by date
@@ -2427,13 +2427,13 @@ function renderDeadlines() {
   let html = '<div class="deadline-grid">';
   items.forEach(item => {
     const sportIcon = sportConfig[item.sport] ? sportConfig[item.sport].icon : '';
-    html += `<div class="deadline-card" onclick="document.getElementById('searchInput').value='${item.name.replace(/'/g,"").substring(0,30)}';filterAndRender();window.scrollTo({top:document.getElementById('sports').offsetTop-80,behavior:'smooth'})">
+    html += `<a class="deadline-card" href="${item.website || '#'}" target="_blank" rel="noopener" style="text-decoration:none;color:inherit;">
       <div class="dl-info">
         <div class="dl-name">${sportIcon ? sportIcon + ' ' : ''}${item.name}</div>
         <div class="dl-org">${item.org} &bull; ${item.regDate}</div>
       </div>
       <div class="dl-badge ${item.urgency.cls}">${item.urgency.label}</div>
-    </div>`;
+    </a>`;
   });
   html += '</div>';
   container.innerHTML = html;
