@@ -90,6 +90,50 @@ a:hover { color: #1b4332; }
 .mobile-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--green-deep); cursor: pointer; }
 .mobile-nav-overlay { display: none; }
 
+/* KIDS PANEL */
+.kids-panel {
+  position: fixed; top: 0; right: -400px; width: 380px; max-width: 90vw;
+  height: 100vh; background: white; z-index: 2000;
+  box-shadow: -4px 0 30px rgba(0,0,0,0.15);
+  transition: right 0.3s ease; padding: 32px 24px; overflow-y: auto;
+}
+.kids-panel.open { right: 0; }
+.kids-panel-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.4);
+  z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.3s;
+}
+.kids-panel-overlay.open { opacity: 1; visibility: visible; }
+.kids-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--green-deep); margin-bottom: 24px; }
+.kids-panel-close { position: absolute; top: 16px; right: 16px; background: none; font-size: 1.5rem; color: var(--slate); cursor: pointer; line-height: 1; border: none; }
+.kids-panel-close:hover { color: var(--navy); }
+.kid-form { background: var(--light-bg); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.kid-form h3 { font-size: 0.95rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+.kid-form-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.kid-form-row input, .kid-form-row select {
+  flex: 1; min-width: 100px; padding: 10px 14px; border: 1.5px solid #dde2e5;
+  border-radius: 8px; font-size: 0.88rem; background: white; color: var(--navy);
+}
+.kid-form-row input:focus, .kid-form-row select:focus { outline: none; border-color: var(--green-main); }
+.kid-add-btn {
+  width: 100%; padding: 12px; background: var(--green-main); color: white;
+  font-weight: 700; font-size: 0.9rem; border-radius: 8px; border: none; cursor: pointer;
+}
+.kid-add-btn:hover { background: var(--green-deep); }
+.kid-list { display: flex; flex-direction: column; gap: 10px; }
+.kid-list-item {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  border-radius: 10px; background: var(--light-bg); border: 1px solid rgba(0,0,0,0.06);
+}
+.kid-list-dot { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+.kid-list-info { flex: 1; }
+.kid-list-name { font-weight: 700; font-size: 0.92rem; color: var(--navy); }
+.kid-list-meta { font-size: 0.78rem; color: var(--slate); }
+.kid-remove-btn {
+  background: none; border: none; color: #e53935; font-size: 0.78rem;
+  font-weight: 600; cursor: pointer; padding: 4px 10px; border-radius: 6px;
+}
+.kid-remove-btn:hover { background: #ffebee; }
+
 /* HERO */
 .about-hero {
   background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
@@ -244,7 +288,7 @@ a:hover { color: #1b4332; }
       <a href="newton-facts.html">Newton Facts</a>
       <a href="program-types-guide.html">Parent Guide</a>
       <a href="about.html">About</a>
-      <a href="index.html" class="nav-kids-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>My Kids</a>
+      <a href="#" class="nav-kids-link" onclick="event.preventDefault();openKidsPanel()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>My Kids</a>
       <a href="mailto:contact.newtonyouthsports@gmail.com?subject=Question%20about%20a%20youth%20sports%20program" class="nav-help">Need Help?</a>
       <a href="index.html#submit" class="nav-cta">Submit a Program</a>
     </div>
@@ -254,6 +298,36 @@ a:hover { color: #1b4332; }
   </div>
 </nav>
 <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+
+<!-- KIDS PANEL -->
+<div class="kids-panel-overlay" id="kidsPanelOverlay" onclick="closeKidsPanel()"></div>
+<div class="kids-panel" id="kidsPanel">
+  <button class="kids-panel-close" onclick="closeKidsPanel()">&times;</button>
+  <h2>My Kids</h2>
+  <div class="kid-form">
+    <h3>Add a Child</h3>
+    <div class="kid-form-row"><input type="text" id="kidNameInput" placeholder="Name"></div>
+    <div class="kid-form-row">
+      <select id="kidGradeInput">
+        <option value="">Grade...</option>
+        <option value="Pre-K">Pre-K</option><option value="Kindergarten">Kindergarten</option>
+        <option value="Grade 1">Grade 1</option><option value="Grade 2">Grade 2</option>
+        <option value="Grade 3">Grade 3</option><option value="Grade 4">Grade 4</option>
+        <option value="Grade 5">Grade 5</option><option value="Grade 6">Grade 6</option>
+        <option value="Grade 7">Grade 7</option><option value="Grade 8">Grade 8</option>
+        <option value="Grade 9">Grade 9</option><option value="Grade 10">Grade 10</option>
+        <option value="Grade 11">Grade 11</option><option value="Grade 12">Grade 12</option>
+      </select>
+      <select id="kidGenderInput">
+        <option value="">Gender...</option>
+        <option value="Boy">Boy</option><option value="Girl">Girl</option>
+        <option value="No Preference">No Preference</option>
+      </select>
+    </div>
+    <button class="kid-add-btn" onclick="addKid()">Add Child</button>
+  </div>
+  <div class="kid-list" id="kidList"></div>
+</div>
 
 <!-- HERO -->
 <section class="about-hero">
@@ -318,6 +392,58 @@ function toggleMobileNav() {
 }
 document.getElementById('mobileNavOverlay').addEventListener('mousedown', toggleMobileNav);
 document.getElementById('mobileNavOverlay').addEventListener('touchstart', toggleMobileNav, {passive:true});
+
+// Kids panel
+const KID_COLORS = ['#e8a838','#90caf9','#52b788','#ce93d8','#ff8a65','#4dd0e1'];
+function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
+function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
+function openKidsPanel() {
+  document.getElementById('kidsPanel').classList.add('open');
+  document.getElementById('kidsPanelOverlay').classList.add('open');
+  renderKidList();
+}
+function closeKidsPanel() {
+  document.getElementById('kidsPanel').classList.remove('open');
+  document.getElementById('kidsPanelOverlay').classList.remove('open');
+}
+function addKid() {
+  const name = document.getElementById('kidNameInput').value.trim();
+  const grade = document.getElementById('kidGradeInput').value;
+  const gender = document.getElementById('kidGenderInput').value;
+  if (!name || !grade || !gender) { alert('Please fill in all fields.'); return; }
+  const kids = getKidProfiles();
+  const id = Date.now();
+  const color = KID_COLORS[kids.length % KID_COLORS.length];
+  kids.push({ id, name, grade, gender, color });
+  saveKidProfiles(kids);
+  document.getElementById('kidNameInput').value = '';
+  document.getElementById('kidGradeInput').value = '';
+  document.getElementById('kidGenderInput').value = '';
+  renderKidList();
+}
+function removeKid(id) {
+  let kids = getKidProfiles().filter(k => k.id !== id);
+  saveKidProfiles(kids);
+  renderKidList();
+}
+function renderKidList() {
+  const kids = getKidProfiles();
+  const container = document.getElementById('kidList');
+  if (kids.length === 0) {
+    container.innerHTML = '<p style="color:var(--slate);font-size:0.85rem;text-align:center;padding:16px;">No kids added yet. Add your children above to personalize program filtering.</p>';
+    return;
+  }
+  container.innerHTML = kids.map(k => `
+    <div class="kid-list-item">
+      <div class="kid-list-dot" style="background:${k.color}"></div>
+      <div class="kid-list-info">
+        <div class="kid-list-name">${k.name}</div>
+        <div class="kid-list-meta">${k.grade} &middot; ${k.gender}</div>
+      </div>
+      <button class="kid-remove-btn" onclick="removeKid(${k.id})">Remove</button>
+    </div>
+  `).join('');
+}
 </script>
 </body>
 </html>
