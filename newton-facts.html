@@ -250,7 +250,10 @@ a:hover { color: #1b4332; }
 /* RESPONSIVE */
 @media (max-width: 600px) {
   .toc-inner ol { grid-template-columns: 1fr; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 100%; }
+  .stat-card { padding: 14px 10px; word-break: break-word; }
+  .stat-card .stat-num { font-size: 1.5rem; }
+  .section-body { overflow-x: hidden; }
   .section-header, .section-body { padding-left: 20px; padding-right: 20px; }
   .facts-hero { padding: 100px 20px 48px; }
 }
