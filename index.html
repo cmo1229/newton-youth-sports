@@ -1986,7 +1986,6 @@ window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
   document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 600);
   updateScrollSpy();
-  updateNavScrollSpy();
 });
 
 // Sport nav scroll spy (throttled)
@@ -2028,68 +2027,53 @@ function updateScrollSpy() {
 }
 
 // Nav link scroll spy — moves the green glow between Home, Calendar
-let navActiveSection = 'home';
-function updateNavScrollSpy() {
+function initNavScrollSpy() {
   const navHome = document.getElementById('navHome');
   const navCalendar = document.getElementById('navCalendar');
   const navCta = document.querySelector('.nav-cta');
   if (!navHome || !navCalendar || !navCta) return;
 
-  const timeline = document.getElementById('timeline');
-  const submit = document.getElementById('submit');
-  const offset = 150;
-  let newActive = 'home';
-
-  if (submit) {
-    const r = submit.getBoundingClientRect();
-    if (r.top <= offset) newActive = 'submit';
-  }
-  if (timeline) {
-    const r = timeline.getBoundingClientRect();
-    if (r.top <= offset) newActive = 'calendar';
-  }
-
-  if (newActive !== navActiveSection) {
-    navActiveSection = newActive;
-    // Reset everything
+  // Start with Home active
+  function setActive(section) {
     navHome.classList.remove('nav-home', 'nav-active');
     navCalendar.classList.remove('nav-active');
     navCta.classList.remove('nav-active');
 
-    if (newActive === 'home') {
+    if (section === 'home') {
       navHome.classList.add('nav-home');
-    } else if (newActive === 'calendar') {
+    } else if (section === 'calendar') {
       navCalendar.classList.add('nav-active');
-    } else if (newActive === 'submit') {
+    } else if (section === 'submit') {
       navCalendar.classList.add('nav-active');
       navCta.classList.add('nav-active');
     }
   }
+
+  // Use IntersectionObserver on Calendar section to trigger the glow shift
+  const timelineEl = document.getElementById('timeline');
+  if (timelineEl) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // When Calendar comes into view at the top
+          setActive(entry.isIntersecting ? 'calendar' : 'home');
+        });
+      },
+      { rootMargin: '-150px 0px -60% 0px', threshold: 0 }
+    );
+    observer.observe(timelineEl);
+  }
+
+  // Click handler — immediately set active state on click
+  const anchorLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  anchorLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      setActive(link.id === 'navCalendar' ? 'calendar' : 'home');
+    });
+  });
 }
 
-// Click-based nav active state — immediately move green glow on nav click
-document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-  link.addEventListener('click', () => {
-    const navHome = document.getElementById('navHome');
-    const navCalendar = document.getElementById('navCalendar');
-    const navCta = document.querySelector('.nav-cta');
-    if (!navHome || !navCalendar) return;
-
-    // Reset everything
-    navHome.classList.remove('nav-home', 'nav-active');
-    navCalendar.classList.remove('nav-active');
-    if (navCta) navCta.classList.remove('nav-active');
-
-    // Determine which section was clicked
-    if (link.id === 'navHome') {
-      navHome.classList.add('nav-home');
-      navActiveSection = 'home';
-    } else if (link.id === 'navCalendar') {
-      navCalendar.classList.add('nav-active');
-      navActiveSection = 'calendar';
-    }
-  });
-});
+document.addEventListener('DOMContentLoaded', initNavScrollSpy);
 
 function toggleMobileFilters() {
   const row = document.getElementById('filterRow');
