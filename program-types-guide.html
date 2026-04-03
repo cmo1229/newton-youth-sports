@@ -82,6 +82,11 @@ a:hover { color: #1b4332; }
   background: var(--green-pale); color: var(--green-deep); font-weight: 600;
 }
 .nav-links .nav-home:hover { background: var(--green-light); color: white; }
+.nav-links .nav-active {
+  background: var(--green-main); color: white; font-weight: 600;
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.25);
+}
+.nav-links .nav-active:hover { background: var(--green-deep); }
 .nav-kids-link {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 16px; border-radius: 8px; font-size: 0.88rem;
@@ -391,6 +396,23 @@ tbody tr:last-child td { border-bottom: none; }
 .guide-footer a { color: var(--green-light); }
 .guide-footer p + p { margin-top: 8px; }
 
+/* BACK TO TOP */
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--green-main); color: white;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transform: translateY(12px);
+  pointer-events: none; transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(45,106,79,0.35);
+  z-index: 500;
+}
+.back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
+.back-to-top:hover { background: var(--green-deep); }
+@media (max-width: 768px) {
+  .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; border-radius: 12px; }
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .nav-inner { height: 56px; padding: 0 16px; }
@@ -423,7 +445,6 @@ tbody tr:last-child td { border-bottom: none; }
   .pt-header, .pt-body { padding-left: 20px; padding-right: 20px; }
   .cell-label { display: block; }
   table { font-size: 0.82rem; }
-  th:first-child, td:first-child { position: sticky; left: 0; background: inherit; z-index: 1; }
   .guide-hero { padding: 100px 20px 48px; }
 }
 </style>
@@ -438,10 +459,10 @@ tbody tr:last-child td { border-bottom: none; }
       Newton Youth Sports
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="index.html" class="nav-home">Home</a>
+      <a href="index.html">Home</a>
       <a href="index.html#timeline">Calendar</a>
       <a href="newton-facts.html">Newton Facts</a>
-      <a href="program-types-guide.html">Parent Guide</a>
+      <a href="program-types-guide.html" class="nav-active">Parent Guide</a>
       <a href="about.html">About</a>
       <a href="#" class="nav-kids-link" onclick="event.preventDefault();openKidsPanel()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg>My Kids</a>
       <a href="mailto:contact.newtonyouthsports@gmail.com?subject=Question%20about%20a%20youth%20sports%20program" class="nav-help">Need Help?</a>
@@ -1457,6 +1478,11 @@ tbody tr:last-child td { border-bottom: none; }
 
 </div><!-- /guide-content -->
 
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
 <!-- FOOTER -->
 <footer class="guide-footer">
   <p><a href="index.html">Newton Youth Sports</a> &copy; 2026. Not affiliated with the City of Newton.</p>
@@ -1521,6 +1547,11 @@ function renderKidList() {
     </div>
   `).join('');
 }
+
+// Back to top scroll toggle
+window.addEventListener('scroll', () => {
+  document.getElementById('backToTop').classList.toggle('visible', window.scrollY > 300);
+});
 </script>
 </body>
 </html>
