@@ -83,10 +83,9 @@ a:hover { color: #1b4332; }
 }
 .nav-links .nav-home:hover { background: var(--green-light); color: white; }
 .nav-links .nav-active {
-  background: var(--green-main); color: white; font-weight: 600;
-  box-shadow: 0 0 0 3px rgba(45,106,79,0.25);
+  background: var(--green-pale); color: var(--green-deep); font-weight: 600;
 }
-.nav-links .nav-active:hover { background: var(--green-deep); }
+.nav-links .nav-active:hover { background: var(--green-light); color: white; }
 .nav-kids-link {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 16px; border-radius: 8px; font-size: 0.88rem;
@@ -309,17 +308,16 @@ a:hover { color: #1b4332; }
 
 /* BACK TO TOP */
 .back-to-top {
-  position: fixed; bottom: 28px; right: 28px;
-  width: 48px; height: 48px; border-radius: 14px;
+  position: fixed; bottom: 32px; right: 32px; z-index: 999;
+  width: 48px; height: 48px; border-radius: 12px;
   background: var(--green-main); color: white;
   display: flex; align-items: center; justify-content: center;
-  opacity: 0; transform: translateY(12px);
-  pointer-events: none; transition: all 0.3s;
-  box-shadow: 0 4px 16px rgba(45,106,79,0.35);
-  z-index: 500;
+  box-shadow: var(--shadow-md); opacity: 0; transform: translateY(20px);
+  transition: all 0.3s; pointer-events: none;
 }
 .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
 .back-to-top:hover { background: var(--green-deep); }
+
 @media (max-width: 768px) {
   .back-to-top { bottom: 20px; right: 20px; width: 44px; height: 44px; border-radius: 12px; }
 }
