@@ -2027,40 +2027,42 @@ function updateScrollSpy() {
   });
 }
 
-// Nav link scroll spy — moves the green glow between Home, Calendar, Submit
-let navActiveBtn = 'home';
+// Nav link scroll spy — moves the green glow between Home, Calendar
+let navActiveSection = 'home';
 function updateNavScrollSpy() {
   const navHome = document.getElementById('navHome');
   const navCalendar = document.getElementById('navCalendar');
-  if (!navHome || !navCalendar) return;
+  const navCta = document.querySelector('.nav-cta');
+  if (!navHome || !navCalendar || !navCta) return;
 
   const timeline = document.getElementById('timeline');
   const submit = document.getElementById('submit');
   const offset = 150;
-  let active = 'home';
+  let newActive = 'home';
 
   if (submit) {
     const r = submit.getBoundingClientRect();
-    if (r.top <= offset) active = 'submit';
+    if (r.top <= offset) newActive = 'submit';
   }
   if (timeline) {
     const r = timeline.getBoundingClientRect();
-    if (r.top <= offset) active = 'calendar';
+    if (r.top <= offset) newActive = 'calendar';
   }
 
-  if (active !== navActiveBtn) {
-    navActiveBtn = active;
-    const allNavLinks = document.querySelectorAll('.nav-links a, .nav-links button');
-    allNavLinks.forEach(a => a.classList.remove('nav-active'));
+  if (newActive !== navActiveSection) {
+    navActiveSection = newActive;
+    // Reset everything
+    navHome.classList.remove('nav-home', 'nav-active');
+    navCalendar.classList.remove('nav-active');
+    navCta.classList.remove('nav-active');
 
-    if (active === 'home') {
-      navHome.classList.add('nav-active');
-    } else if (active === 'calendar') {
+    if (newActive === 'home') {
+      navHome.classList.add('nav-home');
+    } else if (newActive === 'calendar') {
       navCalendar.classList.add('nav-active');
-    } else if (active === 'submit') {
-      // Submit a Program already has .nav-cta, add nav-active for glow
-      const navCta = document.querySelector('.nav-cta');
-      if (navCta) navCta.classList.add('nav-active');
+    } else if (newActive === 'submit') {
+      navCalendar.classList.add('nav-active');
+      navCta.classList.add('nav-active');
     }
   }
 }
@@ -2068,8 +2070,24 @@ function updateNavScrollSpy() {
 // Click-based nav active state — immediately move green glow on nav click
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
-    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('nav-active'));
-    link.classList.add('nav-active');
+    const navHome = document.getElementById('navHome');
+    const navCalendar = document.getElementById('navCalendar');
+    const navCta = document.querySelector('.nav-cta');
+    if (!navHome || !navCalendar) return;
+
+    // Reset everything
+    navHome.classList.remove('nav-home', 'nav-active');
+    navCalendar.classList.remove('nav-active');
+    if (navCta) navCta.classList.remove('nav-active');
+
+    // Determine which section was clicked
+    if (link.id === 'navHome') {
+      navHome.classList.add('nav-home');
+      navActiveSection = 'home';
+    } else if (link.id === 'navCalendar') {
+      navCalendar.classList.add('nav-active');
+      navActiveSection = 'calendar';
+    }
   });
 });
 
