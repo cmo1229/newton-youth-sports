@@ -1498,6 +1498,7 @@ const programs = [
   {sport:"swimming",name:"YMCA Swim Lessons",org:"West Suburban YMCA",desc:"Year-round swim lessons for all ages including Adaptive Swim for children with disabilities. Three indoor pools across two Newton locations. Financial assistance available.",ages:"6 months - Adult",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Contact YMCA",costRange:"under-200",location:"Church St / Wells Ave YMCA",website:"https://wsymca.org/swim-lessons",regDate:"By session",commitment:"1x/week",tags:["adaptive"]},
 
 	  {sport:"swimming",name:"Swim Angelfish Adaptive Aquatics",org:"Swim Angelfish",desc:"Specialized swim instruction for children with disabilities, sensory challenges, anxiety, and motor coordination difficulties. Certified adaptive swim coaches use the Swim Whisperers methodology. Private and small group lessons.",ages:"Ages 3-18",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"adaptive",cost:"Contact for pricing",costRange:"200-500",location:"Multiple locations in Greater Boston area",website:"https://swimangelfish.com/",regDate:"Rolling",commitment:"1x/week",tags:["adaptive"]},
+  {sport:"swimming",name:"Goldfish Swim School",org:"Goldfish Swim School",desc:"Indoor year-round swim lessons for ages 4 months to 12 years. Small classes (4:1 ratio) in a 90° shiver-free pool. Play-based curriculum with Mini, Junior, Glider, Pro, and Swim Force levels. Perpetual lessons model — enroll anytime. Free trial lesson available.",ages:"4 months – 12 years",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Contact for pricing",costRange:"200-500",location:"Brookline, MA (serves Newton area)",website:"https://goldfishswimschool.com/brookline/area/newton-ma/",regDate:"Rolling (perpetual lessons)",commitment:"1x/week",phone:"(781) 417-5315"},
 
   {sport:"swimming",name:"JCC Swim Lessons (Lenny Krayzelburg Swim Academy)",org:"JCC Greater Boston",desc:"Year-round swim lessons using the SwimRight® Method with 8 progression levels. Parent-Tot classes for ages 3 months-2 years, group lessons ages 3+. Small class sizes (4-6 kids). Indoor 25-meter, 6-lane pool kept at 83°F.",ages:"3 months - Adult",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["fall","winter","spring","summer"],level:"introductory",cost:"Contact JCC",costRange:"200-500",location:"333 Nahanton St, Newton",website:"https://www.bostonjcc.org/program/swim-lessons/",regDate:"Rolling enrollment",commitment:"1x/week"},
   {sport:"swimming",name:"JCC Outdoor Pool (Summer)",org:"JCC Greater Boston",desc:"25-yard seasonal outdoor pool with diving boards, zero-depth entry, inflatable slide, and dedicated kiddie pool. Shaded areas, picnic tables, and playground on site. Open Memorial Day through Labor Day. JCC membership required.",ages:"All ages",ageCategory:["prek","k-2","3-5","6-8","9-12"],season:["summer"],level:"recreational",cost:"$967-$1,462/family",costRange:"over-500",location:"333 Nahanton St, Newton",website:"https://www.bostonjcc.org/program/outdoor-pool/",regDate:"Spring registration",commitment:"Seasonal membership"},
@@ -1817,29 +1818,50 @@ function getFiltered() {
   const sort = document.getElementById('sortFilter').value;
   const sportFilterVal = document.getElementById('sportFilter').value;
   const activeSport = sportFilterVal || (document.querySelector('.sq-btn.active')?.dataset.sport || 'all');
-  const ageCategory = gradeToAgeCategory(grade);
+  // Kid-based filtering overrides grade/gender dropdowns when active
+  let kidFilterActive = false;
+  if (selectedKidIds && selectedKidIds.size > 0) {
+    const kids = getKidProfiles();
+    const selectedKids = kids.filter(k => selectedKidIds.has(k.id));
+    if (selectedKids.length > 0) kidFilterActive = true;
+  }
+
 
   let filtered = programs.filter(p => {
     if (activeSport !== 'all' && p.sport !== activeSport) return false;
     if (search && !(p.name.toLowerCase().includes(search) || p.org.toLowerCase().includes(search) || p.desc.toLowerCase().includes(search) || p.sport.toLowerCase().includes(search) || p.location.toLowerCase().includes(search))) return false;
-    if (ageCategory && !(p.ageCategory||[]).includes(ageCategory)) return false;
-    if (gender) {
-      const tags = p.tags || [];
-      const nameLower = p.name.toLowerCase();
-      const descLower = p.desc.toLowerCase();
-      const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
-      const isBoysOnly = tags.includes('boys') || ((nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club') && !nameLower.includes('girls'));
-      if (gender === 'girls') {
-        // Show girls-only + co-ed programs (exclude boys-only)
-        if (isBoysOnly) return false;
-      }
-      if (gender === 'boys') {
-        // Show boys-only + co-ed programs (exclude girls-only)
-        if (isGirlsOnly) return false;
-      }
-      if (gender === 'coed') {
-        // Show only programs that aren't gender-specific
-        if (isGirlsOnly || isBoysOnly) return false;
+    // Kid-based vs. dropdown-based grade/gender filtering
+    if (kidFilterActive) {
+      const kids = getKidProfiles();
+      const selectedKids = kids.filter(k => selectedKidIds.has(k.id));
+      const matchesAnyKid = selectedKids.some(kid => {
+        const kidAgeCategory = gradeToAgeCategory(gradeToFilterValue(kid.grade));
+        if (kidAgeCategory && !(p.ageCategory||[]).includes(kidAgeCategory)) return false;
+        const kidGender = kid.gender === 'Girl' ? 'girls' : kid.gender === 'Boy' ? 'boys' : '';
+        if (kidGender) {
+          const tags = p.tags || [];
+          const nameLower = p.name.toLowerCase();
+          const descLower = p.desc.toLowerCase();
+          const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
+          const isBoysOnly = tags.includes('boys') || ((nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club') && !nameLower.includes('girls'));
+          if (kidGender === 'girls' && isBoysOnly) return false;
+          if (kidGender === 'boys' && isGirlsOnly) return false;
+        }
+        return true;
+      });
+      if (!matchesAnyKid) return false;
+    } else {
+      const ageCategory = gradeToAgeCategory(grade);
+      if (ageCategory && !(p.ageCategory||[]).includes(ageCategory)) return false;
+      if (gender) {
+        const tags = p.tags || [];
+        const nameLower = p.name.toLowerCase();
+        const descLower = p.desc.toLowerCase();
+        const isGirlsOnly = tags.includes('girls') || (nameLower.includes('girl') && !nameLower.includes('boys & girls'));
+        const isBoysOnly = tags.includes('boys') || ((nameLower.includes('boy') || descLower.includes('boy')) && !nameLower.includes('boys & girls club') && !descLower.includes('boys & girls club') && !nameLower.includes('girls'));
+        if (gender === 'girls') { if (isBoysOnly) return false; }
+        if (gender === 'boys') { if (isGirlsOnly) return false; }
+        if (gender === 'coed') { if (isGirlsOnly || isBoysOnly) return false; }
       }
     }
     if (season) {
@@ -2241,6 +2263,12 @@ function addKid() {
   document.getElementById('kidNameInput').value = '';
   document.getElementById('kidGradeInput').value = '';
   document.getElementById('kidGenderInput').value = '';
+  // Auto-include new kid in filter
+  if (selectedKidIds) {
+    selectedKidIds.add(id);
+  } else {
+    selectedKidIds = new Set(kids.map(k => k.id));
+  }
   renderKidList();
   renderKidsBar();
   renderPlanner();
@@ -2254,6 +2282,7 @@ function removeKid(id) {
   let plan = getPlan();
   plan = plan.filter(p => p.kidId !== id);
   savePlan(plan);
+  if (selectedKidIds) { selectedKidIds.delete(id); if (selectedKidIds.size === 0) selectedKidIds = null; }
   renderKidList();
   renderKidsBar();
   renderPlanner();
@@ -2295,24 +2324,28 @@ function gradeShortLabel(grade) {
   return grade.replace('Grade ', 'Gr ');
 }
 
-let activeKidId = null;
+let selectedKidIds = null; // null=show all programs, Set=filter by union of selected kids
 
 function renderKidsBar() {
   const kids = getKidProfiles();
   const bar = document.getElementById('kidsBar');
   if (kids.length === 0) {
     bar.style.display = 'none';
-    activeKidId = null;
+    selectedKidIds = null;
     return;
   }
   bar.style.display = 'flex';
-  const allActive = activeKidId === null ? ' active' : '';
-  let html = `<span class="kid-pill${allActive}" style="background:#52b788" onclick="selectKidPill(null)">All</span>`;
+  const allKidsSelected = selectedKidIds && selectedKidIds.size === kids.length;
+  const allKidsActive = allKidsSelected ? ' active' : '';
+  let html = `<span class="kid-pill${allKidsActive}" style="background:#52b788" onclick="selectKidPill('all-kids')">All Kids</span>`;
   kids.forEach(k => {
-    const isActive = activeKidId === k.id ? ' active' : '';
-    html += `<span class="kid-pill${isActive}" style="background:${k.color}" data-kid-id="${k.id}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender}) <button onclick="event.stopPropagation();removeKidFromBar(${k.id})" style="background:none;border:none;color:rgba(255,255,255,0.7);font-size:0.9rem;cursor:pointer;padding:0 0 0 4px;line-height:1;">&times;</button></span>`;
+    const isActive = (selectedKidIds && selectedKidIds.has(k.id)) ? ' active' : '';
+    html += `<span class="kid-pill${isActive}" style="background:${k.color}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
   });
   html += `<button class="add-kid-btn" onclick="openKidsPanel()">+ Add Child</button>`;
+  if (selectedKidIds && selectedKidIds.size > 0) {
+    html += ` <button class="add-kid-btn" style="background:transparent;border:1px solid #ccc;color:var(--slate);font-size:0.75rem;" onclick="selectKidPill('clear')" title="Show all programs (remove kid filter)">Show All Programs</button>`;
+  }
   bar.innerHTML = html;
 }
 
@@ -2320,7 +2353,10 @@ function removeKidFromBar(kidId) {
   let kids = getKidProfiles();
   kids = kids.filter(k => k.id !== kidId);
   localStorage.setItem('nys-kids', JSON.stringify(kids));
-  if (activeKidId === kidId) activeKidId = null;
+  if (selectedKidIds) {
+    selectedKidIds.delete(kidId);
+    if (selectedKidIds.size === 0) selectedKidIds = null;
+  }
   document.getElementById('gradeFilter').value = '';
   document.getElementById('genderFilter').value = '';
   renderKidsBar();
@@ -2333,19 +2369,28 @@ function removeKidFromBar(kidId) {
 }
 
 function selectKidPill(kidId) {
-  activeKidId = kidId;
-  if (kidId === null) {
-    // Reset grade and gender filters
-    document.getElementById('gradeFilter').value = '';
-    document.getElementById('genderFilter').value = '';
+  const kids = getKidProfiles();
+  if (kidId === 'all-kids') {
+    // Select all kids
+    selectedKidIds = new Set(kids.map(k => k.id));
+  } else if (kidId === 'clear') {
+    // Show all programs (no kid filter)
+    selectedKidIds = null;
   } else {
-    const kids = getKidProfiles();
-    const kid = kids.find(k => k.id === kidId);
-    if (kid) {
-      document.getElementById('gradeFilter').value = gradeToFilterValue(kid.grade);
-      document.getElementById('genderFilter').value = kid.gender === 'Girl' ? 'girls' : kid.gender === 'Boy' ? 'boys' : '';
+    // Toggle individual kid
+    if (!selectedKidIds) {
+      selectedKidIds = new Set();
+    }
+    if (selectedKidIds.has(kidId)) {
+      selectedKidIds.delete(kidId);
+      if (selectedKidIds.size === 0) selectedKidIds = null;
+    } else {
+      selectedKidIds.add(kidId);
     }
   }
+  // Clear dropdown filters — kid filtering is handled separately
+  document.getElementById('gradeFilter').value = '';
+  document.getElementById('genderFilter').value = '';
   renderKidsBar();
   applyFilters();
 }
@@ -2825,6 +2870,11 @@ function showShareToast(msg) {
 
 // ===== INIT =====
 renderAll(programs);
+// Initialize kid filtering to all kids on page load
+(() => {
+  const kids = getKidProfiles();
+  if (kids.length > 0) selectedKidIds = new Set(kids.map(k => k.id));
+})();
 renderKidsBar();
 renderTimeline();
 </script>
