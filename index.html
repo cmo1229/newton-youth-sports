@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Newton Youth Sports & Programs">
 <meta name="twitter:description" content="The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232d6a4f'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231c487a'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -40,16 +40,16 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  --green-deep: #1b4332;
-  --green-main: #2d6a4f;
-  --green-mid: #40916c;
-  --green-light: #52b788;
-  --green-pale: #d8f3dc;
-  --gold: #e8a838;
-  --gold-light: #fceabb;
+  --blue-deep: #0b1d2e;
+  --blue-main: #1c487a;
+  --blue-mid: #2d6cb8;
+  --blue-light: #5196d6;
+  --blue-pale: #dae6f2;
+  --orange: #e8611a;
+  --orange-light: #fde0cf;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f0f4f0;
+  --light-bg: #f2f4f8;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -76,10 +76,10 @@ input, select, textarea { font-family: inherit; }
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
-  font-weight: 800; font-size: 1.15rem; color: var(--green-deep);
+  font-weight: 800; font-size: 1.15rem; color: var(--blue-deep);
 }
 .nav-logo .logo-icon {
-  width: 38px; height: 38px; background: var(--green-main);
+  width: 38px; height: 38px; background: var(--blue-main);
   border-radius: 10px; display: flex; align-items: center; justify-content: center;
   color: white; font-weight: 900; font-size: 1.1rem;
 }
@@ -88,27 +88,27 @@ input, select, textarea { font-family: inherit; }
   padding: 8px 16px; border-radius: 8px; font-size: 0.88rem;
   font-weight: 500; color: var(--slate); transition: all 0.2s;
 }
-.nav-links a:hover { background: var(--green-pale); color: var(--green-deep); }
-.nav-links .nav-home { background: var(--green-pale); color: var(--green-deep); font-weight: 600; }
-.nav-links .nav-home:hover { background: var(--green-light); color: white; }
-.nav-links .nav-active { background: var(--green-pale); color: var(--green-deep); font-weight: 600; }
-.nav-links .nav-active:hover { background: var(--green-light); color: white; }
+.nav-links a:hover { background: var(--blue-pale); color: var(--blue-deep); }
+.nav-links .nav-home { background: var(--blue-pale); color: var(--blue-deep); font-weight: 600; }
+.nav-links .nav-home:hover { background: var(--blue-light); color: white; }
+.nav-links .nav-active { background: var(--blue-pale); color: var(--blue-deep); font-weight: 600; }
+.nav-links .nav-active:hover { background: var(--blue-light); color: white; }
 .nav-links .nav-cta {
-  background: var(--green-main); color: white; font-weight: 600;
+  background: var(--blue-main); color: white; font-weight: 600;
   padding: 8px 20px; margin-left: 8px;
 }
-.nav-links .nav-cta:hover { background: var(--green-deep); }
+.nav-links .nav-cta:hover { background: var(--blue-deep); }
 .nav-links .nav-help {
-  color: var(--gold); font-weight: 600;
+  color: var(--orange); font-weight: 600;
 }
-.nav-links .nav-help:hover { background: rgba(232,168,56,0.1); color: #d4952e; }
-.mobile-toggle { display: none; background: none; font-size: 1.5rem; color: var(--green-deep); }
+.nav-links .nav-help:hover { background: rgba(232,97,26,0.1); color: #c74910; }
+.mobile-toggle { display: none; background: none; font-size: 1.5rem; color: var(--blue-deep); }
 .mobile-nav-overlay { display: none; }
 
 /* ===== HERO ===== */
 .hero {
   position: relative; display: flex; align-items: center;
-  background: linear-gradient(135deg, var(--green-deep) 0%, #0d3320 50%, #1b4332 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #06121e 50%, #0b1d2e 100%);
   overflow: hidden; padding-top: 70px;
 }
 @media (min-width: 769px) {
@@ -119,7 +119,7 @@ input, select, textarea { font-family: inherit; }
 }
 .hero::before {
   content: ''; position: absolute; inset: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><defs><radialGradient id="g1" cx="20%" cy="30%"><stop offset="0%" stop-color="%2352b788" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="70%"><stop offset="0%" stop-color="%23e8a838" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="800"/><rect fill="url(%23g2)" width="1440" height="800"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><defs><radialGradient id="g1" cx="20%" cy="30%"><stop offset="0%" stop-color="%235196d6" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="70%"><stop offset="0%" stop-color="%23e8611a" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="800"/><rect fill="url(%23g2)" width="1440" height="800"/></svg>');
   background-size: cover;
 }
 .hero-content {
@@ -134,9 +134,9 @@ input, select, textarea { font-family: inherit; }
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3);
+  background: rgba(81,150,214,0.15); border: 1px solid rgba(81,150,214,0.3);
   padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
-  color: var(--green-light); font-size: 0.85rem; font-weight: 600;
+  color: var(--blue-light); font-size: 0.85rem; font-weight: 600;
   letter-spacing: 0.5px; text-transform: uppercase;
 }
 .hero h1 {
@@ -146,7 +146,7 @@ input, select, textarea { font-family: inherit; }
   max-width: 800px; margin-bottom: 24px;
 }
 .hero h1 .highlight {
-  background: linear-gradient(135deg, var(--green-light), var(--gold));
+  background: linear-gradient(135deg, var(--blue-light), var(--orange));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   background-clip: text;
 }
@@ -158,7 +158,7 @@ input, select, textarea { font-family: inherit; }
   display: flex; gap: 36px; margin-bottom: 24px; flex-wrap: wrap;
 }
 .hero-stat .num {
-  font-size: 2.5rem; font-weight: 800; color: var(--gold);
+  font-size: 2.5rem; font-weight: 800; color: var(--orange);
   font-family: 'Playfair Display', serif;
 }
 .hero-stat { text-align: center; }
@@ -170,10 +170,10 @@ input, select, textarea { font-family: inherit; }
   font-size: 0.95rem; transition: all 0.3s;
 }
 .btn-primary {
-  background: var(--gold); color: var(--green-deep);
-  box-shadow: 0 4px 15px rgba(232,168,56,0.3);
+  background: var(--orange); color: var(--blue-deep);
+  box-shadow: 0 4px 15px rgba(232,97,26,0.3);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(232,168,56,0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(232,97,26,0.4); }
 .btn-outline {
   background: transparent; color: white;
   border: 2px solid rgba(255,255,255,0.3);
@@ -229,7 +229,7 @@ input, select, textarea { font-family: inherit; }
   transition: all 0.2s; white-space: nowrap;
 }
 .sq-btn:hover, .sq-btn.active {
-  color: var(--green-main); border-bottom-color: var(--green-main);
+  color: var(--blue-main); border-bottom-color: var(--blue-main);
 }
 .sq-scroll-arrow {
   position: absolute; top: 0; bottom: 0; width: 48px;
@@ -275,7 +275,7 @@ input, select, textarea { font-family: inherit; }
   transition: border-color 0.2s; min-width: 160px;
 }
 .filter-select:focus, .filter-input:focus {
-  outline: none; border-color: var(--green-main);
+  outline: none; border-color: var(--blue-main);
 }
 .filter-input { min-width: 280px; }
 .filter-search-row {
@@ -289,7 +289,7 @@ input, select, textarea { font-family: inherit; }
   border-radius: 10px;
 }
 .filter-clear {
-  padding: 10px 20px; background: none; color: var(--green-main);
+  padding: 10px 20px; background: none; color: var(--blue-main);
   font-size: 0.85rem; font-weight: 600; margin-top: 18px;
 }
 .filter-clear:hover { text-decoration: underline; }
@@ -298,12 +298,12 @@ input, select, textarea { font-family: inherit; }
 }
 .filter-tag {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 5px 12px; background: var(--green-pale);
+  padding: 5px 12px; background: var(--blue-pale);
   border-radius: 100px; font-size: 0.78rem; font-weight: 500;
-  color: var(--green-deep);
+  color: var(--blue-deep);
 }
 .filter-tag button {
-  background: none; font-size: 1rem; color: var(--green-main);
+  background: none; font-size: 1rem; color: var(--blue-main);
   line-height: 1;
 }
 .results-count {
@@ -328,7 +328,7 @@ input, select, textarea { font-family: inherit; }
 }
 .sport-header-text h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem; font-weight: 800; color: var(--green-deep);
+  font-size: 2.2rem; font-weight: 800; color: var(--blue-deep);
   line-height: 1.2;
 }
 .sport-header-text .sport-count {
@@ -356,7 +356,7 @@ input, select, textarea { font-family: inherit; }
 }
 .program-card:hover {
   transform: translateY(-4px); box-shadow: var(--shadow-lg);
-  border-color: rgba(45,106,79,0.2);
+  border-color: rgba(28,72,122,0.2);
 }
 .card-top {
   padding: 24px 24px 0;
@@ -377,7 +377,7 @@ input, select, textarea { font-family: inherit; }
 
 .card-body { padding: 16px 24px 24px; flex: 1; display: flex; flex-direction: column; }
 .card-body h3 {
-  font-size: 1.15rem; font-weight: 700; color: var(--green-deep);
+  font-size: 1.15rem; font-weight: 700; color: var(--blue-deep);
   margin-bottom: 8px; line-height: 1.3;
 }
 .card-body .card-desc {
@@ -394,7 +394,7 @@ input, select, textarea { font-family: inherit; }
 }
 .card-detail .detail-icon {
   width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
-  color: var(--green-mid); display: flex; align-items: center;
+  color: var(--blue-mid); display: flex; align-items: center;
   justify-content: center;
 }
 .card-detail .detail-icon svg { width: 15px; height: 15px; }
@@ -405,7 +405,7 @@ input, select, textarea { font-family: inherit; }
 }
 .card-link {
   display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.85rem; font-weight: 600; color: var(--green-main);
+  font-size: 0.85rem; font-weight: 600; color: var(--blue-main);
   transition: gap 0.2s;
 }
 .card-link:hover { gap: 10px; }
@@ -414,44 +414,44 @@ input, select, textarea { font-family: inherit; }
   font-size: 0.85rem; font-weight: 700; color: var(--navy);
 }
 .program-card.featured {
-  border: 2px solid var(--gold); box-shadow: 0 4px 16px rgba(232,168,56,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
 }
 .program-card.featured .card-top::after {
-  content: 'FEATURED'; font-size: 0.65rem; font-weight: 800; color: var(--gold);
+  content: 'FEATURED'; font-size: 0.65rem; font-weight: 800; color: var(--orange);
   letter-spacing: 1px; margin-left: auto;
 }
 .program-card.our-pick {
-  border: 2px solid var(--gold); box-shadow: 0 4px 16px rgba(232,168,56,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
 }
 .program-card.our-pick .card-top::after {
   content: 'PARENTS\2019  PICK'; font-size: 0.65rem; font-weight: 800; color: #fff;
-  letter-spacing: 1px; margin-left: auto; background: var(--gold); padding: 2px 10px; border-radius: 4px;
+  letter-spacing: 1px; margin-left: auto; background: var(--orange); padding: 2px 10px; border-radius: 4px;
 }
 .program-card.featured.our-pick .card-top::after {
   content: 'FEATURED \00B7  PARENTS\2019  PICK'; color: #fff;
-  background: linear-gradient(90deg,var(--gold),#e8a838); padding: 2px 10px; border-radius: 4px;
+  background: linear-gradient(90deg,var(--orange),#e8611a); padding: 2px 10px; border-radius: 4px;
 }
 .badge-coed {
   background: #e3f2fd; color: #1565c0; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;
 }
 .program-card.our-pick.best-value {
-  border: 2px solid var(--gold); box-shadow: 0 4px 16px rgba(232,168,56,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
 }
 .program-card.our-pick.best-value .card-top::after {
   content: 'PARENTS\2019  PICK \00B7  GREAT VALUE'; color: #fff;
-  background: linear-gradient(90deg,var(--gold),#43a047); padding: 2px 10px; border-radius: 4px;
+  background: linear-gradient(90deg,var(--orange),#43a047); padding: 2px 10px; border-radius: 4px;
 }
 .program-card.best-value {
   border: 2px solid #43a047; box-shadow: 0 4px 16px rgba(67,160,71,0.13);
 }
 .program-card.best-value .card-top::after {
   content: 'GREAT VALUE'; font-size: 0.65rem; font-weight: 800; color: #fff;
-  letter-spacing: 1px; margin-left: auto; background: linear-gradient(90deg,var(--gold),#43a047); padding: 2px 10px; border-radius: 4px;
+  letter-spacing: 1px; margin-left: auto; background: linear-gradient(90deg,var(--orange),#43a047); padding: 2px 10px; border-radius: 4px;
 }
 
 /* ===== TIMELINE SECTION ===== */
 .timeline-section {
-  padding: 80px 0; background: var(--green-deep); color: white;
+  padding: 80px 0; background: var(--blue-deep); color: white;
   scroll-margin-top: 70px; overflow: hidden;
 }
 .timeline-section h2 {
@@ -471,9 +471,9 @@ input, select, textarea { font-family: inherit; }
   font-weight: 600; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.6);
   cursor: pointer; border: none; transition: all 0.2s;
 }
-.timeline-tab-btn.active { background: var(--gold); color: var(--green-deep); }
+.timeline-tab-btn.active { background: var(--orange); color: var(--blue-deep); }
 .timeline-tab-btn:hover { background: rgba(255,255,255,0.2); color: white; }
-.timeline-tab-btn.active:hover { background: var(--gold); }
+.timeline-tab-btn.active:hover { background: var(--orange); }
 .deadline-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
   max-width: var(--max-w); margin: 0 auto 36px; padding: 0 32px;
@@ -523,7 +523,7 @@ input, select, textarea { font-family: inherit; }
 }
 .submit-inner h2 {
   font-family: 'Playfair Display', serif; font-size: 2rem;
-  font-weight: 800; color: var(--green-deep); margin-bottom: 12px;
+  font-weight: 800; color: var(--blue-deep); margin-bottom: 12px;
 }
 .submit-inner .section-sub {
   color: var(--slate); margin-bottom: 36px; font-size: 0.95rem;
@@ -541,15 +541,15 @@ input, select, textarea { font-family: inherit; }
   background: var(--white);
 }
 .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-  outline: none; border-color: var(--green-main);
+  outline: none; border-color: var(--blue-main);
 }
 .form-group textarea { resize: vertical; min-height: 120px; }
 .submit-btn {
-  width: 100%; padding: 16px; background: var(--green-main);
+  width: 100%; padding: 16px; background: var(--blue-main);
   color: white; font-weight: 700; font-size: 1rem;
   border-radius: 10px; margin-top: 8px; transition: all 0.3s;
 }
-.submit-btn:hover { background: var(--green-deep); }
+.submit-btn:hover { background: var(--blue-deep); }
 
 /* ===== FOOTER ===== */
 .footer {
@@ -569,7 +569,7 @@ input, select, textarea { font-family: inherit; }
   display: block; font-size: 0.82rem; padding: 4px 0;
   transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--green-light); }
+.footer-links a:hover { color: var(--blue-light); }
 .footer-bottom {
   max-width: var(--max-w); margin: 0 auto; padding: 24px 32px 0;
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -580,13 +580,13 @@ input, select, textarea { font-family: inherit; }
 .back-to-top {
   position: fixed; bottom: 32px; right: 32px; z-index: 999;
   width: 48px; height: 48px; border-radius: 12px;
-  background: var(--green-main); color: white;
+  background: var(--blue-main); color: white;
   display: flex; align-items: center; justify-content: center;
   box-shadow: var(--shadow-md); opacity: 0; transform: translateY(20px);
   transition: all 0.3s; pointer-events: none;
 }
 .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: all; }
-.back-to-top:hover { background: var(--green-deep); }
+.back-to-top:hover { background: var(--blue-deep); }
 
 /* ===== NO RESULTS ===== */
 .no-results {
@@ -617,7 +617,7 @@ input, select, textarea { font-family: inherit; }
     padding: 14px 16px; border-radius: 10px; font-size: 0.95rem;
     border-bottom: 1px solid rgba(0,0,0,0.04);
   }
-  .nav-links a:hover { background: var(--green-pale); }
+  .nav-links a:hover { background: var(--blue-pale); }
   .nav-links .nav-cta {
     margin-left: 0; margin-top: 12px; text-align: center;
     padding: 14px 20px; border-radius: 10px;
@@ -677,7 +677,7 @@ input, select, textarea { font-family: inherit; }
     overflow: hidden; text-overflow: ellipsis;
   }
   .sq-btn:hover, .sq-btn.active {
-    background: var(--green-main); color: white;
+    background: var(--blue-main); color: white;
     border-bottom-color: transparent;
   }
   .sq-scroll-arrow { display: none; }
@@ -685,7 +685,7 @@ input, select, textarea { font-family: inherit; }
     display: flex; align-items: center; justify-content: center;
     gap: 6px; width: 100%; padding: 8px;
     background: white; border: none; font-size: 0.8rem;
-    font-weight: 600; color: var(--green-main); cursor: pointer;
+    font-weight: 600; color: var(--blue-main); cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,0.06);
   }
   .sports-quick-toggle svg {
@@ -708,7 +708,7 @@ input, select, textarea { font-family: inherit; }
     font-size: 0.82rem; font-weight: 600; color: var(--slate);
     cursor: pointer; transition: all 0.2s;
   }
-  .mobile-filter-toggle:hover { border-color: var(--green-main); color: var(--green-main); }
+  .mobile-filter-toggle:hover { border-color: var(--blue-main); color: var(--blue-main); }
   .mobile-filter-toggle svg { width: 16px; height: 16px; transition: transform 0.2s; }
   .mobile-filter-toggle.open svg { transform: rotate(180deg); }
   .filter-row {
@@ -865,16 +865,16 @@ input, select, textarea { font-family: inherit; }
 .kid-pill.active { border-color: var(--navy); box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
 .add-kid-btn {
   padding: 6px 14px; border-radius: 100px; font-size: 0.82rem;
-  font-weight: 600; color: var(--green-main); background: var(--green-pale);
-  cursor: pointer; border: 1px dashed var(--green-mid);
+  font-weight: 600; color: var(--blue-main); background: var(--blue-pale);
+  cursor: pointer; border: 1px dashed var(--blue-mid);
 }
-.add-kid-btn:hover { background: var(--green-light); color: white; }
+.add-kid-btn:hover { background: var(--blue-light); color: white; }
 .nav-kids-btn {
   padding: 8px 16px; border-radius: 8px; font-size: 0.88rem;
   font-weight: 500; color: var(--slate); transition: all 0.2s;
   background: none; display: inline-flex; align-items: center; gap: 6px;
 }
-.nav-kids-btn:hover { background: var(--green-pale); color: var(--green-deep); }
+.nav-kids-btn:hover { background: var(--blue-pale); color: var(--blue-deep); }
 
 /* ===== KIDS PANEL ===== */
 .kids-panel {
@@ -890,7 +890,7 @@ input, select, textarea { font-family: inherit; }
   z-index: 1999; opacity: 0; visibility: hidden; transition: all 0.3s;
 }
 .kids-panel-overlay.open { opacity: 1; visibility: visible; }
-.kids-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--green-deep); margin-bottom: 24px; }
+.kids-panel h2 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--blue-deep); margin-bottom: 24px; }
 .kids-panel-close {
   position: absolute; top: 16px; right: 16px; background: none; font-size: 1.5rem;
   color: var(--slate); cursor: pointer; line-height: 1; border: none;
@@ -903,13 +903,13 @@ input, select, textarea { font-family: inherit; }
   flex: 1; min-width: 100px; padding: 10px 14px; border: 1.5px solid #dde2e5;
   border-radius: 8px; font-size: 0.88rem; background: white; color: var(--navy);
 }
-.kid-form-row input:focus, .kid-form-row select:focus { outline: none; border-color: var(--green-main); }
+.kid-form-row input:focus, .kid-form-row select:focus { outline: none; border-color: var(--blue-main); }
 .kid-add-btn {
-  width: 100%; padding: 12px; background: var(--green-main); color: white;
+  width: 100%; padding: 12px; background: var(--blue-main); color: white;
   font-weight: 700; font-size: 0.9rem; border-radius: 8px; border: none;
   cursor: pointer; transition: background 0.2s;
 }
-.kid-add-btn:hover { background: var(--green-deep); }
+.kid-add-btn:hover { background: var(--blue-deep); }
 .kid-list { display: flex; flex-direction: column; gap: 10px; }
 .kid-list-item {
   display: flex; align-items: center; gap: 12px; padding: 14px 16px;
@@ -978,16 +978,16 @@ input, select, textarea { font-family: inherit; }
 }
 .planner-clear-btn:hover { background: rgba(255,255,255,0.2); color: white; }
 .planner-share-btn {
-  padding: 8px 20px; background: var(--gold); color: var(--navy);
+  padding: 8px 20px; background: var(--orange); color: var(--navy);
   border: none; border-radius: 8px; font-size: 0.82rem;
   font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
   transition: all 0.2s;
 }
-.planner-share-btn:hover { background: #d4952e; }
+.planner-share-btn:hover { background: #c74910; }
 .planner-share-btn svg { width: 14px; height: 14px; }
 .share-toast {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
-  background: var(--green-deep); color: white; padding: 12px 24px;
+  background: var(--blue-deep); color: white; padding: 12px 24px;
   border-radius: 10px; font-size: 0.88rem; font-weight: 600;
   box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 3000;
   opacity: 0; transition: opacity 0.3s; pointer-events: none;
@@ -996,12 +996,12 @@ input, select, textarea { font-family: inherit; }
 
 /* Add to Plan button on cards */
 .card-plan-btn {
-  background: none; border: 1px solid var(--green-mid); color: var(--green-main);
+  background: none; border: 1px solid var(--blue-mid); color: var(--blue-main);
   border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 0.78rem;
   font-weight: 600; display: inline-flex; align-items: center; gap: 4px;
   transition: all 0.2s;
 }
-.card-plan-btn:hover { background: var(--green-pale); }
+.card-plan-btn:hover { background: var(--blue-pale); }
 .card-plan-btn svg { width: 14px; height: 14px; }
 
 /* Add to Plan popup */
@@ -1019,16 +1019,16 @@ input, select, textarea { font-family: inherit; }
   width: 100%; padding: 8px 12px; border: 1.5px solid #dde2e5; border-radius: 8px;
   font-size: 0.88rem; margin-bottom: 12px; background: white;
 }
-.plan-popup select:focus { outline: none; border-color: var(--green-main); }
+.plan-popup select:focus { outline: none; border-color: var(--blue-main); }
 .plan-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
 .plan-week-cb { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--navy); }
-.plan-week-cb input { accent-color: var(--green-main); }
+.plan-week-cb input { accent-color: var(--blue-main); }
 .plan-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
 .plan-popup-save {
-  padding: 8px 20px; background: var(--green-main); color: white; border: none;
+  padding: 8px 20px; background: var(--blue-main); color: white; border: none;
   border-radius: 8px; font-weight: 600; font-size: 0.85rem; cursor: pointer;
 }
-.plan-popup-save:hover { background: var(--green-deep); }
+.plan-popup-save:hover { background: var(--blue-deep); }
 .plan-popup-cancel {
   padding: 8px 16px; background: none; color: var(--slate); border: 1px solid #dde2e5;
   border-radius: 8px; font-weight: 500; font-size: 0.85rem; cursor: pointer;
@@ -1372,9 +1372,9 @@ input, select, textarea { font-family: inherit; }
     <div class="footer-brand">
       <h3>Newton Youth Sports</h3>
       <p>The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.</p>
-      <p style="margin-top: 12px;">Questions? <a href="mailto:contact.newtonyouthsports@gmail.com" style="color: var(--green-light);">contact.newtonyouthsports@gmail.com</a></p>
-      <p style="margin-top: 8px;"><a href="https://www.facebook.com/groups/1286005558989312" target="_blank" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Parents & Community</a></p>
-      <p style="margin-top: 4px;"><a href="https://www.facebook.com/groups/1091326471449122" target="_blank" style="color: var(--green-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Youth Athletics</a></p>
+      <p style="margin-top: 12px;">Questions? <a href="mailto:contact.newtonyouthsports@gmail.com" style="color: var(--blue-light);">contact.newtonyouthsports@gmail.com</a></p>
+      <p style="margin-top: 8px;"><a href="https://www.facebook.com/groups/1286005558989312" target="_blank" style="color: var(--blue-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Parents & Community</a></p>
+      <p style="margin-top: 4px;"><a href="https://www.facebook.com/groups/1091326471449122" target="_blank" style="color: var(--blue-light); display: inline-flex; align-items: center; gap: 6px;"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Follow Newton Youth Athletics</a></p>
     </div>
     <div class="footer-links">
       <h4>Quick Links</h4>
@@ -1938,7 +1938,7 @@ function updateActiveFilters() {
     const isOpen = mft.classList.contains('open');
     mft.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       Filters${ac ? ' (' + ac + ' active)' : ''}`;
-    if (ac && !isOpen) { mft.style.color = 'var(--green-main)'; mft.style.borderColor = 'var(--green-main)'; }
+    if (ac && !isOpen) { mft.style.color = 'var(--blue-main)'; mft.style.borderColor = 'var(--blue-main)'; }
     else { mft.style.color = ''; mft.style.borderColor = ''; }
   }
 }
@@ -2236,7 +2236,7 @@ document.querySelectorAll('[data-nav-sport]').forEach(link => {
 });
 
 // ===== KID PROFILES =====
-const KID_COLORS = ['#e8a838','#90caf9','#52b788','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#e8611a','#90caf9','#5196d6','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 
@@ -2337,7 +2337,7 @@ function renderKidsBar() {
   bar.style.display = 'flex';
   const allKidsSelected = selectedKidIds && selectedKidIds.size === kids.length;
   const allKidsActive = allKidsSelected ? ' active' : '';
-  let html = `<span class="kid-pill${allKidsActive}" style="background:#52b788" onclick="selectKidPill('all-kids')">All Kids</span>`;
+  let html = `<span class="kid-pill${allKidsActive}" style="background:#5196d6" onclick="selectKidPill('all-kids')">All Kids</span>`;
   kids.forEach(k => {
     const isActive = (selectedKidIds && selectedKidIds.has(k.id)) ? ' active' : '';
     html += `<span class="kid-pill${isActive}" style="background:${k.color}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
@@ -2572,7 +2572,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#52b788';
+    const dotColor = kid ? kid.color : '#5196d6';
     const kidPlans = plan.filter(p => p.kidId === kidId);
 
     const weekCounts = new Array(weekCount).fill(0);
@@ -2610,7 +2610,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#52b788';
+    const dotColor = kid ? kid.color : '#5196d6';
     const kidPlans = plan.filter(p => p.kidId === kidId);
     kidPlans.forEach(p => {
       const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => weeks[w] || '');
@@ -2784,7 +2784,7 @@ function savePlanEntry(programName, programSport) {
   const kids = getKidProfiles();
   const kidId = kidVal === 'general' ? 'general' : parseInt(kidVal);
   const kid = kids.find(k => k.id === kidId);
-  const color = kid ? kid.color : '#52b788';
+  const color = kid ? kid.color : '#5196d6';
 
   const plan = getPlan();
   plan.push({ kidId, programName, programSport, season, weeks, color });
