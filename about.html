@@ -24,22 +24,22 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-a { color: #2e5a9e; text-decoration: underline; }
-a:hover { color: #142d52; }
+a { color: #1a2d4a; text-decoration: underline; }
+a:hover { color: #0f1d30; }
 img { max-width: 100%; display: block; }
 button { cursor: pointer; border: none; font-family: inherit; }
-a:hover { color: #142d52; }
+a:hover { color: #0f1d30; }
 
 :root {
-  --blue-deep: #142d52;
-  --blue-main: #2e5a9e;
-  --blue-mid: #4878c2;
-  --blue-light: #6a90cf;
-  --blue-pale: #dce6f5;
+  --blue-deep: #0f1d30;
+  --blue-main: #1a2d4a;
+  --blue-mid: #2e4a72;
+  --blue-light: #4a6a90;
+  --blue-pale: #d4dce8;
   --orange: #FF6B00;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f2f4f9;
+  --light-bg: #f1f3f7;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -148,7 +148,7 @@ a:hover { color: #142d52; }
 
 /* HERO */
 .about-hero {
-  background: linear-gradient(135deg, var(--blue-deep) 0%, #0c1a2e 50%, #142d52 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #081420 50%, #0f1d30 100%);
   padding: 140px 32px 80px;
   color: white;
   text-align: center;
@@ -427,7 +427,7 @@ document.getElementById('mobileNavOverlay').addEventListener('mousedown', toggle
 document.getElementById('mobileNavOverlay').addEventListener('touchstart', toggleMobileNav, {passive:true});
 
 // Kids panel
-const KID_COLORS = ['#FF6B00','#90caf9','#6a90cf','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#FF6B00','#90caf9','#4a6a90','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 function openKidsPanel() {

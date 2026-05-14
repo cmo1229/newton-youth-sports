@@ -24,22 +24,22 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-a { color: #2e5a9e; text-decoration: underline; }
-a:hover { color: #142d52; }
+a { color: #1a2d4a; text-decoration: underline; }
+a:hover { color: #0f1d30; }
 img { max-width: 100%; display: block; }
 button { cursor: pointer; border: none; font-family: inherit; }
 
 :root {
-  --blue-deep: #142d52;
-  --blue-main: #2e5a9e;
-  --blue-mid: #4878c2;
-  --blue-light: #6a90cf;
-  --blue-pale: #dce6f5;
+  --blue-deep: #0f1d30;
+  --blue-main: #1a2d4a;
+  --blue-mid: #2e4a72;
+  --blue-light: #4a6a90;
+  --blue-pale: #d4dce8;
   --orange: #FF6B00;
   --orange-light: #ffe0cc;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f2f4f9;
+  --light-bg: #f1f3f7;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -148,7 +148,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
 /* HERO */
 .guide-hero {
-  background: linear-gradient(135deg, var(--blue-deep) 0%, #0c1a2e 50%, #142d52 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #081420 50%, #0f1d30 100%);
   padding: 120px 32px 60px;
   color: white;
   text-align: center;
@@ -208,7 +208,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
   box-shadow: var(--shadow-md); overflow: hidden;
   border-left: 5px solid var(--blue-main);
 }
-.program-type-card.rec { border-left-color: #6a90cf; }
+.program-type-card.rec { border-left-color: #4a6a90; }
 .program-type-card.travel { border-left-color: #FF6B00; }
 .program-type-card.aau { border-left-color: #e76f51; }
 .program-type-card.club { border-left-color: #457b9d; }
@@ -222,7 +222,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
   font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.8px; margin-bottom: 12px;
 }
-.rec .pt-label { background: #dce6f5; color: #142d52; }
+.rec .pt-label { background: #d4dce8; color: #0f1d30; }
 .travel .pt-label { background: #ffe0cc; color: #7c5a0b; }
 .aau .pt-label { background: #fde8e3; color: #a0301a; }
 .club .pt-label { background: #dbeafe; color: #1e3a5f; }
@@ -337,7 +337,7 @@ tbody tr:last-child td { border-bottom: none; }
 
 .check-item {
   display: flex; gap: 12px; padding: 10px 0;
-  border-bottom: 1px solid #f2f4f9;
+  border-bottom: 1px solid #f1f3f7;
 }
 .check-item:last-child { border-bottom: none; }
 .check-box {
@@ -372,7 +372,7 @@ tbody tr:last-child td { border-bottom: none; }
   margin: 28px 0;
 }
 .callout.green {
-  background: linear-gradient(135deg, #ecfdf5 0%, #dce6f5 100%);
+  background: linear-gradient(135deg, #ecfdf5 0%, #d4dce8 100%);
   border-color: #a7d7bf;
 }
 .callout.red {
@@ -1063,9 +1063,9 @@ tbody tr:last-child td { border-bottom: none; }
   <h2>Multi-Sport vs. Early Specialization</h2>
   <p style="color: var(--slate); margin-bottom: 20px;">One of the biggest decisions parents face is whether to focus on one sport or keep their child playing multiple sports. The research is clear, even if the pressure from coaches and other parents is not.</p>
 
-  <div class="program-type-card rec" style="border-left-color: #2e5a9e; margin-bottom: 24px;">
+  <div class="program-type-card rec" style="border-left-color: #1a2d4a; margin-bottom: 24px;">
     <div class="pt-header">
-      <div class="pt-label" style="background: #dce6f5; color: #142d52;">What the research says</div>
+      <div class="pt-label" style="background: #d4dce8; color: #0f1d30;">What the research says</div>
       <h3>The Case for Multi-Sport Participation</h3>
     </div>
     <div class="pt-body">
@@ -1498,7 +1498,7 @@ function toggleMobileNav() {
 document.getElementById('mobileNavOverlay').addEventListener('mousedown', toggleMobileNav);
 document.getElementById('mobileNavOverlay').addEventListener('touchstart', toggleMobileNav, {passive:true});
 
-const KID_COLORS = ['#FF6B00','#90caf9','#6a90cf','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#FF6B00','#90caf9','#4a6a90','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 function openKidsPanel() {
