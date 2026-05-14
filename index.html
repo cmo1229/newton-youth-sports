@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Newton Youth Sports & Programs">
 <meta name="twitter:description" content="The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231c487a'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23002d66'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -40,16 +40,16 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  --blue-deep: #0b1d2e;
-  --blue-main: #1c487a;
-  --blue-mid: #2d6cb8;
-  --blue-light: #5196d6;
-  --blue-pale: #dae6f2;
-  --orange: #e8611a;
-  --orange-light: #fde0cf;
+  --blue-deep: #001632;
+  --blue-main: #002d66;
+  --blue-mid: #002EBF;
+  --blue-light: #4a6fd8;
+  --blue-pale: #d4dff5;
+  --orange: #FF6B00;
+  --orange-light: #ffe0cc;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f2f4f8;
+  --light-bg: #f0f3f8;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -101,14 +101,14 @@ input, select, textarea { font-family: inherit; }
 .nav-links .nav-help {
   color: var(--orange); font-weight: 600;
 }
-.nav-links .nav-help:hover { background: rgba(232,97,26,0.1); color: #c74910; }
+.nav-links .nav-help:hover { background: rgba(255,107,0,0.1); color: #e05f00; }
 .mobile-toggle { display: none; background: none; font-size: 1.5rem; color: var(--blue-deep); }
 .mobile-nav-overlay { display: none; }
 
 /* ===== HERO ===== */
 .hero {
   position: relative; display: flex; align-items: center;
-  background: linear-gradient(135deg, var(--blue-deep) 0%, #06121e 50%, #0b1d2e 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #000d1a 50%, #001632 100%);
   overflow: hidden; padding-top: 70px;
 }
 @media (min-width: 769px) {
@@ -119,7 +119,7 @@ input, select, textarea { font-family: inherit; }
 }
 .hero::before {
   content: ''; position: absolute; inset: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><defs><radialGradient id="g1" cx="20%" cy="30%"><stop offset="0%" stop-color="%235196d6" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="70%"><stop offset="0%" stop-color="%23e8611a" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="800"/><rect fill="url(%23g2)" width="1440" height="800"/></svg>');
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 800"><defs><radialGradient id="g1" cx="20%" cy="30%"><stop offset="0%" stop-color="%235196d6" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient><radialGradient id="g2" cx="80%" cy="70%"><stop offset="0%" stop-color="%23FF6B00" stop-opacity="0.1"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs><rect fill="url(%23g1)" width="1440" height="800"/><rect fill="url(%23g2)" width="1440" height="800"/></svg>');
   background-size: cover;
 }
 .hero-content {
@@ -134,7 +134,7 @@ input, select, textarea { font-family: inherit; }
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(81,150,214,0.15); border: 1px solid rgba(81,150,214,0.3);
+  background: rgba(74,111,216,0.15); border: 1px solid rgba(74,111,216,0.3);
   padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
   color: var(--blue-light); font-size: 0.85rem; font-weight: 600;
   letter-spacing: 0.5px; text-transform: uppercase;
@@ -171,9 +171,9 @@ input, select, textarea { font-family: inherit; }
 }
 .btn-primary {
   background: var(--orange); color: var(--blue-deep);
-  box-shadow: 0 4px 15px rgba(232,97,26,0.3);
+  box-shadow: 0 4px 15px rgba(255,107,0,0.3);
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(232,97,26,0.4); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255,107,0,0.4); }
 .btn-outline {
   background: transparent; color: white;
   border: 2px solid rgba(255,255,255,0.3);
@@ -356,7 +356,7 @@ input, select, textarea { font-family: inherit; }
 }
 .program-card:hover {
   transform: translateY(-4px); box-shadow: var(--shadow-lg);
-  border-color: rgba(28,72,122,0.2);
+  border-color: rgba(0,45,102,0.2);
 }
 .card-top {
   padding: 24px 24px 0;
@@ -414,14 +414,14 @@ input, select, textarea { font-family: inherit; }
   font-size: 0.85rem; font-weight: 700; color: var(--navy);
 }
 .program-card.featured {
-  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(255,107,0,0.15);
 }
 .program-card.featured .card-top::after {
   content: 'FEATURED'; font-size: 0.65rem; font-weight: 800; color: var(--orange);
   letter-spacing: 1px; margin-left: auto;
 }
 .program-card.our-pick {
-  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(255,107,0,0.15);
 }
 .program-card.our-pick .card-top::after {
   content: 'PARENTS\2019  PICK'; font-size: 0.65rem; font-weight: 800; color: #fff;
@@ -429,13 +429,13 @@ input, select, textarea { font-family: inherit; }
 }
 .program-card.featured.our-pick .card-top::after {
   content: 'FEATURED \00B7  PARENTS\2019  PICK'; color: #fff;
-  background: linear-gradient(90deg,var(--orange),#e8611a); padding: 2px 10px; border-radius: 4px;
+  background: linear-gradient(90deg,var(--orange),#FF6B00); padding: 2px 10px; border-radius: 4px;
 }
 .badge-coed {
   background: #e3f2fd; color: #1565c0; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;
 }
 .program-card.our-pick.best-value {
-  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(232,97,26,0.15);
+  border: 2px solid var(--orange); box-shadow: 0 4px 16px rgba(255,107,0,0.15);
 }
 .program-card.our-pick.best-value .card-top::after {
   content: 'PARENTS\2019  PICK \00B7  GREAT VALUE'; color: #fff;
@@ -983,7 +983,7 @@ input, select, textarea { font-family: inherit; }
   font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
   transition: all 0.2s;
 }
-.planner-share-btn:hover { background: #c74910; }
+.planner-share-btn:hover { background: #e05f00; }
 .planner-share-btn svg { width: 14px; height: 14px; }
 .share-toast {
   position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
@@ -2236,7 +2236,7 @@ document.querySelectorAll('[data-nav-sport]').forEach(link => {
 });
 
 // ===== KID PROFILES =====
-const KID_COLORS = ['#e8611a','#90caf9','#5196d6','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#FF6B00','#90caf9','#4a6fd8','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 
@@ -2337,7 +2337,7 @@ function renderKidsBar() {
   bar.style.display = 'flex';
   const allKidsSelected = selectedKidIds && selectedKidIds.size === kids.length;
   const allKidsActive = allKidsSelected ? ' active' : '';
-  let html = `<span class="kid-pill${allKidsActive}" style="background:#5196d6" onclick="selectKidPill('all-kids')">All Kids</span>`;
+  let html = `<span class="kid-pill${allKidsActive}" style="background:#4a6fd8" onclick="selectKidPill('all-kids')">All Kids</span>`;
   kids.forEach(k => {
     const isActive = (selectedKidIds && selectedKidIds.has(k.id)) ? ' active' : '';
     html += `<span class="kid-pill${isActive}" style="background:${k.color}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
@@ -2572,7 +2572,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#5196d6';
+    const dotColor = kid ? kid.color : '#4a6fd8';
     const kidPlans = plan.filter(p => p.kidId === kidId);
 
     const weekCounts = new Array(weekCount).fill(0);
@@ -2610,7 +2610,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#5196d6';
+    const dotColor = kid ? kid.color : '#4a6fd8';
     const kidPlans = plan.filter(p => p.kidId === kidId);
     kidPlans.forEach(p => {
       const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => weeks[w] || '');
@@ -2784,7 +2784,7 @@ function savePlanEntry(programName, programSport) {
   const kids = getKidProfiles();
   const kidId = kidVal === 'general' ? 'general' : parseInt(kidVal);
   const kid = kids.find(k => k.id === kidId);
-  const color = kid ? kid.color : '#5196d6';
+  const color = kid ? kid.color : '#4a6fd8';
 
   const plan = getPlan();
   plan.push({ kidId, programName, programSport, season, weeks, color });
