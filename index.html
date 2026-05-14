@@ -12,7 +12,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Newton Youth Sports & Programs">
 <meta name="twitter:description" content="The centralized resource for Newton, MA families. Built to help parents navigate the landscape of youth sports, camps, and enrichment programs.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23002d66'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232a5090'/><path d='M50 15L61 40L88 44L68 63L73 90L50 77L27 90L32 63L12 44L39 40Z' fill='white'/></svg>">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -40,16 +40,16 @@ input, select, textarea { font-family: inherit; }
 
 /* ===== CSS VARIABLES ===== */
 :root {
-  --blue-deep: #001632;
-  --blue-main: #002d66;
-  --blue-mid: #002EBF;
-  --blue-light: #4a6fd8;
-  --blue-pale: #d4dff5;
+  --blue-deep: #142d52;
+  --blue-main: #2e5a9e;
+  --blue-mid: #4878c2;
+  --blue-light: #6a90cf;
+  --blue-pale: #dce6f5;
   --orange: #FF6B00;
   --orange-light: #ffe0cc;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f0f3f8;
+  --light-bg: #f2f4f9;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -108,7 +108,7 @@ input, select, textarea { font-family: inherit; }
 /* ===== HERO ===== */
 .hero {
   position: relative; display: flex; align-items: center;
-  background: linear-gradient(135deg, var(--blue-deep) 0%, #000d1a 50%, #001632 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #0c1a2e 50%, #142d52 100%);
   overflow: hidden; padding-top: 70px;
 }
 @media (min-width: 769px) {
@@ -134,7 +134,7 @@ input, select, textarea { font-family: inherit; }
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(74,111,216,0.15); border: 1px solid rgba(74,111,216,0.3);
+  background: rgba(106,144,207,0.15); border: 1px solid rgba(106,144,207,0.3);
   padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
   color: var(--blue-light); font-size: 0.85rem; font-weight: 600;
   letter-spacing: 0.5px; text-transform: uppercase;
@@ -356,7 +356,7 @@ input, select, textarea { font-family: inherit; }
 }
 .program-card:hover {
   transform: translateY(-4px); box-shadow: var(--shadow-lg);
-  border-color: rgba(0,45,102,0.2);
+  border-color: rgba(46,90,158,0.2);
 }
 .card-top {
   padding: 24px 24px 0;
@@ -2236,7 +2236,7 @@ document.querySelectorAll('[data-nav-sport]').forEach(link => {
 });
 
 // ===== KID PROFILES =====
-const KID_COLORS = ['#FF6B00','#90caf9','#4a6fd8','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#FF6B00','#90caf9','#6a90cf','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 
@@ -2337,7 +2337,7 @@ function renderKidsBar() {
   bar.style.display = 'flex';
   const allKidsSelected = selectedKidIds && selectedKidIds.size === kids.length;
   const allKidsActive = allKidsSelected ? ' active' : '';
-  let html = `<span class="kid-pill${allKidsActive}" style="background:#4a6fd8" onclick="selectKidPill('all-kids')">All Kids</span>`;
+  let html = `<span class="kid-pill${allKidsActive}" style="background:#6a90cf" onclick="selectKidPill('all-kids')">All Kids</span>`;
   kids.forEach(k => {
     const isActive = (selectedKidIds && selectedKidIds.has(k.id)) ? ' active' : '';
     html += `<span class="kid-pill${isActive}" style="background:${k.color}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
@@ -2572,7 +2572,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#4a6fd8';
+    const dotColor = kid ? kid.color : '#6a90cf';
     const kidPlans = plan.filter(p => p.kidId === kidId);
 
     const weekCounts = new Array(weekCount).fill(0);
@@ -2610,7 +2610,7 @@ function renderPlanner() {
   kidIds.forEach(kidId => {
     const kid = kids.find(k => k.id === kidId);
     const label = kid ? kid.name : 'General';
-    const dotColor = kid ? kid.color : '#4a6fd8';
+    const dotColor = kid ? kid.color : '#6a90cf';
     const kidPlans = plan.filter(p => p.kidId === kidId);
     kidPlans.forEach(p => {
       const weekLabels = (p.weeks || []).sort((a,b) => a-b).map(w => weeks[w] || '');
@@ -2784,7 +2784,7 @@ function savePlanEntry(programName, programSport) {
   const kids = getKidProfiles();
   const kidId = kidVal === 'general' ? 'general' : parseInt(kidVal);
   const kid = kids.find(k => k.id === kidId);
-  const color = kid ? kid.color : '#4a6fd8';
+  const color = kid ? kid.color : '#6a90cf';
 
   const plan = getPlan();
   plan.push({ kidId, programName, programSport, season, weeks, color });
