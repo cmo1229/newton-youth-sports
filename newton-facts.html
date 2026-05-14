@@ -24,22 +24,22 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
-a { color: #1a2d4a; text-decoration: underline; }
-a:hover { color: #0f1d30; }
+a { color: #2D5AA0; text-decoration: underline; }
+a:hover { color: #162a42; }
 img { max-width: 100%; display: block; }
 button { cursor: pointer; border: none; font-family: inherit; }
 
 :root {
-  --blue-deep: #0f1d30;
-  --blue-main: #1a2d4a;
-  --blue-mid: #2e4a72;
-  --blue-light: #4a6a90;
-  --blue-pale: #d4dce8;
+  --blue-deep: #162a42;
+  --blue-main: #2D5AA0;
+  --blue-mid: #3A6EA5;
+  --blue-light: #5B82C5;
+  --blue-pale: #d4e0f0;
   --orange: #FF6B00;
   --orange-light: #ffe0cc;
   --navy: #16213e;
   --slate: #4a5568;
-  --light-bg: #f1f3f7;
+  --light-bg: #f0f4f9;
   --white: #ffffff;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
@@ -148,7 +148,7 @@ button { cursor: pointer; border: none; font-family: inherit; }
 
 /* HERO */
 .facts-hero {
-  background: linear-gradient(135deg, var(--blue-deep) 0%, #081420 50%, #0f1d30 100%);
+  background: linear-gradient(135deg, var(--blue-deep) 0%, #0e1a2a 50%, #162a42 100%);
   padding: 120px 32px 60px;
   color: white;
   text-align: center;
@@ -1020,7 +1020,7 @@ function toggleMobileNav() {
 document.getElementById('mobileNavOverlay').addEventListener('mousedown', toggleMobileNav);
 document.getElementById('mobileNavOverlay').addEventListener('touchstart', toggleMobileNav, {passive:true});
 
-const KID_COLORS = ['#FF6B00','#90caf9','#4a6a90','#ce93d8','#ff8a65','#4dd0e1'];
+const KID_COLORS = ['#FF6B00','#90caf9','#5B82C5','#ce93d8','#ff8a65','#4dd0e1'];
 function getKidProfiles() { return JSON.parse(localStorage.getItem('nys-kids') || '[]'); }
 function saveKidProfiles(kids) { localStorage.setItem('nys-kids', JSON.stringify(kids)); }
 function openKidsPanel() {
