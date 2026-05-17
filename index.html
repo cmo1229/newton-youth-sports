@@ -180,6 +180,76 @@ input, select, textarea { font-family: inherit; }
 }
 .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
+/* ===== HERO KIDS BAR ===== */
+.hero-kids {
+  margin-top: 28px;
+  position: relative; z-index: 2;
+}
+.hero-quick-add {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px; padding: 16px 20px;
+}
+.hero-quick-add .hqa-label {
+  font-weight: 700; font-size: 0.88rem; color: white; white-space: nowrap;
+  display: flex; align-items: center; gap: 7px;
+}
+.hero-quick-add input, .hero-quick-add select {
+  padding: 10px 14px; border: 1.5px solid rgba(255,255,255,0.25);
+  border-radius: 10px; font-size: 0.85rem; background: rgba(255,255,255,0.95); color: var(--navy);
+  min-width: 100px;
+}
+.hero-quick-add input::placeholder { color: #8899aa; }
+.hero-quick-add input:focus, .hero-quick-add select:focus {
+  outline: none; border-color: white; box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+}
+.hero-quick-add .hqa-add-btn {
+  padding: 10px 20px; background: var(--orange); color: var(--blue-deep);
+  font-weight: 700; font-size: 0.85rem; border-radius: 10px; border: none;
+  cursor: pointer; white-space: nowrap; transition: all 0.2s;
+}
+.hero-quick-add .hqa-add-btn:hover { background: #ff8c3a; transform: translateY(-1px); }
+.hero-quick-add .hqa-privacy {
+  font-size: 0.72rem; color: rgba(255,255,255,0.6); display: flex; align-items: center; gap: 4px;
+  white-space: nowrap; margin-left: auto;
+}
+.hero-kids-pills {
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 14px; padding: 14px 20px;
+}
+.hero-kids-pills .kid-pill {
+  padding: 7px 16px; border-radius: 100px; font-size: 0.84rem;
+  font-weight: 600; color: white; cursor: pointer; transition: all 0.2s;
+  border: 2px solid transparent;
+}
+.hero-kids-pills .kid-pill:hover { opacity: 0.85; }
+.hero-kids-pills .kid-pill.active {
+  border-color: white; box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.hero-kids-pills .hka-add-btn {
+  padding: 7px 18px; border-radius: 100px; font-size: 0.84rem;
+  font-weight: 600; color: white; background: rgba(255,255,255,0.15);
+  cursor: pointer; border: 1px dashed rgba(255,255,255,0.35);
+  transition: all 0.2s;
+}
+.hero-kids-pills .hka-add-btn:hover { background: rgba(255,255,255,0.25); }
+.hero-kids-pills .hka-clear-btn {
+  padding: 7px 16px; border-radius: 100px; font-size: 0.78rem;
+  font-weight: 500; color: rgba(255,255,255,0.7);
+  background: transparent; border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer; transition: all 0.2s;
+}
+.hero-kids-pills .hka-clear-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+.hero-kids-pills .hka-privacy {
+  font-size: 0.72rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 4px;
+  white-space: nowrap; margin-left: auto;
+}
+
 /* ===== HERO PHOTO COLLAGE ===== */
 .hero-photos {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px;
@@ -655,6 +725,18 @@ input, select, textarea { font-family: inherit; }
     padding: 10px 18px; font-size: 0.82rem; justify-content: center;
     text-align: center; border-radius: 10px;
   }
+
+  /* Hero kids bar — mobile */
+  .hero-kids { margin-top: 20px; }
+  .hero-quick-add {
+    flex-direction: column; gap: 8px; padding: 14px;
+    text-align: left;
+  }
+  .hero-quick-add input, .hero-quick-add select { width: 100%; }
+  .hero-quick-add .hqa-add-btn { width: 100%; text-align: center; }
+  .hero-quick-add .hqa-privacy { margin-left: 0; align-self: center; }
+  .hero-kids-pills { flex-direction: column; gap: 8px; padding: 14px; }
+  .hero-kids-pills .hka-privacy { margin-left: 0; align-self: center; }
 
   /* --- SPORTS NAV (grid on mobile) --- */
   .sports-quick {
@@ -1173,6 +1255,7 @@ input, select, textarea { font-family: inherit; }
         </div>
       </div>
     </div>
+    <div class="hero-kids" id="kidsBar"></div>
   </div>
 </section>
 
@@ -1212,7 +1295,6 @@ input, select, textarea { font-family: inherit; }
 <!-- ===== FILTERS ===== -->
 <div class="filter-section" id="sports">
   <div class="filter-inner">
-    <div class="kids-bar" id="kidsBar"></div>
     <div class="filter-search-row">
       <input type="text" class="filter-input" id="searchInput" placeholder="Search programs, organizations, sports...">
     </div>
@@ -2367,11 +2449,9 @@ function renderKidsBar() {
   const kids = getKidProfiles();
   const bar = document.getElementById('kidsBar');
   if (kids.length === 0) {
-    // Show quick-add bar with privacy note — always visible on home page
-    bar.style.display = 'block';
-    bar.innerHTML = `<div class="quick-add-bar">
-      <span class="qa-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg> Add Your Kids</span>
-      <input type="text" id="qaName" placeholder="Name" style="width:100px;">
+    bar.innerHTML = `<div class="hero-quick-add">
+      <span class="hqa-label"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M16 3.13a4 4 0 010 7.75"/><path d="M21 21v-2a4 4 0 00-3-3.87"/></svg> Personalize for Your Kids</span>
+      <input type="text" id="qaName" placeholder="First name" style="width:110px;">
       <select id="qaGrade">
         <option value="">Grade</option>
         <option value="Pre-K">Pre-K</option>
@@ -2395,24 +2475,23 @@ function renderKidsBar() {
         <option value="Girl">Girl</option>
         <option value="No Preference">No Pref</option>
       </select>
-      <button class="qa-add-btn" onclick="quickAddKid()">Add</button>
-      <span class="qa-privacy"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Stored only on your device</span>
+      <button class="hqa-add-btn" onclick="quickAddKid()">Add to My Kids</button>
+      <span class="hqa-privacy"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Only stored on your device</span>
     </div>`;
     return;
   }
-  bar.style.display = 'block';
   const allKidsSelected = selectedKidIds && selectedKidIds.size === kids.length;
   const allKidsActive = allKidsSelected ? ' active' : '';
-  let html = `<div class="kids-bar"><span class="kid-pill${allKidsActive}" style="background:#5B82C5" onclick="selectKidPill('all-kids')">All Kids</span>`;
+  let html = `<div class="hero-kids-pills"><span class="kid-pill${allKidsActive}" style="background:#5B82C5" onclick="selectKidPill('all-kids')">All Kids</span>`;
   kids.forEach(k => {
     const isActive = (selectedKidIds && selectedKidIds.has(k.id)) ? ' active' : '';
     html += `<span class="kid-pill${isActive}" style="background:${k.color}" onclick="selectKidPill(${k.id})">${k.name} (${gradeShortLabel(k.grade)}, ${k.gender})</span>`;
   });
-  html += `<button class="add-kid-btn" onclick="openKidsPanel()">+ Add Child</button>`;
+  html += `<button class="hka-add-btn" onclick="openKidsPanel()">+ Add Child</button>`;
   if (selectedKidIds && selectedKidIds.size > 0) {
-    html += ` <button class="add-kid-btn" style="background:transparent;border:1px solid #ccc;color:var(--slate);font-size:0.75rem;" onclick="selectKidPill('clear')" title="Show all programs (remove kid filter)">Show All Programs</button>`;
+    html += ` <button class="hka-clear-btn" onclick="selectKidPill('clear')" title="Show all programs (remove kid filter)">Show All Programs</button>`;
   }
-  html += `<span class="qa-privacy" style="margin-left:8px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Stored only on your device</span></div>`;
+  html += `<span class="hka-privacy"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Only stored on your device</span></div>`;
   bar.innerHTML = html;
 }
 
