@@ -1931,7 +1931,10 @@ function getFiltered() {
     if (kidFilterActive) {
       const kids = getKidProfiles();
       const selectedKids = kids.filter(k => selectedKidIds.has(k.id));
-      const matchesAnyKid = selectedKids.some(kid => {
+      const allKidsSelected = selectedKidIds.size === kids.length;
+      // All Kids: intersection (must match EVERY kid). Individual picks: union (match any).
+      const matcher = allKidsSelected ? 'every' : 'some';
+      const matchesKids = selectedKids[matcher](kid => {
         const kidAgeCategory = gradeToAgeCategory(gradeToFilterValue(kid.grade));
         if (kidAgeCategory && !(p.ageCategory||[]).includes(kidAgeCategory)) return false;
         const kidGender = kid.gender === 'Girl' ? 'girls' : kid.gender === 'Boy' ? 'boys' : '';
@@ -1946,7 +1949,7 @@ function getFiltered() {
         }
         return true;
       });
-      if (!matchesAnyKid) return false;
+      if (!matchesKids) return false;
     } else {
       const ageCategory = gradeToAgeCategory(grade);
       if (ageCategory && !(p.ageCategory||[]).includes(ageCategory)) return false;
