@@ -1694,6 +1694,7 @@ const programs = [
 
   // ===== SCHOOL BREAK CLINICS & CAMPS =====
   // -- Winter Break (Dec/Jan) --
+  {sport:"clinics-camps",name:"NAA Winter Break Basketball Clinic",org:"Newton Community Education",desc:"Newton Athletes United's highly rated co-ed basketball clinic during winter break. Covers shooting, ball handling, defense, and game strategy with NAA's experienced coaches. Runs 8:30am-3:30pm daily.",ages:"K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["winter"],level:"camp",cost:"Varies by program",costRange:"200-500",location:"Brown Middle School",website:"https://newtoncommunityed.org",regDate:"Check NCE catalog",commitment:"Dec 28-31, 8:30am-3:30pm",ourPick:true,breakType:"winter-break"},
   {sport:"clinics-camps",name:"Newton Community Ed - Winter Break Programs",org:"Newton Community Education",desc:"Variety of vacation week programs during winter break including sports, arts, STEM, and games. Features the signature NAA Winter Basketball Clinic -- a co-ed clinic covering shooting, ball handling, defense, and game strategy. Held at Brown Middle School.",ages:"K-12",ageCategory:["k-2","3-5","6-8","9-12"],season:["winter"],level:"camp",cost:"Varies by program",costRange:"200-500",location:"Newton Public Schools",website:"https://newtoncommunityed.org",regDate:"Check NCE catalog",commitment:"Daily programs",breakType:"winter-break"},
   {sport:"clinics-camps",name:"Viking Sports Winter Break Camp",org:"Viking Sports",desc:"Multi-sport camp during December school vacation week. Basketball, soccer, flag football, floor hockey, dodgeball, and more. 33+ year Newton partner.",ages:"Ages 5-12",ageCategory:["k-2","3-5"],season:["winter"],level:"camp",cost:"Contact for pricing",costRange:"200-500",location:"Pellegrini Park & Gym, Newton",website:"https://www.vikingcamps.com/newton/",regDate:"Jan 28 (residents)",commitment:"1-week camp",breakType:"winter-break"},
   {sport:"clinics-camps",name:"Exxcel Gymnastics Winter Break Camp",org:"Exxcel Gymnastics",desc:"Gymnastics, climbing, ninja training, and fun activities during winter school vacation. All levels welcome at Newton's premier gymnastics facility.",ages:"Preschool - Teens",ageCategory:["prek","k-2","3-5","6-8"],season:["winter"],level:"camp",cost:"Contact Exxcel",costRange:"200-500",location:"88 Wells Ave, Newton",website:"https://www.exxcel.net/",regDate:"Rolling",commitment:"Daily camp",breakType:"winter-break"},
@@ -1822,10 +1823,10 @@ function renderSportSection(sportKey, filteredPrograms) {
   let gridContent = '';
   if (sportKey === 'clinics-camps') {
     const breakOrder = [
-      {key:'april-break',label:'April Break',color:'#81c784'},
-      {key:'summer',label:'Summer Camps',color:'#ffb74d'},
       {key:'winter-break',label:'Winter Break (December)',color:'#90caf9'},
-      {key:'february-break',label:'February Break',color:'#ce93d8'}
+      {key:'february-break',label:'February Break',color:'#ce93d8'},
+      {key:'april-break',label:'April Break',color:'#81c784'},
+      {key:'summer',label:'Summer Camps',color:'#ffb74d'}
     ];
     breakOrder.forEach(b => {
       const breakPrograms = sportPrograms.filter(p => p.breakType === b.key);
