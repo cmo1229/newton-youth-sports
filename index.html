@@ -1092,7 +1092,7 @@ input, select, textarea { font-family: inherit; }
 }
 .share-toast.show { opacity: 1; }
 
-/* Add to Plan button on cards */
+/* Add to Schedule button on cards */
 .card-plan-btn {
   background: none; border: 1px solid var(--blue-mid); color: var(--blue-main);
   border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 0.78rem;
@@ -1102,7 +1102,7 @@ input, select, textarea { font-family: inherit; }
 .card-plan-btn:hover { background: var(--blue-pale); }
 .card-plan-btn svg { width: 14px; height: 14px; }
 
-/* Add to Plan popup */
+/* Add to Schedule popup */
 .plan-popup {
   position: fixed; z-index: 2100; background: white; border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 20px; width: 300px;
@@ -1119,6 +1119,11 @@ input, select, textarea { font-family: inherit; }
 }
 .plan-popup select:focus { outline: none; border-color: var(--blue-main); }
 .plan-weeks { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+.plan-popup .plan-kids { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+.plan-popup .plan-kid-cb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 0; }
+.plan-popup .plan-kid-cb input { accent-color: var(--blue-main); flex-shrink: 0; }
+.plan-popup .plan-optional { font-weight: 500; color: var(--slate); text-transform: none; letter-spacing: 0; }
+.plan-popup .plan-kid-none { font-size: 0.8rem; color: var(--slate); margin-bottom: 14px; }
 .plan-week-cb { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--navy); }
 .plan-week-cb input { accent-color: var(--blue-main); }
 .plan-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
@@ -1808,7 +1813,7 @@ function createProgramCard(p) {
     <div class="card-footer">
       <a href="${p.website}" target="_blank" rel="noopener" class="card-link">Visit Website <svg><use href="#icon-arrow"/></svg></a>
       <span style="display:flex;align-items:center;gap:8px;">
-        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', [${(p.season||[]).map(s=>`'${s}'`).join(',')}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Plan</button>
+        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', [${(p.season||[]).map(s=>`'${s}'`).join(',')}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Add to Schedule</button>
         <span class="card-cost">${p.cost}</span>
       </span>
     </div>
@@ -2725,9 +2730,9 @@ function renderPlanner() {
     container.innerHTML = `<div class="planner-grid-wrap"><div class="planner-grid" style="grid-template-columns: 120px repeat(${weekCount}, 1fr);">
       <div class="planner-header"></div>
       ${weeks.map(w => `<div class="planner-header">${w}</div>`).join('')}
-      <div class="planner-empty">Click the <strong>Plan</strong> button on any program card to start building your ${seasonData.label.toLowerCase()} schedule!</div>
+      <div class="planner-empty">Click the <strong>Add to Schedule</strong> button on any program card to start building your ${seasonData.label.toLowerCase()} schedule!</div>
     </div></div>
-    <div class="planner-mobile-empty">Tap <strong>Plan</strong> on any program card to start building your ${seasonData.label.toLowerCase()} schedule.</div>`;
+    <div class="planner-mobile-empty">Tap <strong>Add to Schedule</strong> on any program card to start building your ${seasonData.label.toLowerCase()} schedule.</div>`;
     return;
   }
 
@@ -2801,13 +2806,13 @@ function renderPlanner() {
 
 function clearPlan(mode) {
   if (mode === 'all') {
-    if (confirm('Clear your plan for ALL seasons?')) {
+    if (confirm('Clear your schedule for ALL seasons?')) {
       localStorage.removeItem('nys-plan');
       renderTimeline();
     }
   } else {
     const seasonLabel = PLANNER_SEASONS[currentPlannerSeason].label;
-    if (confirm('Clear your plan for ' + seasonLabel + '?')) {
+    if (confirm('Clear your schedule for ' + seasonLabel + '?')) {
       const plan = getPlan().filter(p => p.season !== currentPlannerSeason);
       savePlan(plan);
       renderTimeline();
@@ -2825,7 +2830,7 @@ function guessSeasonForProgram(programText) {
   return getCurrentSeason();
 }
 
-// Add to Plan popup
+// Add to Schedule popup
 function openPlanPopup(event, programName, programSport, programSeasons) {
   event.stopPropagation();
   event.preventDefault();
@@ -2847,8 +2852,13 @@ function openPlanPopup(event, programName, programSport, programSeasons) {
   popup.className = 'plan-popup';
   popup.id = 'planPopup';
 
-  let kidOptions = '<option value="general">General</option>';
-  kids.forEach(k => { kidOptions += `<option value="${k.id}">${k.name}</option>`; });
+  let kidCheckboxes = '';
+  kids.forEach(k => {
+    kidCheckboxes += `<label class="plan-kid-cb"><input type="checkbox" name="plan-kid" value="${k.id}"> ${k.name}</label>`;
+  });
+  if (!kidCheckboxes) {
+    kidCheckboxes = '<p class="plan-kid-none">No children added yet — this will be saved as <strong>General</strong>. Use the kids panel to add your children.</p>';
+  }
 
   // Use the program's actual season data if available
   const defaultSeason = (programSeasons && programSeasons.length === 1) ? programSeasons[0] : guessSeasonForProgram(programName + ' ' + programSport);
@@ -2881,10 +2891,10 @@ function openPlanPopup(event, programName, programSport, programSeasons) {
   }
 
   popup.innerHTML = `
-    <h4>Add to Plan</h4>
+    <h4>Add to Schedule</h4>
     <p style="font-size:0.82rem;color:var(--slate);margin-bottom:14px;">${programName}</p>
-    <label>For which child?</label>
-    <select id="planKidSelect">${kidOptions}</select>
+    <label>For which child? <span class="plan-optional">optional</span></label>
+    <div class="plan-kids" id="planKidsContainer">${kidCheckboxes}</div>
     <label>Season</label>
     <select id="planSeasonSelect" onchange="updatePlanWeeks()">${seasonOptions}</select>
     <label>Which weeks?</label>
@@ -2939,8 +2949,6 @@ function closePlanPopup() {
 }
 
 function savePlanEntry(programName, programSport) {
-  const kidSelect = document.getElementById('planKidSelect');
-  const kidVal = kidSelect.value;
   const seasonSelect = document.getElementById('planSeasonSelect');
   const season = seasonSelect.value;
   const weekCheckboxes = document.querySelectorAll('#planPopup input[name="plan-week"]:checked');
@@ -2949,12 +2957,18 @@ function savePlanEntry(programName, programSport) {
   if (weeks.length === 0) { alert('Please select at least one week.'); return; }
 
   const kids = getKidProfiles();
-  const kidId = kidVal === 'general' ? 'general' : parseInt(kidVal);
-  const kid = kids.find(k => k.id === kidId);
-  const color = kid ? kid.color : '#5B82C5';
+  // Children are optional. Nothing ticked means the entry is saved as General,
+  // which is what the old single-select defaulted to. More than one ticked
+  // saves the same program once per child so each gets their own schedule row.
+  const kidBoxes = document.querySelectorAll('#planPopup input[name="plan-kid"]:checked');
+  let kidIds = Array.from(kidBoxes).map(cb => parseInt(cb.value));
+  if (kidIds.length === 0) kidIds = ['general'];
 
   const plan = getPlan();
-  plan.push({ kidId, programName, programSport, season, weeks, color });
+  kidIds.forEach(kidId => {
+    const kid = kids.find(k => k.id === kidId);
+    plan.push({ kidId, programName, programSport, season, weeks, color: kid ? kid.color : '#5B82C5' });
+  });
   savePlan(plan);
   closePlanPopup();
 
@@ -3006,7 +3020,7 @@ function sharePlan() {
     navigator.share({ title: `${seasonData.label} Sports Plan`, text }).catch(() => {});
   } else {
     navigator.clipboard.writeText(text).then(() => {
-      showShareToast('Plan copied to clipboard!');
+      showShareToast('Schedule copied to clipboard!');
     }).catch(() => {
       // Fallback for older browsers
       const ta = document.createElement('textarea');
@@ -3017,7 +3031,7 @@ function sharePlan() {
       ta.select();
       document.execCommand('copy');
       document.body.removeChild(ta);
-      showShareToast('Plan copied to clipboard!');
+      showShareToast('Schedule copied to clipboard!');
     });
   }
 }
