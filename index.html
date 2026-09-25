@@ -470,7 +470,10 @@ input, select, textarea { font-family: inherit; }
   transition: gap 0.2s;
 }
 .card-link:hover { gap: 10px; }
-.card-link svg { width: 16px; height: 16px; }
+/* flex-shrink: 0 — the footer row squeezes this link against the cost text, and
+   without it the SVG collapses horizontally while keeping its height, so the
+   arrow renders squashed and off-centre on cards with a longer cost. */
+.card-link svg { width: 16px; height: 16px; flex-shrink: 0; }
 .card-cost {
   font-size: 0.85rem; font-weight: 700; color: var(--navy);
 }
