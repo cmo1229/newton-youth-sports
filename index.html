@@ -467,6 +467,7 @@ input, select, textarea { font-family: inherit; }
 .card-link {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 0.85rem; font-weight: 600; color: var(--blue-main);
+  white-space: nowrap;
   transition: gap 0.2s;
 }
 .card-link:hover { gap: 10px; }
@@ -1100,9 +1101,13 @@ input, select, textarea { font-family: inherit; }
   background: none; border: 1px solid var(--blue-mid); color: var(--blue-main);
   border-radius: 8px; padding: 6px 10px; cursor: pointer; font-size: 0.78rem;
   font-weight: 600; display: inline-flex; align-items: center; gap: 4px;
-  white-space: nowrap; flex-shrink: 0;
+  flex-shrink: 0;
   transition: all 0.2s;
 }
+/* Two fixed lines — "Add to" beside the icon, "Schedule" beneath — so the
+   button keeps a predictable, narrow width instead of wrapping wherever
+   the card happens to run out of room. */
+.plan-btn-label { line-height: 1.15; text-align: left; }
 .card-plan-btn:hover { background: var(--blue-pale); }
 .card-plan-btn svg { width: 14px; height: 14px; }
 
@@ -1816,7 +1821,7 @@ function createProgramCard(p) {
     <div class="card-footer">
       <a href="${p.website}" target="_blank" rel="noopener" class="card-link">Visit Website <svg><use href="#icon-arrow"/></svg></a>
       <span style="display:flex;align-items:center;gap:8px;">
-        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', [${(p.season||[]).map(s=>`'${s}'`).join(',')}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg> Add to Schedule</button>
+        <button class="card-plan-btn" onclick="openPlanPopup(event, '${p.name.replace(/'/g,"\\'")}', '${p.sport}', [${(p.season||[]).map(s=>`'${s}'`).join(',')}])"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="plan-btn-label">Add to<br>Schedule</span></button>
         <span class="card-cost">${p.cost}</span>
       </span>
     </div>
