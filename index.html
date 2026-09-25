@@ -1124,7 +1124,6 @@ input, select, textarea { font-family: inherit; }
 .plan-popup .plan-kid-cb { display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 600; color: var(--navy); margin-bottom: 0; }
 .plan-popup .plan-kid-cb input { accent-color: var(--blue-main); flex-shrink: 0; }
 .plan-popup .plan-optional { font-weight: 500; color: var(--slate); text-transform: none; letter-spacing: 0; }
-.plan-popup .plan-kid-none { font-size: 0.8rem; color: var(--slate); margin-bottom: 14px; }
 .plan-week-cb { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--navy); }
 .plan-week-cb input { accent-color: var(--blue-main); }
 .plan-popup-actions { display: flex; gap: 8px; justify-content: flex-end; }
@@ -2857,9 +2856,12 @@ function openPlanPopup(event, programName, programSport, programSeasons) {
   kids.forEach(k => {
     kidCheckboxes += `<label class="plan-kid-cb"><input type="checkbox" name="plan-kid" value="${k.id}"> ${k.name}</label>`;
   });
-  if (!kidCheckboxes) {
-    kidCheckboxes = '<p class="plan-kid-none">No children added yet — this will be saved as <strong>General</strong>. Use the kids panel to add your children.</p>';
-  }
+  // With no children saved there is nothing to choose, so the whole block is
+  // omitted rather than shown empty. savePlanEntry still falls back to General.
+  const kidBlock = kidCheckboxes
+    ? `<label>For which child? <span class="plan-optional">optional</span></label>
+    <div class="plan-kids" id="planKidsContainer">${kidCheckboxes}</div>`
+    : '';
 
   // Use the program's actual season data if available
   const defaultSeason = (programSeasons && programSeasons.length === 1) ? programSeasons[0] : guessSeasonForProgram(programName + ' ' + programSport);
@@ -2894,8 +2896,7 @@ function openPlanPopup(event, programName, programSport, programSeasons) {
   popup.innerHTML = `
     <h4>Add to Schedule</h4>
     <p style="font-size:0.82rem;color:var(--slate);margin-bottom:14px;">${programName}</p>
-    <label>For which child? <span class="plan-optional">optional</span></label>
-    <div class="plan-kids" id="planKidsContainer">${kidCheckboxes}</div>
+    ${kidBlock}
     <label>Season</label>
     <select id="planSeasonSelect" onchange="updatePlanWeeks()">${seasonOptions}</select>
     <label>Which weeks?</label>
